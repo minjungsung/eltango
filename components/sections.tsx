@@ -394,34 +394,34 @@ export function Contact() {
         </div>
 
         {/* Contact channels */}
-        <div className="mt-8 grid gap-4 sm:grid-cols-2">
-          <div className="rounded-lg border bg-[#ff5ea8] p-5 text-white">
+        <div className="mt-10 mx-auto grid max-w-5xl items-stretch gap-4 sm:grid-cols-2">
+          <div className="rounded-xl border bg-[#ff5ea8] p-6 text-white">
             <div className="flex items-center gap-3">
               <div className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-white/20">
                 <Phone className="h-5 w-5" />
               </div>
-              <div className="text-sm">(82) 1024150563</div>
+              <div className="text-lg font-semibold tracking-wide">(82) 1024150563</div>
             </div>
-            <div className="mt-3 flex gap-2">
-              <Button asChild variant="secondary">
+            <div className="mt-4 grid grid-cols-2 gap-2">
+              <Button asChild variant="secondary" className="w-full">
                 <a href="tel:+821024150563">전화하기</a>
               </Button>
-              <Button asChild variant="outline">
+              <Button asChild variant="outline" className="w-full">
                 <a href="sms:+821024150563">문자 보내기</a>
               </Button>
             </div>
             <div className="mt-2 text-xs opacity-90">표기: 010-2415-0563</div>
           </div>
 
-          <div className="rounded-lg border bg-black p-5 text-white">
+          <div className="rounded-xl border bg-neutral-900 p-6 text-white">
             <div className="flex items-center gap-3">
               <div className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-[#fee500]">
                 <MessageCircle className="h-5 w-5 text-black" />
               </div>
-              <div className="text-sm">KakaoTalk ID : @fishlove0</div>
+              <div className="text-lg font-semibold tracking-wide">KakaoTalk ID : @fishlove0</div>
             </div>
-            <div className="mt-3 flex gap-2">
-              <CopyButton text="@fishlove0" label="ID 복사" />
+            <div className="mt-4">
+              <CopyButton text="@fishlove0" label="ID 복사" className="w-full" variant="outline" />
             </div>
             <div className="mt-2 text-xs opacity-70">카카오채널/오픈채팅 링크가 있다면 버튼으로 연결 가능합니다.</div>
           </div>

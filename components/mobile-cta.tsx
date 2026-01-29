@@ -18,7 +18,7 @@ export function MobileCTA() {
             <Phone className="h-4 w-4" /> 전화
           </a>
         </Button>
-        <CopyButton text="@fishlove0" label="카톡ID" />
+        <CopyButton text="@fishlove0" label="카톡ID" className="w-full" size="sm" variant="outline" />
       </div>
     </div>
   );
