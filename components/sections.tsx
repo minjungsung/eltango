@@ -294,7 +294,7 @@ export function Contact() {
             <a href="mailto:info@eltango.kr?subject=%5B%EC%97%98%EB%95%85%EA%B3%A0%5D%20%EC%88%98%EA%B0%95%20%EB%AC%B8%EC%9D%98">이메일 문의</a>
           </Button>
           <Button size="lg" variant="secondary" asChild>
-            <a href="https://maps.google.com/?q=eltango" target="_blank" rel="noreferrer">
+            <a href="https://naver.me/xdp3zeag" target="_blank" rel="noreferrer">
               <MapPin className="mr-2 h-4 w-4" /> 오시는 길
             </a>
           </Button>
