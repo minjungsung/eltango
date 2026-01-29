@@ -45,8 +45,8 @@ export function Hero() {
           부에노스아이레스 스타일 탱고. 음악과 연결, 파트너와 교감, 바닥과의 대화까지—
           기본부터 깊이 있게, 제대로 배워요.
         </p>
-        <div className="mt-8 flex items-center justify-center gap-3">
-          <Button size="lg" asChild>
+        <div className="mt-8 grid w-full grid-cols-1 gap-2 sm:mx-auto sm:max-w-none sm:grid-cols-3 sm:gap-3">
+          <Button asChild className="w-full sm:w-auto">
             <a
               href="https://docs.google.com/forms/d/e/1FAIpQLSdqxyTy_5SwYwzzmRQC3-nyWK0kmvQr8ue6MVLbYXeUdp57vQ/viewform?usp=send_form"
               target="_blank"
@@ -55,10 +55,10 @@ export function Hero() {
               수강신청하기
             </a>
           </Button>
-          <Button size="lg" variant="secondary" asChild>
+          <Button variant="secondary" asChild className="w-full sm:w-auto">
             <a href="#features">커리큘럼 보기</a>
           </Button>
-          <Button size="lg" variant="outline" asChild>
+          <Button variant="outline" asChild className="hidden sm:inline-flex">
             <Link href="#gallery">갤러리</Link>
           </Button>
         </div>
