@@ -32,6 +32,7 @@ vercel
 - 강사 사진 추가: public/images 폴더에 다음 파일명을 사용해 이미지를 넣으세요.
 	- public/images/fish.jpg
 	- public/images/taebong.jpg
+	- public/images/nenia.png
 	(파일명이 다르면 components/sections.tsx의 경로를 수정하세요.)
 
 ## 기술 스택

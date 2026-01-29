@@ -143,7 +143,7 @@ export function Instructors() {
         </ul>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         <Card>
           <CardContent className="p-0">
             <div className="relative aspect-[4/5] w-full overflow-hidden rounded-t-lg">
@@ -179,6 +179,25 @@ export function Instructors() {
               <CardTitle className="text-xl">태봉</CardTitle>
               <p className="mt-1 text-sm text-muted-foreground">Tango Instructor • Connection & Balance</p>
               <p className="mt-3 text-sm text-muted-foreground">탄탄한 기본기와 균형을 바탕으로 실전 지향의 레슨을 제공합니다.</p>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="p-0">
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-t-lg">
+              <Image
+                src="/images/nenia.png"
+                alt="Instructor portrait"
+                fill
+                className="object-cover"
+                sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+              />
+            </div>
+            <div className="p-6">
+              <CardTitle className="text-xl">네니아</CardTitle>
+              <p className="mt-1 text-sm text-muted-foreground">Tango Instructor • Nuevo Specialist</p>
+              <p className="mt-3 text-sm text-muted-foreground">다이내믹한 라인과 컨트롤, 누에보의 디테일을 바탕으로 창의적인 무브먼트를 탐구합니다.</p>
             </div>
           </CardContent>
         </Card>
