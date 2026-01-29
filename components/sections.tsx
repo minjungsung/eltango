@@ -116,7 +116,7 @@ export function Schedule() {
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle>프랙티카</CardTitle>
+            <CardTitle>쁘락띠카</CardTitle>
           </CardHeader>
           <CardContent>
             <p className="mb-2">매주 토 15:00 - 17:00</p>
