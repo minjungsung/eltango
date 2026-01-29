@@ -299,9 +299,6 @@ export function Contact() {
             </a>
           </Button>
         </div>
-        <p className="mt-3 text-xs text-muted-foreground">
-          이메일 주소와 위치 링크는 추후 실제 정보로 교체하세요.
-        </p>
       </div>
     </section>
   );
