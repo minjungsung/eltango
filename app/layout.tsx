@@ -10,6 +10,15 @@ export const metadata: Metadata = {
   title: "엘땅고 | Buenos Aires Style Tango",
   description:
     "부에노스아이레스 스타일 탱고 스튜디오 엘땅고. 초급부터 마스터까지, 제대로 배워요.",
+  keywords: [
+    "탱고학원",
+    "아르헨티나탱고",
+    "탱고배우기",
+    "강남탱고",
+    "직장인취미",
+    "엘땅고",
+    "서울탱고아카데미",
+  ],
   openGraph: {
     title: "엘땅고",
     description:

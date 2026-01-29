@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { CheckCircle2, Clock, Heart, MapPin, Music2, Star, Users } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export function Hero() {
   return (
@@ -56,33 +57,71 @@ export function Hero() {
           <Button size="lg" variant="secondary" asChild>
             <a href="#features">커리큘럼 보기</a>
           </Button>
+          <Button size="lg" variant="outline" asChild>
+            <Link href="#gallery">갤러리</Link>
+          </Button>
         </div>
       </div>
     </section>
   );
 }
 
-export function Features() {
-  const items = [
-    { icon: <Users className="h-6 w-6" />, title: "소수정예", desc: "최대 8명 소수로 집중 케어" },
-    { icon: <Music2 className="h-6 w-6" />, title: "음악성 중심", desc: "리듬과 멜로디로 리드 & 팔로우" },
-    { icon: <Clock className="h-6 w-6" />, title: "탄탄한 기초", desc: "걷기, 축, 밸런스부터 차근히" },
-    { icon: <Star className="h-6 w-6" />, title: "현지 스타일", desc: "BA 현지 메소드 기반 수업" },
-  ];
+export function StudioIntro() {
   return (
-    <section id="features" className="container py-12 sm:py-16">
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {items.map((it) => (
-          <Card key={it.title}>
-            <CardHeader>
-              <div className="mb-2 inline-flex h-10 w-10 items-center justify-center rounded-full bg-muted">
-                {it.icon}
-              </div>
-              <CardTitle>{it.title}</CardTitle>
-            </CardHeader>
-            <CardContent className="text-muted-foreground">{it.desc}</CardContent>
-          </Card>
-        ))}
+    <section id="studio" className="container py-12 sm:py-16">
+      <div className="mx-auto max-w-3xl text-center">
+        <h2 className="text-3xl font-bold tracking-tight">엘땅고 강남본점</h2>
+        <p className="mt-4 text-muted-foreground">
+          강남에서 16년째 운영 중인 아르헨티나 탱고 전문 학원, 엘땅고_서울탱고아카데미 강남본점입니다.
+          24년차 탱고강사 이인경 대표가 직접 강의하며, 누적 수강생 1만명, 현재 월 평균 수강생 100명과 함께하고 있습니다.
+          정통 탱고를 체계적으로 배울 수 있는 탱고 명가로, 수준별 커리큘럼을 운영합니다.
+        </p>
+      </div>
+
+      <div className="mt-8 grid gap-6 md:grid-cols-3">
+        <Card>
+          <CardHeader>
+            <CardTitle>수준별 커리큘럼</CardTitle>
+          </CardHeader>
+          <CardContent className="text-sm text-muted-foreground">
+            성인 초급, 초중급, 중급, 상급 레슨부터 트레이닝 과정, 소그룹레슨, 전문가과정까지 단계적으로 구성되어 있습니다.
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>정통 탱고 메소드</CardTitle>
+          </CardHeader>
+          <CardContent className="text-sm text-muted-foreground">
+            2023 로마탱고대회 챔피언 직강 수업으로 음악성과 연결을 중심으로 탄탄하게 배우는 정통 메소드입니다.
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>강남 라이프스타일</CardTitle>
+          </CardHeader>
+          <CardContent className="text-sm text-muted-foreground">
+            특히 강남 직장인(30·40대)을 위한 퇴근 후 취미, 새로운 커뮤니티, 성인 탱고 레슨으로 많은 사랑을 받고 있습니다.
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="mt-8 mx-auto max-w-3xl text-center text-sm text-muted-foreground">
+        강남 탱고, 강남 탱고학원, 성인 탱고 레슨을 찾고 계시다면 엘땅고에서 제대로 시작해보세요.
+        오셔서 레벨 상담을 받고, 쾌적한 시설도 확인하세요!
+      </div>
+
+      <div className="mt-6 flex flex-wrap justify-center gap-2">
+        <Badge variant="secondary">탱고학원</Badge>
+        <Badge variant="secondary">아르헨티나탱고</Badge>
+        <Badge variant="secondary">탱고배우기</Badge>
+        <Badge variant="secondary">강남탱고</Badge>
+        <Badge variant="secondary">직장인취미</Badge>
+      </div>
+
+      <div className="mt-6 flex justify-center">
+        <Button asChild>
+          <a href="#register">상담 신청</a>
+        </Button>
       </div>
     </section>
   );
@@ -128,6 +167,33 @@ export function Schedule() {
   );
 }
 
+export function Gallery() {
+  const slides = [
+    "/images/slides/KakaoTalk_Image_2026-01-29-22-35-32_001.png",
+    "/images/slides/KakaoTalk_Image_2026-01-29-22-35-33_002.png",
+    "/images/slides/KakaoTalk_Image_2026-01-29-22-35-34_003.png",
+    "/images/slides/KakaoTalk_Image_2026-01-29-22-35-34_004.png",
+    "/images/slides/KakaoTalk_Image_2026-01-29-22-35-34_005.png",
+  ];
+  return (
+    <section id="gallery" className="container py-12 sm:py-16">
+      <div className="mb-6 text-center">
+        <h2 className="text-3xl font-bold tracking-tight">갤러리</h2>
+        <p className="mt-2 text-muted-foreground">엘땅고의 순간들을 미리 느껴보세요</p>
+      </div>
+      <div className="overflow-x-auto">
+        <div className="flex snap-x snap-mandatory gap-4">
+          {slides.map((src) => (
+            <div key={src} className="relative h-[260px] w-[360px] flex-shrink-0 snap-start overflow-hidden rounded-lg border">
+              <Image src={src} alt="엘땅고 갤러리" fill className="object-cover" sizes="360px" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function Instructors() {
   return (
     <section id="instructors" className="container py-12 sm:py-16">
@@ -142,6 +208,24 @@ export function Instructors() {
           <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary"/> 개인 피드백 제공</li>
         </ul>
       </div>
+
+      <Card className="mb-8">
+        <CardContent className="p-6">
+          <CardTitle className="text-xl">이인경 대표 소개</CardTitle>
+          <ul className="mt-3 space-y-1 text-sm text-muted-foreground">
+            <li>2003 로마탱고대회 1위 챔피언(Farabute)</li>
+            <li>2017, 2019 아르헨티나 세계 탱고 대회 준결승 진출</li>
+            <li>2015 메트로폴리탄 탱고 대회 심사위원</li>
+            <li>아르헨티나 탱고 지도자 자격증 교재 공동저자</li>
+            <li>대전탱고페스티발, 서울탱고챔피언쉽 오거나이저</li>
+            <li>전) 한국 아르헨티나탱고 협회 이사장</li>
+            <li>전) 국민대학교 평생교육원 초빙교수</li>
+          </ul>
+          <p className="mt-3 text-xs text-muted-foreground">
+            방송/영화/연극 안무지도: SBS 여인의 향기, MBC 우리결혼했어요, 드라마 W·동네의영웅·내사랑치유기·가족끼리왜이래, 영화 패션왕, 연극 아브라소 등
+          </p>
+        </CardContent>
+      </Card>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         <Card>
@@ -210,35 +294,35 @@ export function Pricing() {
   return (
     <section id="pricing" className="container py-12 sm:py-16">
       <div className="mb-6 text-center">
-        <h2 className="text-3xl font-bold tracking-tight">수강료</h2>
-        <p className="mt-2 text-muted-foreground">쉽게 시작하고, 꾸준히 성장하세요</p>
+        <h2 className="text-3xl font-bold tracking-tight">수강 정보</h2>
+        <p className="mt-2 text-muted-foreground">퇴근 후 취미부터 레벨업 과정까지, 딱 맞게 선택하세요</p>
       </div>
       <div className="grid gap-6 lg:grid-cols-3">
         <Card>
           <CardHeader>
-            <CardTitle>체험 클래스</CardTitle>
+            <CardTitle>2040 직장인 퇴근후 취미 초급반</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold">₩0</p>
-            <p className="mt-2 text-sm text-muted-foreground">첫 방문 1회 무료</p>
+            <p className="text-3xl font-bold">₩100,000</p>
+            <p className="mt-2 text-sm text-muted-foreground">퇴근 후 바로 시작하는 성인 초급 과정</p>
           </CardContent>
         </Card>
         <Card className="border-primary">
           <CardHeader>
-            <CardTitle>정규반 (월)</CardTitle>
+            <CardTitle>아름다운 바디라인 만들기 트레이닝반</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold">₩160,000</p>
-            <p className="mt-2 text-sm text-muted-foreground">주 2회 / 4주</p>
+            <p className="text-3xl font-bold">₩100,000</p>
+            <p className="mt-2 text-sm text-muted-foreground">라인/컨트롤/체형 개선을 위한 트레이닝</p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle>개인 레슨</CardTitle>
+            <CardTitle>고수로 가는 레벨업클랴스_중상급과정</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold">문의</p>
-            <p className="mt-2 text-sm text-muted-foreground">맞춤 커리큘럼</p>
+            <p className="text-3xl font-bold">₩120,000</p>
+            <p className="mt-2 text-sm text-muted-foreground">중상급 테크닉과 음악성 심화</p>
           </CardContent>
         </Card>
       </div>
@@ -294,10 +378,18 @@ export function Contact() {
             <a href="mailto:info@eltango.kr?subject=%5B%EC%97%98%EB%95%85%EA%B3%A0%5D%20%EC%88%98%EA%B0%95%20%EB%AC%B8%EC%9D%98">이메일 문의</a>
           </Button>
           <Button size="lg" variant="secondary" asChild>
-            <a href="https://naver.me/xdp3zeag" target="_blank" rel="noreferrer">
+            <a href="tel:01024150563">전화 문의</a>
+          </Button>
+          <Button size="lg" variant="secondary" asChild>
+            <a href="https://map.naver.com/p/entry/place/20526245?placePath=/home?from=map&fromPanelNum=1&additionalHeight=76&timestamp=202601292225&locale=ko&svcName=map_pcv5&c=15.00,0,0,0,dh" target="_blank" rel="noreferrer">
               <MapPin className="mr-2 h-4 w-4" /> 오시는 길
             </a>
           </Button>
+        </div>
+        <div className="mt-6 text-sm text-muted-foreground">
+          <div>주소: 서울 서초구 반포동 741번지 2층</div>
+          <div>Address: Banpo-dong 741, 2F, Seoul, Korea 137-903</div>
+          <div>지하철: 신논현역 1번출구, 강남역 10번출구 도보</div>
         </div>
       </div>
     </section>

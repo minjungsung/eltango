@@ -1,10 +1,11 @@
-import { Contact, FAQ, Features, Footer, Hero, Instructors, Pricing, Schedule } from "@/components/sections";
+import { Contact, FAQ, Footer, Gallery, Hero, Instructors, Pricing, Schedule, StudioIntro } from "@/components/sections";
 
 export default function Page() {
   return (
     <main>
       <Hero />
-      <Features />
+      <StudioIntro />
+      <Gallery />
       <Schedule />
       <Instructors />
       <Pricing />
