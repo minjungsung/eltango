@@ -215,7 +215,7 @@ export function Instructors() {
           <CardTitle className="text-xl">이인경 대표 소개</CardTitle>
           <ul className="mt-3 space-y-1 text-sm text-muted-foreground">
             <li>2003 로마탱고대회 1위 챔피언(Farabute)</li>
-            <li>2017, 2019 아르헨티나 세계 탱고 대회 준결승 진출</li>
+            <li>2017, 2019 아르헨티나 세계탱고대회 준결승 진출</li>
             <li>2015 메트로폴리탄 탱고 대회 심사위원</li>
             <li>아르헨티나 탱고 지도자 자격증 교재 공동저자</li>
             <li>대전탱고페스티발, 서울탱고챔피언쉽 오거나이저</li>
