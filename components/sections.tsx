@@ -18,7 +18,13 @@ export function Hero() {
         </p>
         <div className="mt-8 flex items-center justify-center gap-3">
           <Button size="lg" asChild>
-            <a href="#register">수강신청하기</a>
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSdqxyTy_5SwYwzzmRQC3-nyWK0kmvQr8ue6MVLbYXeUdp57vQ/viewform?usp=send_form"
+              target="_blank"
+              rel="noreferrer"
+            >
+              수강신청하기
+            </a>
           </Button>
           <Button size="lg" variant="secondary" asChild>
             <a href="#features">커리큘럼 보기</a>
@@ -198,6 +204,15 @@ export function Contact() {
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Button size="lg" asChild>
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSdqxyTy_5SwYwzzmRQC3-nyWK0kmvQr8ue6MVLbYXeUdp57vQ/viewform?usp=send_form"
+              target="_blank"
+              rel="noreferrer"
+            >
+              수강신청하기
+            </a>
+          </Button>
+          <Button size="lg" variant="secondary" asChild>
             <a href="mailto:info@eltango.kr?subject=%5B%EC%97%98%EB%95%85%EA%B3%A0%5D%20%EC%88%98%EA%B0%95%20%EB%AC%B8%EC%9D%98">이메일 문의</a>
           </Button>
           <Button size="lg" variant="secondary" asChild>

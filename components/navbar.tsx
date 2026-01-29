@@ -23,7 +23,13 @@ export function Navbar() {
         </nav>
         <div className="hidden md:block">
           <Button asChild>
-            <a href="#register">수강신청하기</a>
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSdqxyTy_5SwYwzzmRQC3-nyWK0kmvQr8ue6MVLbYXeUdp57vQ/viewform?usp=send_form"
+              target="_blank"
+              rel="noreferrer"
+            >
+              수강신청하기
+            </a>
           </Button>
         </div>
         <button
@@ -42,7 +48,14 @@ export function Navbar() {
           <a href="#pricing" onClick={() => setOpen(false)}>수강료</a>
           <a href="#faq" onClick={() => setOpen(false)}>FAQ</a>
           <Button asChild className="mt-2">
-            <a href="#register" onClick={() => setOpen(false)}>수강신청하기</a>
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSdqxyTy_5SwYwzzmRQC3-nyWK0kmvQr8ue6MVLbYXeUdp57vQ/viewform?usp=send_form"
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => setOpen(false)}
+            >
+              수강신청하기
+            </a>
           </Button>
         </div>
       </div>
