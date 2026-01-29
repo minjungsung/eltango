@@ -3,6 +3,7 @@ import "./globals.css";
 import { Noto_Sans_KR } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
+import { MobileCTA } from "@/components/mobile-cta";
 
 const noto = Noto_Sans_KR({ subsets: ["latin"], display: "swap" });
 
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider attribute="class" forcedTheme="dark">
           <Navbar />
           {children}
+          <MobileCTA />
         </ThemeProvider>
       </body>
     </html>

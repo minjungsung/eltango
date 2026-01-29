@@ -2,9 +2,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { CheckCircle2, Clock, Heart, MapPin, Music2, Star, Users } from "lucide-react";
+import { CheckCircle2, Clock, Heart, MapPin, Music2, Star, Users, Phone, MessageCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { CopyButton } from "@/components/ui/copy-button";
 
 export function Hero() {
   return (
@@ -390,6 +391,40 @@ export function Contact() {
           <div>주소: 서울 서초구 반포동 741번지 2층</div>
           <div>Address: Banpo-dong 741, 2F, Seoul, Korea 137-903</div>
           <div>지하철: 신논현역 1번출구, 강남역 10번출구 도보</div>
+        </div>
+
+        {/* Contact channels */}
+        <div className="mt-8 grid gap-4 sm:grid-cols-2">
+          <div className="rounded-lg border bg-[#ff5ea8] p-5 text-white">
+            <div className="flex items-center gap-3">
+              <div className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-white/20">
+                <Phone className="h-5 w-5" />
+              </div>
+              <div className="text-sm">(82) 1024150563</div>
+            </div>
+            <div className="mt-3 flex gap-2">
+              <Button asChild variant="secondary">
+                <a href="tel:+821024150563">전화하기</a>
+              </Button>
+              <Button asChild variant="outline">
+                <a href="sms:+821024150563">문자 보내기</a>
+              </Button>
+            </div>
+            <div className="mt-2 text-xs opacity-90">표기: 010-2415-0563</div>
+          </div>
+
+          <div className="rounded-lg border bg-black p-5 text-white">
+            <div className="flex items-center gap-3">
+              <div className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-[#fee500]">
+                <MessageCircle className="h-5 w-5 text-black" />
+              </div>
+              <div className="text-sm">KakaoTalk ID : @fishlove0</div>
+            </div>
+            <div className="mt-3 flex gap-2">
+              <CopyButton text="@fishlove0" label="ID 복사" />
+            </div>
+            <div className="mt-2 text-xs opacity-70">카카오채널/오픈채팅 링크가 있다면 버튼으로 연결 가능합니다.</div>
+          </div>
         </div>
       </div>
     </section>
