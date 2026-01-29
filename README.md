@@ -29,6 +29,10 @@ vercel
 - 이메일/위치: components/sections.tsx 의 Contact 섹션에서 실제 이메일/지도 링크로 교체하세요.
 - 색상/테마: app/globals.css CSS 변수 및 tailwind.config.ts 참고.
 - OG 메타: app/layout.tsx 의 metadata 수정.
+- 강사 사진 추가: public/images 폴더에 다음 파일명을 사용해 이미지를 넣으세요.
+	- public/images/fish.jpg
+	- public/images/taebong.jpg
+	(파일명이 다르면 components/sections.tsx의 경로를 수정하세요.)
 
 ## 기술 스택
 - Next.js 14 (App Router)

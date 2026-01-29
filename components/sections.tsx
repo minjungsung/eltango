@@ -3,11 +3,38 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { CheckCircle2, Clock, Heart, MapPin, Music2, Star, Users } from "lucide-react";
+import Image from "next/image";
 
 export function Hero() {
   return (
-    <section className="container relative py-16 sm:py-24">
-      <div className="mx-auto max-w-3xl text-center">
+    <section className="relative overflow-hidden py-16 sm:py-24">
+      {/* Background visual (subtle) */}
+      <div aria-hidden className="pointer-events-none absolute inset-0">
+        <div className="absolute -right-24 top-0 hidden h-[120%] w-[70%] rotate-3 opacity-10 blur-sm md:block">
+          <Image
+            src="/images/fish.jpg"
+            alt="Instructor portrait background"
+            fill
+            className="object-cover"
+            priority
+            sizes="(min-width: 1024px) 70vw, 0px"
+            draggable={false}
+          />
+        </div>
+        <div className="absolute -left-24 bottom-0 hidden h-[120%] w-[50%] -rotate-2 opacity-10 blur-sm lg:block">
+          <Image
+            src="/images/taebong.jpg"
+            alt="Instructor portrait background"
+            fill
+            className="object-cover"
+            sizes="(min-width: 1280px) 50vw, 0px"
+            draggable={false}
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+      </div>
+
+      <div className="container relative z-10 mx-auto max-w-3xl text-center">
         <Badge className="mb-4 bg-accent">Buenos Aires Style</Badge>
         <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl">
           탱고의 본질을, 엘땅고에서
@@ -104,23 +131,55 @@ export function Schedule() {
 export function Instructors() {
   return (
     <section id="instructors" className="container py-12 sm:py-16">
-      <div className="grid items-center gap-8 lg:grid-cols-2">
-        <div>
-          <h2 className="text-3xl font-bold tracking-tight">강사진</h2>
-          <p className="mt-4 text-muted-foreground">
-            부에노스아이레스 현지 메소드와 음악성을 바탕으로 지도합니다. 
-            테크닉을 넘어 파트너와의 연결을 중심으로 가르칩니다.
-          </p>
-          <ul className="mt-6 space-y-2 text-sm text-muted-foreground">
-            <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary"/> 10+년 티칭 & 공연 경력</li>
-            <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary"/> 현지 마에스트로 사사</li>
-            <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary"/> 개인 피드백 제공</li>
-          </ul>
-        </div>
+      <div className="mb-8 text-center lg:mb-12">
+        <h2 className="text-3xl font-bold tracking-tight">강사진</h2>
+        <p className="mt-3 text-muted-foreground">
+          부에노스아이레스 현지 메소드와 음악성을 바탕으로 지도합니다. 테크닉을 넘어 연결과 음악성을 중심으로 가르칩니다.
+        </p>
+        <ul className="mx-auto mt-4 flex max-w-xl flex-col gap-2 text-sm text-muted-foreground sm:flex-row sm:flex-wrap sm:justify-center">
+          <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary"/> 10+년 티칭 & 공연 경력</li>
+          <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary"/> 현지 마에스트로 사사</li>
+          <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary"/> 개인 피드백 제공</li>
+        </ul>
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-2">
         <Card>
-          <CardContent className="p-6">
-            <div className="aspect-video w-full rounded-lg bg-muted" />
-            <p className="mt-3 text-sm text-muted-foreground">프로필 사진/영상 자리 (대체 예정)</p>
+          <CardContent className="p-0">
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-t-lg">
+              <Image
+                src="/images/fish.jpg"
+                alt="Instructor portrait"
+                fill
+                className="object-cover"
+                sizes="(min-width: 768px) 50vw, 100vw"
+                priority
+              />
+            </div>
+            <div className="p-6">
+              <CardTitle className="text-xl">피쉬</CardTitle>
+              <p className="mt-1 text-sm text-muted-foreground">Tango Instructor • Musicality & Technique</p>
+              <p className="mt-3 text-sm text-muted-foreground">음악성과 연결 중심의 지도로 기본기부터 서서히 레벨업을 이끕니다.</p>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="p-0">
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-t-lg">
+              <Image
+                src="/images/taebong.jpg"
+                alt="Instructor portrait"
+                fill
+                className="object-cover"
+                sizes="(min-width: 768px) 50vw, 100vw"
+              />
+            </div>
+            <div className="p-6">
+              <CardTitle className="text-xl">태봉</CardTitle>
+              <p className="mt-1 text-sm text-muted-foreground">Tango Instructor • Connection & Balance</p>
+              <p className="mt-3 text-sm text-muted-foreground">탄탄한 기본기와 균형을 바탕으로 실전 지향의 레슨을 제공합니다.</p>
+            </div>
           </CardContent>
         </Card>
       </div>
