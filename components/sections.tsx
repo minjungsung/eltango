@@ -1,21 +1,28 @@
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { CheckCircle2, Clock, Heart, MapPin, Music2, Star, Users, Phone, MessageCircle } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { CheckCircle2, Heart, MapPin, Phone, MessageCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { CopyButton } from "@/components/ui/copy-button";
+import { RegisterForm } from "@/components/register-form";
 
 export function Hero() {
+  const t = useTranslations("hero");
   return (
     <section className="relative overflow-hidden py-16 sm:py-24">
-      {/* Background visual (subtle) */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="absolute -right-24 top-0 hidden h-[120%] w-[70%] rotate-3 opacity-10 blur-sm md:block">
           <Image
             src="/images/fish.jpg"
-            alt="Instructor portrait background"
+            alt=""
             fill
             className="object-cover"
             priority
@@ -26,7 +33,7 @@ export function Hero() {
         <div className="absolute -left-24 bottom-0 hidden h-[120%] w-[50%] -rotate-2 opacity-10 blur-sm lg:block">
           <Image
             src="/images/taebong.jpg"
-            alt="Instructor portrait background"
+            alt=""
             fill
             className="object-cover"
             sizes="(min-width: 1280px) 50vw, 0px"
@@ -37,29 +44,23 @@ export function Hero() {
       </div>
 
       <div className="container relative z-10 mx-auto max-w-3xl text-center">
-        <Badge className="mb-4 bg-accent">Buenos Aires Style</Badge>
+        <Badge className="mb-4 bg-accent">{t("badge")}</Badge>
         <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl">
-          탱고의 본질을, 엘땅고에서
+          {t("title")}
         </h1>
-        <p className="mt-6 text-lg text-muted-foreground">
-          부에노스아이레스 스타일 탱고. 음악과 연결, 파트너와 교감, 바닥과의 대화까지—
-          기본부터 깊이 있게, 제대로 배워요.
-        </p>
+        <p className="mt-6 text-lg text-muted-foreground">{t("subtitle")}</p>
         <div className="mt-8 grid w-full grid-cols-1 gap-2 sm:mx-auto sm:max-w-none sm:grid-cols-3 sm:gap-3">
           <Button asChild className="w-full sm:w-auto">
-            <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLSdqxyTy_5SwYwzzmRQC3-nyWK0kmvQr8ue6MVLbYXeUdp57vQ/viewform?usp=send_form"
-              target="_blank"
-              rel="noreferrer"
-            >
-              수강신청하기
+            <a href="#register">
+              <MessageCircle className="mr-2 h-4 w-4" />
+              {t("ctaPrimary")}
             </a>
           </Button>
           <Button variant="secondary" asChild className="w-full sm:w-auto">
-            <a href="#features">커리큘럼 보기</a>
+            <a href="#schedule">{t("ctaSecondary")}</a>
           </Button>
           <Button variant="outline" asChild className="hidden sm:inline-flex">
-            <Link href="#gallery">갤러리</Link>
+            <Link href="#gallery">{t("ctaTertiary")}</Link>
           </Button>
         </div>
       </div>
@@ -68,60 +69,56 @@ export function Hero() {
 }
 
 export function StudioIntro() {
+  const t = useTranslations("studio");
   return (
     <section id="studio" className="container py-12 sm:py-16">
       <div className="mx-auto max-w-3xl text-center">
-        <h2 className="text-3xl font-bold tracking-tight">엘땅고 강남본점</h2>
-        <p className="mt-4 text-muted-foreground">
-          강남에서 16년째 운영 중인 아르헨티나 탱고 전문 학원, 엘땅고_서울탱고아카데미 강남본점입니다.
-          24년차 탱고강사 이인경 대표가 직접 강의하며, 누적 수강생 1만명, 현재 월 평균 수강생 100명과 함께하고 있습니다.
-          정통 탱고를 체계적으로 배울 수 있는 탱고 명가로, 수준별 커리큘럼을 운영합니다.
-        </p>
+        <h2 className="text-3xl font-bold tracking-tight">{t("title")}</h2>
+        <p className="mt-4 text-muted-foreground">{t("description")}</p>
       </div>
 
       <div className="mt-8 grid gap-6 md:grid-cols-3">
         <Card>
           <CardHeader>
-            <CardTitle>수준별 커리큘럼</CardTitle>
+            <CardTitle>{t("cards.curriculum.title")}</CardTitle>
           </CardHeader>
           <CardContent className="text-sm text-muted-foreground">
-            성인 초급, 초중급, 중급, 상급 레슨부터 트레이닝 과정, 소그룹레슨, 전문가과정까지 단계적으로 구성되어 있습니다.
+            {t("cards.curriculum.body")}
           </CardContent>
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle>정통 탱고 메소드</CardTitle>
+            <CardTitle>{t("cards.method.title")}</CardTitle>
           </CardHeader>
           <CardContent className="text-sm text-muted-foreground">
-            2023 로마탱고대회 챔피언 직강 수업으로 음악성과 연결을 중심으로 탄탄하게 배우는 정통 메소드입니다.
+            {t("cards.method.body")}
           </CardContent>
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle>강남 라이프스타일</CardTitle>
+            <CardTitle>{t("cards.lifestyle.title")}</CardTitle>
           </CardHeader>
           <CardContent className="text-sm text-muted-foreground">
-            특히 강남 직장인(30·40대)을 위한 퇴근 후 취미, 새로운 커뮤니티, 성인 탱고 레슨으로 많은 사랑을 받고 있습니다.
+            {t("cards.lifestyle.body")}
           </CardContent>
         </Card>
       </div>
 
       <div className="mt-8 mx-auto max-w-3xl text-center text-sm text-muted-foreground">
-        강남 탱고, 강남 탱고학원, 성인 탱고 레슨을 찾고 계시다면 엘땅고에서 제대로 시작해보세요.
-        오셔서 레벨 상담을 받고, 쾌적한 시설도 확인하세요!
+        {t("tagline")}
       </div>
 
       <div className="mt-6 flex flex-wrap justify-center gap-2">
-        <Badge variant="secondary">탱고학원</Badge>
-        <Badge variant="secondary">아르헨티나탱고</Badge>
-        <Badge variant="secondary">탱고배우기</Badge>
-        <Badge variant="secondary">강남탱고</Badge>
-        <Badge variant="secondary">직장인취미</Badge>
+        <Badge variant="secondary">{t("badges.t1")}</Badge>
+        <Badge variant="secondary">{t("badges.t2")}</Badge>
+        <Badge variant="secondary">{t("badges.t3")}</Badge>
+        <Badge variant="secondary">{t("badges.t4")}</Badge>
+        <Badge variant="secondary">{t("badges.t5")}</Badge>
       </div>
 
       <div className="mt-6 flex justify-center">
         <Button asChild>
-          <a href="#register">상담 신청</a>
+          <a href="#register">{t("cta")}</a>
         </Button>
       </div>
     </section>
@@ -129,38 +126,39 @@ export function StudioIntro() {
 }
 
 export function Schedule() {
+  const t = useTranslations("schedule");
   return (
     <section id="schedule" className="container py-12 sm:py-16">
       <div className="mb-6 text-center">
-        <h2 className="text-3xl font-bold tracking-tight">수업 시간표</h2>
-        <p className="mt-2 text-muted-foreground">체계적인 커리큘럼으로 레벨업</p>
+        <h2 className="text-3xl font-bold tracking-tight">{t("title")}</h2>
+        <p className="mt-2 text-muted-foreground">{t("subtitle")}</p>
       </div>
       <div className="grid gap-6 lg:grid-cols-3">
         <Card>
           <CardHeader>
-            <CardTitle>초급 A</CardTitle>
+            <CardTitle>{t("beginner.title")}</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="mb-2">매주 화/목 19:30 - 20:40</p>
-            <p className="text-muted-foreground">걷기, 홀드, 기본 리듬</p>
+            <p className="mb-2">{t("beginner.time")}</p>
+            <p className="text-muted-foreground">{t("beginner.body")}</p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle>초중급</CardTitle>
+            <CardTitle>{t("upperBeginner.title")}</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="mb-2">매주 화/목 20:50 - 22:00</p>
-            <p className="text-muted-foreground">축, 피봇, 오초/히로</p>
+            <p className="mb-2">{t("upperBeginner.time")}</p>
+            <p className="text-muted-foreground">{t("upperBeginner.body")}</p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle>쁘락띠카</CardTitle>
+            <CardTitle>{t("practica.title")}</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="mb-2">매주 토 15:00 - 17:00</p>
-            <p className="text-muted-foreground">자율 연습 & 피드백</p>
+            <p className="mb-2">{t("practica.time")}</p>
+            <p className="text-muted-foreground">{t("practica.body")}</p>
           </CardContent>
         </Card>
       </div>
@@ -169,6 +167,7 @@ export function Schedule() {
 }
 
 export function Gallery() {
+  const t = useTranslations("gallery");
   const slides = [
     "/images/slides/KakaoTalk_Image_2026-01-29-22-35-32_001.png",
     "/images/slides/KakaoTalk_Image_2026-01-29-22-35-33_002.png",
@@ -179,14 +178,17 @@ export function Gallery() {
   return (
     <section id="gallery" className="container py-12 sm:py-16">
       <div className="mb-6 text-center">
-        <h2 className="text-3xl font-bold tracking-tight">갤러리</h2>
-        <p className="mt-2 text-muted-foreground">엘땅고의 순간들을 미리 느껴보세요</p>
+        <h2 className="text-3xl font-bold tracking-tight">{t("title")}</h2>
+        <p className="mt-2 text-muted-foreground">{t("subtitle")}</p>
       </div>
       <div className="overflow-x-auto">
         <div className="flex snap-x snap-mandatory gap-4">
           {slides.map((src) => (
-            <div key={src} className="relative h-[260px] w-[360px] flex-shrink-0 snap-start overflow-hidden rounded-lg border">
-              <Image src={src} alt="엘땅고 갤러리" fill className="object-cover" sizes="360px" />
+            <div
+              key={src}
+              className="relative h-[260px] w-[360px] flex-shrink-0 snap-start overflow-hidden rounded-lg border"
+            >
+              <Image src={src} alt={t("alt")} fill className="object-cover" sizes="360px" />
             </div>
           ))}
         </div>
@@ -196,35 +198,38 @@ export function Gallery() {
 }
 
 export function Instructors() {
+  const t = useTranslations("instructors");
   return (
     <section id="instructors" className="container py-12 sm:py-16">
       <div className="mb-8 text-center lg:mb-12">
-        <h2 className="text-3xl font-bold tracking-tight">강사진</h2>
-        <p className="mt-3 text-muted-foreground">
-          부에노스아이레스 현지 메소드와 음악성을 바탕으로 지도합니다. 테크닉을 넘어 연결과 음악성을 중심으로 가르칩니다.
-        </p>
+        <h2 className="text-3xl font-bold tracking-tight">{t("title")}</h2>
+        <p className="mt-3 text-muted-foreground">{t("description")}</p>
         <ul className="mx-auto mt-4 flex max-w-xl flex-col gap-2 text-sm text-muted-foreground sm:flex-row sm:flex-wrap sm:justify-center">
-          <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary"/> 10+년 티칭 & 공연 경력</li>
-          <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary"/> 현지 마에스트로 사사</li>
-          <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary"/> 개인 피드백 제공</li>
+          <li className="flex items-center gap-2">
+            <CheckCircle2 className="h-4 w-4 text-primary" /> {t("bullets.b1")}
+          </li>
+          <li className="flex items-center gap-2">
+            <CheckCircle2 className="h-4 w-4 text-primary" /> {t("bullets.b2")}
+          </li>
+          <li className="flex items-center gap-2">
+            <CheckCircle2 className="h-4 w-4 text-primary" /> {t("bullets.b3")}
+          </li>
         </ul>
       </div>
 
       <Card className="mb-8">
         <CardContent className="p-6">
-          <CardTitle className="text-xl">이인경 대표 소개</CardTitle>
+          <CardTitle className="text-xl">{t("director.title")}</CardTitle>
           <ul className="mt-3 space-y-1 text-sm text-muted-foreground">
-            <li>2003 로마탱고대회 1위 챔피언(Farabute)</li>
-            <li>2017, 2019 아르헨티나 세계탱고대회 준결승 진출</li>
-            <li>2015 메트로폴리탄 탱고 대회 심사위원</li>
-            <li>아르헨티나 탱고 지도자 자격증 교재 공동저자</li>
-            <li>대전탱고페스티발, 서울탱고챔피언쉽 오거나이저</li>
-            <li>전) 한국 아르헨티나탱고 협회 이사장</li>
-            <li>전) 국민대학교 평생교육원 초빙교수</li>
+            <li>{t("director.items.i1")}</li>
+            <li>{t("director.items.i2")}</li>
+            <li>{t("director.items.i3")}</li>
+            <li>{t("director.items.i4")}</li>
+            <li>{t("director.items.i5")}</li>
+            <li>{t("director.items.i6")}</li>
+            <li>{t("director.items.i7")}</li>
           </ul>
-          <p className="mt-3 text-xs text-muted-foreground">
-            방송/영화/연극 안무지도: SBS 여인의 향기, MBC 우리결혼했어요, 드라마 W·동네의영웅·내사랑치유기·가족끼리왜이래, 영화 패션왕, 연극 아브라소 등
-          </p>
+          <p className="mt-3 text-xs text-muted-foreground">{t("director.media")}</p>
         </CardContent>
       </Card>
 
@@ -234,7 +239,7 @@ export function Instructors() {
             <div className="relative aspect-[4/5] w-full overflow-hidden rounded-t-lg">
               <Image
                 src="/images/fish.jpg"
-                alt="Instructor portrait"
+                alt={t("portraitAlt")}
                 fill
                 className="object-cover"
                 sizes="(min-width: 768px) 50vw, 100vw"
@@ -242,9 +247,9 @@ export function Instructors() {
               />
             </div>
             <div className="p-6">
-              <CardTitle className="text-xl">피쉬</CardTitle>
-              <p className="mt-1 text-sm text-muted-foreground">Tango Instructor • Musicality & Technique</p>
-              <p className="mt-3 text-sm text-muted-foreground">음악성과 연결 중심의 지도로 기본기부터 서서히 레벨업을 이끕니다.</p>
+              <CardTitle className="text-xl">{t("fish.name")}</CardTitle>
+              <p className="mt-1 text-sm text-muted-foreground">{t("fish.role")}</p>
+              <p className="mt-3 text-sm text-muted-foreground">{t("fish.bio")}</p>
             </div>
           </CardContent>
         </Card>
@@ -254,16 +259,16 @@ export function Instructors() {
             <div className="relative aspect-[4/5] w-full overflow-hidden rounded-t-lg">
               <Image
                 src="/images/taebong.jpg"
-                alt="Instructor portrait"
+                alt={t("portraitAlt")}
                 fill
                 className="object-cover"
                 sizes="(min-width: 768px) 50vw, 100vw"
               />
             </div>
             <div className="p-6">
-              <CardTitle className="text-xl">태봉</CardTitle>
-              <p className="mt-1 text-sm text-muted-foreground">Tango Instructor • Connection & Balance</p>
-              <p className="mt-3 text-sm text-muted-foreground">탄탄한 기본기와 균형을 바탕으로 실전 지향의 레슨을 제공합니다.</p>
+              <CardTitle className="text-xl">{t("taebong.name")}</CardTitle>
+              <p className="mt-1 text-sm text-muted-foreground">{t("taebong.role")}</p>
+              <p className="mt-3 text-sm text-muted-foreground">{t("taebong.bio")}</p>
             </div>
           </CardContent>
         </Card>
@@ -273,16 +278,16 @@ export function Instructors() {
             <div className="relative aspect-[4/5] w-full overflow-hidden rounded-t-lg">
               <Image
                 src="/images/nenia.png"
-                alt="Instructor portrait"
+                alt={t("portraitAlt")}
                 fill
                 className="object-cover"
                 sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
               />
             </div>
             <div className="p-6">
-              <CardTitle className="text-xl">네니아</CardTitle>
-              <p className="mt-1 text-sm text-muted-foreground">Tango Instructor • Nuevo Specialist</p>
-              <p className="mt-3 text-sm text-muted-foreground">다이내믹한 라인과 컨트롤, 누에보의 디테일을 바탕으로 창의적인 무브먼트를 탐구합니다.</p>
+              <CardTitle className="text-xl">{t("nenia.name")}</CardTitle>
+              <p className="mt-1 text-sm text-muted-foreground">{t("nenia.role")}</p>
+              <p className="mt-3 text-sm text-muted-foreground">{t("nenia.bio")}</p>
             </div>
           </CardContent>
         </Card>
@@ -292,38 +297,39 @@ export function Instructors() {
 }
 
 export function Pricing() {
+  const t = useTranslations("pricing");
   return (
     <section id="pricing" className="container py-12 sm:py-16">
       <div className="mb-6 text-center">
-        <h2 className="text-3xl font-bold tracking-tight">수강 정보</h2>
-        <p className="mt-2 text-muted-foreground">퇴근 후 취미부터 레벨업 과정까지, 딱 맞게 선택하세요</p>
+        <h2 className="text-3xl font-bold tracking-tight">{t("title")}</h2>
+        <p className="mt-2 text-muted-foreground">{t("subtitle")}</p>
       </div>
       <div className="grid gap-6 lg:grid-cols-3">
         <Card>
           <CardHeader>
-            <CardTitle>2040 직장인 퇴근후 취미 초급반</CardTitle>
+            <CardTitle>{t("p1.title")}</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold">₩100,000</p>
-            <p className="mt-2 text-sm text-muted-foreground">퇴근 후 바로 시작하는 성인 초급 과정</p>
+            <p className="text-3xl font-bold">{t("p1.price")}</p>
+            <p className="mt-2 text-sm text-muted-foreground">{t("p1.body")}</p>
           </CardContent>
         </Card>
         <Card className="border-primary">
           <CardHeader>
-            <CardTitle>아름다운 바디라인 만들기 트레이닝반</CardTitle>
+            <CardTitle>{t("p2.title")}</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold">₩100,000</p>
-            <p className="mt-2 text-sm text-muted-foreground">라인/컨트롤/체형 개선을 위한 트레이닝</p>
+            <p className="text-3xl font-bold">{t("p2.price")}</p>
+            <p className="mt-2 text-sm text-muted-foreground">{t("p2.body")}</p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle>고수로 가는 레벨업클랴스_중상급과정</CardTitle>
+            <CardTitle>{t("p3.title")}</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold">₩120,000</p>
-            <p className="mt-2 text-sm text-muted-foreground">중상급 테크닉과 음악성 심화</p>
+            <p className="text-3xl font-bold">{t("p3.price")}</p>
+            <p className="mt-2 text-sm text-muted-foreground">{t("p3.body")}</p>
           </CardContent>
         </Card>
       </div>
@@ -332,18 +338,16 @@ export function Pricing() {
 }
 
 export function FAQ() {
+  const t = useTranslations("faq");
   const faqs = [
-    {
-      q: "완전 초보도 가능한가요?",
-      a: "네. 걷기와 음악 듣기부터 차근차근 진행합니다.",
-    },
-    { q: "파트너가 꼭 필요하나요?", a: "아니요. 수업 중 파트너 체인지가 있습니다." },
-    { q: "복장은 어떻게 하나요?", a: "움직임이 편한 복장과 실내화면 충분합니다." },
+    { q: t("q1"), a: t("a1") },
+    { q: t("q2"), a: t("a2") },
+    { q: t("q3"), a: t("a3") },
   ];
   return (
     <section id="faq" className="container py-12 sm:py-16">
       <div className="mb-6 text-center">
-        <h2 className="text-3xl font-bold tracking-tight">자주 묻는 질문</h2>
+        <h2 className="text-3xl font-bold tracking-tight">{t("title")}</h2>
       </div>
       <Accordion type="single" collapsible className="mx-auto max-w-2xl">
         {faqs.map((f, i) => (
@@ -358,59 +362,62 @@ export function FAQ() {
 }
 
 export function Contact() {
+  const t = useTranslations("contact");
   return (
     <section id="register" className="container py-16">
       <div className="mx-auto max-w-2xl text-center">
-        <h2 className="text-3xl font-bold tracking-tight">지금 시작해요</h2>
-        <p className="mt-2 text-muted-foreground">
-          체험 수업 예약이나 수강 문의를 남겨주세요. 바로 안내드립니다.
-        </p>
+        <Badge className="mb-4 bg-accent">{t("badge")}</Badge>
+        <h2 className="text-3xl font-bold tracking-tight">{t("title")}</h2>
+        <p className="mt-2 text-muted-foreground">{t("description")}</p>
+
+        <div className="mx-auto mt-8 max-w-md rounded-xl border bg-card p-6 shadow-sm">
+          <RegisterForm source="contact" />
+        </div>
+
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <Button size="lg" asChild>
-            <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLSdqxyTy_5SwYwzzmRQC3-nyWK0kmvQr8ue6MVLbYXeUdp57vQ/viewform?usp=send_form"
-              target="_blank"
-              rel="noreferrer"
-            >
-              수강신청하기
+          <Button size="lg" variant="secondary" asChild>
+            <a href="mailto:info@eltango.kr?subject=%5B%EC%97%98%EB%95%85%EA%B3%A0%5D%20%EC%88%98%EA%B0%95%20%EB%AC%B8%EC%9D%98">
+              {t("email")}
             </a>
           </Button>
           <Button size="lg" variant="secondary" asChild>
-            <a href="mailto:info@eltango.kr?subject=%5B%EC%97%98%EB%95%85%EA%B3%A0%5D%20%EC%88%98%EA%B0%95%20%EB%AC%B8%EC%9D%98">이메일 문의</a>
+            <a href="tel:01024150563">{t("phone")}</a>
           </Button>
           <Button size="lg" variant="secondary" asChild>
-            <a href="tel:01024150563">전화 문의</a>
-          </Button>
-          <Button size="lg" variant="secondary" asChild>
-            <a href="https://map.naver.com/p/entry/place/20526245?placePath=/home?from=map&fromPanelNum=1&additionalHeight=76&timestamp=202601292225&locale=ko&svcName=map_pcv5&c=15.00,0,0,0,dh" target="_blank" rel="noreferrer">
-              <MapPin className="mr-2 h-4 w-4" /> 오시는 길
+            <a
+              href="https://map.naver.com/p/entry/place/20526245?placePath=/home?from=map&fromPanelNum=1&additionalHeight=76&timestamp=202601292225&locale=ko&svcName=map_pcv5&c=15.00,0,0,0,dh"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <MapPin className="mr-2 h-4 w-4" /> {t("directions")}
             </a>
           </Button>
         </div>
         <div className="mt-6 text-sm text-muted-foreground">
-          <div>주소: 서울 서초구 반포동 741번지 2층</div>
-          <div>Address: Banpo-dong 741, 2F, Seoul, Korea 137-903</div>
-          <div>지하철: 신논현역 1번출구, 강남역 10번출구 도보</div>
+          <div>{t("address1")}</div>
+          <div>{t("address2")}</div>
+          <div>{t("subway")}</div>
         </div>
 
-        {/* Contact channels */}
         <div className="mt-10 mx-auto grid max-w-5xl items-stretch gap-4 sm:grid-cols-2">
           <div className="rounded-xl border bg-[#ff5ea8] p-6 text-white">
             <div className="flex items-center gap-3">
               <div className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-white/20">
                 <Phone className="h-5 w-5" />
               </div>
-              <div className="text-lg font-semibold tracking-wide">(82) 1024150563</div>
+              <div className="text-lg font-semibold tracking-wide">
+                {t("phoneCard.number")}
+              </div>
             </div>
             <div className="mt-4 grid grid-cols-2 gap-2">
               <Button asChild variant="secondary" className="w-full">
-                <a href="tel:+821024150563">전화하기</a>
+                <a href="tel:+821024150563">{t("phoneCard.call")}</a>
               </Button>
               <Button asChild variant="outline" className="w-full">
-                <a href="sms:+821024150563">문자 보내기</a>
+                <a href="sms:+821024150563">{t("phoneCard.sms")}</a>
               </Button>
             </div>
-            <div className="mt-2 text-xs opacity-90">표기: 010-2415-0563</div>
+            <div className="mt-2 text-xs opacity-90">{t("phoneCard.note")}</div>
           </div>
 
           <div className="rounded-xl border bg-neutral-900 p-6 text-white">
@@ -418,12 +425,12 @@ export function Contact() {
               <div className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-[#fee500]">
                 <MessageCircle className="h-5 w-5 text-black" />
               </div>
-              <div className="text-lg font-semibold tracking-wide">KakaoTalk ID : @fishlove0</div>
+              <div className="text-lg font-semibold tracking-wide">{t("kakao.id")}</div>
             </div>
             <div className="mt-4">
-              <CopyButton text="@fishlove0" label="ID 복사" className="w-full" variant="outline" />
+              <CopyButton text="@fishlove0" className="w-full" variant="outline" />
             </div>
-            <div className="mt-2 text-xs opacity-70">카카오채널/오픈채팅 링크가 있다면 버튼으로 연결 가능합니다.</div>
+            <div className="mt-2 text-xs opacity-70">{t("kakao.note")}</div>
           </div>
         </div>
       </div>
@@ -432,11 +439,14 @@ export function Contact() {
 }
 
 export function Footer() {
+  const t = useTranslations("footer");
   return (
     <footer className="border-t py-10">
       <div className="container flex flex-col items-center gap-2 text-center text-sm text-muted-foreground">
-        <div className="flex items-center gap-2"><Heart className="h-4 w-4 text-primary"/> 탱고와 함께 성장해요</div>
-        <div>© {new Date().getFullYear()} 엘땅고. All rights reserved.</div>
+        <div className="flex items-center gap-2">
+          <Heart className="h-4 w-4 text-primary" /> {t("tagline")}
+        </div>
+        <div>{t("rights", { year: new Date().getFullYear() })}</div>
       </div>
     </footer>
   );

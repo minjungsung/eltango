@@ -1,0 +1,194 @@
+{
+  "metadata": {
+    "title": "Eltango | Buenos Aires Style Tango",
+    "description": "Eltango, a Buenos Aires style tango studio in Seoul. Learn tango properly, from beginner to master."
+  },
+  "nav": {
+    "brand": "Eltango",
+    "features": "Features",
+    "schedule": "Schedule",
+    "instructors": "Instructors",
+    "pricing": "Pricing",
+    "faq": "FAQ",
+    "cta": "Join Open Chat",
+    "menu": "Menu",
+    "switchTo": "한국어"
+  },
+  "hero": {
+    "badge": "Buenos Aires Style",
+    "title": "The Essence of Tango, at Eltango",
+    "subtitle": "Buenos Aires style tango. Music, connection, partner communication, and a dialogue with the floor — learn it deeply and properly, starting from the fundamentals.",
+    "ctaPrimary": "Join Open Chat",
+    "ctaSecondary": "See Curriculum",
+    "ctaTertiary": "Gallery"
+  },
+  "studio": {
+    "title": "Eltango Gangnam HQ",
+    "description": "Eltango Seoul Tango Academy Gangnam HQ has been running for 16 years as a specialized Argentine tango school in Gangnam. Led by director Lee In-kyung, a 24-year veteran instructor, with over 10,000 cumulative students and 100 monthly active students, Eltango is a renowned tango institution with a structured, level-based curriculum.",
+    "cards": {
+      "curriculum": {
+        "title": "Level-based Curriculum",
+        "body": "From beginner, upper-beginner, intermediate, and advanced adult classes to training tracks, small-group lessons, and professional programs — structured for steady progression."
+      },
+      "method": {
+        "title": "Authentic Tango Method",
+        "body": "Taught directly by a 2023 Roma Tango Championship champion, focused on musicality and connection, grounded in authentic method."
+      },
+      "lifestyle": {
+        "title": "Gangnam Lifestyle",
+        "body": "Especially loved by Gangnam professionals in their 30s–40s — an after-work hobby, a new community, and a proper adult tango lesson."
+      }
+    },
+    "tagline": "Looking for a Gangnam tango studio or an adult tango lesson? Start properly at Eltango. Come by for a level consultation and tour our comfortable facilities!",
+    "badges": {
+      "t1": "Tango Studio",
+      "t2": "Argentine Tango",
+      "t3": "Learn Tango",
+      "t4": "Gangnam Tango",
+      "t5": "After-work Hobby"
+    },
+    "cta": "Book a Consultation"
+  },
+  "schedule": {
+    "title": "Class Schedule",
+    "subtitle": "Level up with a structured curriculum",
+    "beginner": {
+      "title": "Beginner A",
+      "time": "Tue / Thu 19:30 – 20:40",
+      "body": "Walking, hold, basic rhythm"
+    },
+    "upperBeginner": {
+      "title": "Upper Beginner",
+      "time": "Tue / Thu 20:50 – 22:00",
+      "body": "Axis, pivots, ocho / giro"
+    },
+    "practica": {
+      "title": "Práctica",
+      "time": "Sat 15:00 – 17:00",
+      "body": "Open practice & feedback"
+    }
+  },
+  "gallery": {
+    "title": "Gallery",
+    "subtitle": "A glimpse of moments at Eltango",
+    "alt": "Eltango gallery"
+  },
+  "instructors": {
+    "title": "Instructors",
+    "description": "We teach grounded in the Buenos Aires local method and musicality — beyond technique, centered on connection and musicality.",
+    "bullets": {
+      "b1": "10+ years of teaching & performance",
+      "b2": "Trained by Buenos Aires maestros",
+      "b3": "Personalized feedback"
+    },
+    "director": {
+      "title": "About Director Lee In-kyung",
+      "items": {
+        "i1": "2003 Roma Tango Championship 1st place (Farabute)",
+        "i2": "2017, 2019 Argentine World Tango Championship semifinalist",
+        "i3": "2015 Metropolitan Tango Competition judge",
+        "i4": "Co-author of the Argentine tango instructor certification textbook",
+        "i5": "Organizer of Daejeon Tango Festival & Seoul Tango Championship",
+        "i6": "Former chairperson of the Korea Argentine Tango Association",
+        "i7": "Former visiting professor, Kookmin University Continuing Education"
+      },
+      "media": "Choreography for TV / film / theater: SBS 'Scent of a Woman', MBC 'We Got Married', dramas 'W', 'Neighborhood Hero', 'My Healing Love', 'Why Family?', film 'Fashion King', stage 'Abrazo', and more."
+    },
+    "fish": {
+      "name": "Fish",
+      "role": "Tango Instructor • Musicality & Technique",
+      "bio": "Guides students from fundamentals upward with a focus on musicality and connection."
+    },
+    "taebong": {
+      "name": "Taebong",
+      "role": "Tango Instructor • Connection & Balance",
+      "bio": "Delivers practical, real-world lessons grounded in solid fundamentals and balance."
+    },
+    "nenia": {
+      "name": "Nenia",
+      "role": "Tango Instructor • Nuevo Specialist",
+      "bio": "Explores creative movement through dynamic lines, control, and the details of nuevo tango."
+    },
+    "portraitAlt": "Instructor portrait"
+  },
+  "pricing": {
+    "title": "Class Packages",
+    "subtitle": "From an after-work hobby to a level-up track — pick what fits you",
+    "p1": {
+      "title": "Adult Beginner — After-work Hobby (20s–40s)",
+      "price": "₩100,000",
+      "body": "An adult beginner course you can start right after work"
+    },
+    "p2": {
+      "title": "Beautiful Body Line — Training Class",
+      "price": "₩100,000",
+      "body": "Training to improve your lines, control, and body shape"
+    },
+    "p3": {
+      "title": "Level-up Class to Mastery — Upper-intermediate",
+      "price": "₩120,000",
+      "body": "Deepen upper-intermediate technique and musicality"
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "q1": "Can a complete beginner join?",
+    "a1": "Yes. We start step by step, from walking to listening to the music.",
+    "q2": "Do I need a partner?",
+    "a2": "No. We rotate partners during class.",
+    "q3": "What should I wear?",
+    "a3": "Comfortable clothes and indoor shoes are enough."
+  },
+  "contact": {
+    "badge": "Free Consultation",
+    "title": "Start right away via Open Chat",
+    "description": "Leave your name and phone number and we'll take you straight to our KakaoTalk open chat. Trial lessons and level consultations are welcome.",
+    "email": "Email",
+    "phone": "Call",
+    "directions": "Directions",
+    "address1": "Address: Banpo-dong 741, 2F, Seocho-gu, Seoul, Korea",
+    "address2": "Postal: 137-903",
+    "subway": "Subway: Sinnonhyeon Station Exit 1, Gangnam Station Exit 10 (walking distance)",
+    "phoneCard": {
+      "number": "(82) 10-2415-0563",
+      "call": "Call",
+      "sms": "Text",
+      "note": "Local format: 010-2415-0563"
+    },
+    "kakao": {
+      "id": "KakaoTalk ID : @fishlove0",
+      "copy": "Copy ID",
+      "copied": "Copied",
+      "note": "If you have a KakaoTalk channel / open chat link we can connect via button."
+    }
+  },
+  "footer": {
+    "tagline": "Grow with tango",
+    "rights": "© {year} Eltango. All rights reserved."
+  },
+  "mobileCta": {
+    "openChat": "Open Chat",
+    "call": "Call",
+    "kakaoId": "Kakao ID"
+  },
+  "registerForm": {
+    "nameLabel": "Name *",
+    "namePlaceholder": "Your name",
+    "phoneLabel": "Phone *",
+    "phonePlaceholder": "010-1234-5678",
+    "memoLabel": "Message (optional)",
+    "memoPlaceholder": "Any questions or prior experience you'd like to share.",
+    "consent": "[Required] I agree to the collection and use of my name and phone number for consultation purposes. Retention: up to 1 year after consultation ends.",
+    "submit": "Submit & Join Open Chat",
+    "submitting": "Submitting...",
+    "redirecting": "Redirecting...",
+    "success": "Submitted! Redirecting to the KakaoTalk open chat...",
+    "hint": "You'll be redirected to our KakaoTalk open chat right after submission.",
+    "errorName": "Please enter your name.",
+    "errorPhone": "Please enter a valid phone number.",
+    "errorConsent": "You must agree to the privacy policy to continue.",
+    "errorServer": "Server is not configured yet. Please try again later.",
+    "errorGeneric": "Something went wrong. Please try again.",
+    "errorNetwork": "Network error. Please try again."
+  }
+}

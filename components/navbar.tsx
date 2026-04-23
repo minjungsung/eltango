@@ -1,60 +1,75 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { LanguageSwitcher } from "@/components/language-switcher";
 
 export function Navbar() {
+  const t = useTranslations("nav");
   const [open, setOpen] = useState(false);
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background/70 backdrop-blur">
       <div className="container flex h-16 items-center justify-between">
-        <Link href="#" className="font-semibold tracking-tight">
-          엘땅고
-        </Link>
+        <a href="#" className="font-semibold tracking-tight">
+          {t("brand")}
+        </a>
         <nav className="hidden gap-8 text-sm md:flex">
-          <a href="#features" className="text-muted-foreground hover:text-foreground">특징</a>
-          <a href="#schedule" className="text-muted-foreground hover:text-foreground">수업시간</a>
-          <a href="#instructors" className="text-muted-foreground hover:text-foreground">강사진</a>
-          <a href="#pricing" className="text-muted-foreground hover:text-foreground">수강료</a>
-          <a href="#faq" className="text-muted-foreground hover:text-foreground">FAQ</a>
+          <a href="#studio" className="text-muted-foreground hover:text-foreground">
+            {t("features")}
+          </a>
+          <a href="#schedule" className="text-muted-foreground hover:text-foreground">
+            {t("schedule")}
+          </a>
+          <a href="#instructors" className="text-muted-foreground hover:text-foreground">
+            {t("instructors")}
+          </a>
+          <a href="#pricing" className="text-muted-foreground hover:text-foreground">
+            {t("pricing")}
+          </a>
+          <a href="#faq" className="text-muted-foreground hover:text-foreground">
+            {t("faq")}
+          </a>
         </nav>
-        <div className="hidden md:block">
+        <div className="hidden items-center gap-2 md:flex">
+          <LanguageSwitcher />
           <Button asChild>
-            <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLSdqxyTy_5SwYwzzmRQC3-nyWK0kmvQr8ue6MVLbYXeUdp57vQ/viewform?usp=send_form"
-              target="_blank"
-              rel="noreferrer"
-            >
-              수강신청하기
-            </a>
+            <a href="#register">{t("cta")}</a>
           </Button>
         </div>
         <button
           className="inline-flex items-center justify-center rounded-md p-2 md:hidden"
           onClick={() => setOpen((v) => !v)}
-          aria-label="메뉴"
+          aria-label={t("menu")}
         >
           <Menu className="h-6 w-6" />
         </button>
       </div>
-      <div className={cn("md:hidden border-t", open ? "block" : "hidden")}> 
+      <div className={cn("md:hidden border-t", open ? "block" : "hidden")}>
         <div className="container grid gap-2 py-4 text-sm">
-          <a href="#features" onClick={() => setOpen(false)}>특징</a>
-          <a href="#schedule" onClick={() => setOpen(false)}>수업시간</a>
-          <a href="#instructors" onClick={() => setOpen(false)}>강사진</a>
-          <a href="#pricing" onClick={() => setOpen(false)}>수강료</a>
-          <a href="#faq" onClick={() => setOpen(false)}>FAQ</a>
+          <a href="#studio" onClick={() => setOpen(false)}>
+            {t("features")}
+          </a>
+          <a href="#schedule" onClick={() => setOpen(false)}>
+            {t("schedule")}
+          </a>
+          <a href="#instructors" onClick={() => setOpen(false)}>
+            {t("instructors")}
+          </a>
+          <a href="#pricing" onClick={() => setOpen(false)}>
+            {t("pricing")}
+          </a>
+          <a href="#faq" onClick={() => setOpen(false)}>
+            {t("faq")}
+          </a>
+          <div className="mt-2">
+            <LanguageSwitcher onChanged={() => setOpen(false)} className="px-0" />
+          </div>
           <Button asChild className="mt-2">
-            <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLSdqxyTy_5SwYwzzmRQC3-nyWK0kmvQr8ue6MVLbYXeUdp57vQ/viewform?usp=send_form"
-              target="_blank"
-              rel="noreferrer"
-              onClick={() => setOpen(false)}
-            >
-              수강신청하기
+            <a href="#register" onClick={() => setOpen(false)}>
+              {t("cta")}
             </a>
           </Button>
         </div>
