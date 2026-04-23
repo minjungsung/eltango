@@ -15,7 +15,7 @@ export function Navbar() {
       <div className="container flex h-16 items-center justify-between">
         <a
           href="#"
-          className="font-serif text-lg font-medium tracking-tight"
+          className="text-[17px] font-bold tracking-[-0.02em]"
         >
           {t("brand")}
         </a>

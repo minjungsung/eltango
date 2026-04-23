@@ -21,6 +21,24 @@ import Link from "next/link";
 import { CopyButton } from "@/components/ui/copy-button";
 import { RegisterForm } from "@/components/register-form";
 
+// Split i18n text on newlines and render each line as its own <p>. The parent
+// container controls size + color + max-width; this component only decides
+// where the paragraph breaks go so a short tail like "입니다." never ends up
+// orphaned on its own line mid-sentence — each sentence wraps inside its own
+// block instead of sharing a wrap context with siblings.
+function Prose({ text, className = "" }: { text: string; className?: string }) {
+  const lines = text.split(/\n+/).map((l) => l.trim()).filter(Boolean);
+  return (
+    <div className={`space-y-3 ${className}`}>
+      {lines.map((line, i) => (
+        <p key={i} className="text-pretty">
+          {line}
+        </p>
+      ))}
+    </div>
+  );
+}
+
 export function Hero() {
   const t = useTranslations("hero");
   return (
@@ -52,12 +70,13 @@ export function Hero() {
 
       <div className="container relative z-10 mx-auto max-w-3xl text-center">
         <Badge className="mb-5 bg-accent">{t("badge")}</Badge>
-        <h1 className="font-serif text-5xl font-medium leading-[1.05] tracking-tight sm:text-7xl">
+        <h1 className="text-[40px] font-bold leading-[1.1] tracking-[-0.03em] text-balance sm:text-5xl md:text-6xl">
           {t("title")}
         </h1>
-        <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-          {t("subtitle")}
-        </p>
+        <Prose
+          text={t("subtitle")}
+          className="mx-auto mt-5 max-w-2xl text-[15px] leading-[1.7] text-muted-foreground sm:text-base md:text-[17px]"
+        />
         <div className="mt-8 grid w-full grid-cols-1 gap-2 sm:mx-auto sm:max-w-none sm:grid-cols-3 sm:gap-3">
           <Button asChild className="w-full sm:w-auto">
             <a href="#register">
@@ -82,10 +101,11 @@ export function StudioIntro() {
   return (
     <section id="studio" className="container py-16 sm:py-24">
       <div className="mx-auto max-w-3xl text-center">
-        <h2 className="font-serif text-4xl font-medium leading-[1.1] tracking-tight sm:text-5xl">{t("title")}</h2>
-        <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
-          {t("description")}
-        </p>
+        <h2 className="text-[26px] font-bold leading-[1.2] tracking-[-0.025em] text-balance sm:text-3xl md:text-[34px]">{t("title")}</h2>
+        <Prose
+          text={t("description")}
+          className="mx-auto mt-4 max-w-3xl text-[15px] leading-[1.7] text-muted-foreground sm:text-base md:text-[17px]"
+        />
       </div>
 
       <div className="mt-10 grid gap-6 md:grid-cols-3">
@@ -115,9 +135,10 @@ export function StudioIntro() {
         </Card>
       </div>
 
-      <div className="mt-8 mx-auto max-w-3xl text-center text-sm text-muted-foreground">
-        {t("tagline")}
-      </div>
+      <Prose
+        text={t("tagline")}
+        className="mx-auto mt-10 max-w-3xl text-center text-[14px] leading-[1.7] text-muted-foreground sm:text-[15px]"
+      />
 
       <div className="mt-6 flex flex-wrap justify-center gap-2">
         <Badge variant="secondary">{t("badges.t1")}</Badge>
@@ -140,9 +161,9 @@ export function Schedule() {
   const t = useTranslations("schedule");
   return (
     <section id="schedule" className="container py-16 sm:py-24">
-      <div className="mb-6 text-center">
-        <h2 className="font-serif text-4xl font-medium leading-[1.1] tracking-tight sm:text-5xl">{t("title")}</h2>
-        <p className="mt-3 text-base leading-relaxed text-muted-foreground sm:text-lg">
+      <div className="mb-8 text-center">
+        <h2 className="text-[26px] font-bold leading-[1.2] tracking-[-0.025em] text-balance sm:text-3xl md:text-[34px]">{t("title")}</h2>
+        <p className="mt-4 text-pretty text-[15px] leading-[1.7] text-muted-foreground sm:text-base md:text-[17px]">
           {t("subtitle")}
         </p>
       </div>
@@ -190,9 +211,9 @@ export function Gallery() {
   ];
   return (
     <section id="gallery" className="container py-16 sm:py-24">
-      <div className="mb-6 text-center">
-        <h2 className="font-serif text-4xl font-medium leading-[1.1] tracking-tight sm:text-5xl">{t("title")}</h2>
-        <p className="mt-3 text-base leading-relaxed text-muted-foreground sm:text-lg">
+      <div className="mb-8 text-center">
+        <h2 className="text-[26px] font-bold leading-[1.2] tracking-[-0.025em] text-balance sm:text-3xl md:text-[34px]">{t("title")}</h2>
+        <p className="mt-4 text-pretty text-[15px] leading-[1.7] text-muted-foreground sm:text-base md:text-[17px]">
           {t("subtitle")}
         </p>
       </div>
@@ -216,20 +237,24 @@ export function Instructors() {
   const t = useTranslations("instructors");
   return (
     <section id="instructors" className="container py-16 sm:py-24">
-      <div className="mb-8 text-center lg:mb-12">
-        <h2 className="font-serif text-4xl font-medium leading-[1.1] tracking-tight sm:text-5xl">{t("title")}</h2>
-        <p className="mt-3 text-base leading-relaxed text-muted-foreground sm:text-lg">
-          {t("description")}
-        </p>
-        <ul className="mx-auto mt-6 flex max-w-xl flex-col gap-2 text-sm text-muted-foreground sm:flex-row sm:flex-wrap sm:justify-center">
+      <div className="mb-10 text-center lg:mb-14">
+        <h2 className="text-[26px] font-bold leading-[1.2] tracking-[-0.025em] text-balance sm:text-3xl md:text-[34px]">{t("title")}</h2>
+        <Prose
+          text={t("description")}
+          className="mx-auto mt-4 max-w-3xl text-[15px] leading-[1.7] text-muted-foreground sm:text-base md:text-[17px]"
+        />
+        <ul className="mx-auto mt-6 flex max-w-xl flex-col items-center gap-2 text-[14px] text-muted-foreground sm:text-[15px]">
           <li className="flex items-center gap-2">
-            <CheckCircle2 className="h-4 w-4 text-primary" /> {t("bullets.b1")}
+            <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-primary" />
+            <span>{t("bullets.b1")}</span>
           </li>
           <li className="flex items-center gap-2">
-            <CheckCircle2 className="h-4 w-4 text-primary" /> {t("bullets.b2")}
+            <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-primary" />
+            <span>{t("bullets.b2")}</span>
           </li>
           <li className="flex items-center gap-2">
-            <CheckCircle2 className="h-4 w-4 text-primary" /> {t("bullets.b3")}
+            <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-primary" />
+            <span>{t("bullets.b3")}</span>
           </li>
         </ul>
       </div>
@@ -317,9 +342,9 @@ export function Pricing() {
   const t = useTranslations("pricing");
   return (
     <section id="pricing" className="container py-16 sm:py-24">
-      <div className="mb-6 text-center">
-        <h2 className="font-serif text-4xl font-medium leading-[1.1] tracking-tight sm:text-5xl">{t("title")}</h2>
-        <p className="mt-3 text-base leading-relaxed text-muted-foreground sm:text-lg">
+      <div className="mb-8 text-center">
+        <h2 className="text-[26px] font-bold leading-[1.2] tracking-[-0.025em] text-balance sm:text-3xl md:text-[34px]">{t("title")}</h2>
+        <p className="mt-4 text-pretty text-[15px] leading-[1.7] text-muted-foreground sm:text-base md:text-[17px]">
           {t("subtitle")}
         </p>
       </div>
@@ -329,7 +354,7 @@ export function Pricing() {
             <CardTitle>{t("p1.title")}</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="font-serif text-4xl font-medium tracking-tight">
+            <p className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
               {t("p1.price")}
             </p>
             <p className="mt-2 text-sm text-muted-foreground">{t("p1.body")}</p>
@@ -340,7 +365,7 @@ export function Pricing() {
             <CardTitle>{t("p2.title")}</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="font-serif text-4xl font-medium tracking-tight">
+            <p className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
               {t("p2.price")}
             </p>
             <p className="mt-2 text-sm text-muted-foreground">{t("p2.body")}</p>
@@ -351,7 +376,7 @@ export function Pricing() {
             <CardTitle>{t("p3.title")}</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="font-serif text-4xl font-medium tracking-tight">
+            <p className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
               {t("p3.price")}
             </p>
             <p className="mt-2 text-sm text-muted-foreground">{t("p3.body")}</p>
@@ -371,8 +396,8 @@ export function FAQ() {
   ];
   return (
     <section id="faq" className="container py-16 sm:py-24">
-      <div className="mb-6 text-center">
-        <h2 className="font-serif text-4xl font-medium leading-[1.1] tracking-tight sm:text-5xl">{t("title")}</h2>
+      <div className="mb-8 text-center">
+        <h2 className="text-[26px] font-bold leading-[1.2] tracking-[-0.025em] text-balance sm:text-3xl md:text-[34px]">{t("title")}</h2>
       </div>
       <Accordion type="single" collapsible className="mx-auto max-w-2xl">
         {faqs.map((f, i) => (
@@ -393,12 +418,15 @@ export function Contact() {
 
   return (
     <section id="register" className="container py-14 sm:py-20">
-      <div className="mx-auto max-w-xl text-center">
+      <div className="mx-auto max-w-2xl text-center">
         <Badge className="mb-4 bg-accent">{t("badge")}</Badge>
-        <h2 className="font-serif text-4xl font-medium leading-[1.1] tracking-tight sm:text-5xl">
+        <h2 className="text-[26px] font-bold leading-[1.2] tracking-[-0.025em] text-balance sm:text-3xl md:text-[34px]">
           {t("title")}
         </h2>
-        <p className="mt-3 text-muted-foreground">{t("description")}</p>
+        <Prose
+          text={t("description")}
+          className="mx-auto mt-4 max-w-xl text-[15px] leading-[1.7] text-muted-foreground sm:text-base md:text-[17px]"
+        />
       </div>
 
       <div className="mx-auto mt-8 max-w-md rounded-2xl border border-border/60 bg-card/80 p-5 shadow-xl shadow-black/5 backdrop-blur-sm sm:p-7">
@@ -538,13 +566,13 @@ function ContactTile({
           {icon}
         </div>
 
-        <div className="mt-5 text-[10px] font-medium uppercase tracking-[0.22em] text-muted-foreground">
+        <div className="mt-5 text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
           {eyebrow}
         </div>
-        <div className="mt-1.5 text-lg font-semibold tracking-tight text-foreground">
+        <div className="mt-2 text-[17px] font-semibold tracking-tight text-foreground sm:text-lg">
           {value}
         </div>
-        <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+        <p className="mt-2 text-[13px] leading-[1.65] text-muted-foreground">
           {description}
         </p>
       </div>

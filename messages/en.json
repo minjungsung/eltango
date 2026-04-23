@@ -17,14 +17,14 @@
   "hero": {
     "badge": "Buenos Aires Style",
     "title": "The Essence of Tango, at Eltango",
-    "subtitle": "Buenos Aires style tango. Music, connection, partner communication, and a dialogue with the floor — learn it deeply and properly, starting from the fundamentals.",
+    "subtitle": "Buenos Aires style tango.\nMusic, connection, partner communication, and a dialogue with the floor.\nLearn it deeply and properly, from the fundamentals.",
     "ctaPrimary": "Join Open Chat",
     "ctaSecondary": "See Curriculum",
     "ctaTertiary": "Gallery"
   },
   "studio": {
     "title": "Eltango Gangnam HQ",
-    "description": "Eltango Seoul Tango Academy Gangnam HQ has been running for 16 years as a specialized Argentine tango school in Gangnam. Led by director Lee In-kyung, a 24-year veteran instructor, with over 10,000 cumulative students and 100 monthly active students, Eltango is a renowned tango institution with a structured, level-based curriculum.",
+    "description": "Eltango Seoul Tango Academy Gangnam HQ has been running for 16 years as a specialized Argentine tango school in Gangnam.\n\nLed by director Lee In-kyung, a 24-year veteran instructor, with over 10,000 cumulative students and 100 monthly active students.\n\nA renowned tango institution with a structured, level-based curriculum.",
     "cards": {
       "curriculum": {
         "title": "Level-based Curriculum",
@@ -39,7 +39,7 @@
         "body": "Especially loved by Gangnam professionals in their 30s–40s — an after-work hobby, a new community, and a proper adult tango lesson."
       }
     },
-    "tagline": "Looking for a Gangnam tango studio or an adult tango lesson? Start properly at Eltango. Come by for a level consultation and tour our comfortable facilities!",
+    "tagline": "Looking for a Gangnam tango studio or an adult tango lesson? Start properly at Eltango.\nCome by for a level consultation and tour our comfortable facilities!",
     "badges": {
       "t1": "Tango Studio",
       "t2": "Argentine Tango",
@@ -75,7 +75,7 @@
   },
   "instructors": {
     "title": "Instructors",
-    "description": "We teach grounded in the Buenos Aires local method and musicality — beyond technique, centered on connection and musicality.",
+    "description": "We teach grounded in the Buenos Aires local method and musicality.\nBeyond technique — centered on connection and musicality.",
     "bullets": {
       "b1": "10+ years of teaching & performance",
       "b2": "Trained by Buenos Aires maestros",

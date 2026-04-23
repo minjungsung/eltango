@@ -91,9 +91,24 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Tight line-height + subtle letter-spacing on display headings
-   so the serif display doesn't look airy on mobile. */
-.font-serif {
-  font-feature-settings: "ss01", "liga", "dlig";
-  letter-spacing: -0.01em;
+/* Display headings: Pretendard at heavy weight. Slight negative tracking
+   prevents the classic "fat sans on big size" airy feeling and keeps
+   Korean + Latin consistent in the same line. */
+h1,
+h2,
+h3 {
+  letter-spacing: -0.02em;
+  font-feature-settings: "ss01", "cv11", "ss03";
+}
+
+/* Optical kerning for body + headings — subtle but adds up on long KR lines. */
+p,
+li,
+label,
+span,
+a,
+button,
+input,
+textarea {
+  font-feature-settings: "ss01", "cv11";
 }

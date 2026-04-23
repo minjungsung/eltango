@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "../globals.css";
-import { Fraunces, Noto_Serif_KR } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -9,27 +8,10 @@ import { Navbar } from "@/components/navbar";
 import { MobileCTA } from "@/components/mobile-cta";
 import { routing } from "@/i18n/routing";
 
-// Editorial serif for headings — optical-sizing aware variable font that
-// lends a tango/Buenos Aires editorial feel. Body text uses Pretendard via
-// globals.css (see --font-sans) because it renders Korean far more cleanly
-// than any Google serif.
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-serif-latin",
-  style: ["normal", "italic"],
-  axes: ["SOFT", "opsz"],
-});
-
-// Korean serif so "갤러리" etc. don't fall back to the browser default
-// Korean serif (which varies across OS and generally looks worse than
-// Pretendard). Noto Serif KR pairs well with Fraunces.
-const notoSerifKr = Noto_Serif_KR({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-serif-kr",
-  weight: ["400", "500", "600"],
-});
+// Single-font system: Pretendard Variable, loaded via globals.css so that
+// the same font carries both Korean and Latin. Weight + size + tracking
+// provide all the hierarchy we need — a serif display pair looked off in
+// Korean (no Fraunces glyphs, fell back to a different serif mid-word).
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -87,11 +69,7 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   return (
-    <html
-      lang={locale}
-      className={`${fraunces.variable} ${notoSerifKr.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang={locale} suppressHydrationWarning>
       <body className="font-sans antialiased">
         <NextIntlClientProvider>
           <ThemeProvider attribute="class" forcedTheme="dark">
