@@ -13,7 +13,10 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background/70 backdrop-blur">
       <div className="container flex h-16 items-center justify-between">
-        <a href="#" className="font-semibold tracking-tight">
+        <a
+          href="#"
+          className="font-serif text-lg font-medium tracking-tight"
+        >
           {t("brand")}
         </a>
         <nav className="hidden gap-8 text-sm md:flex">

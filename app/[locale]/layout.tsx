@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "../globals.css";
-import { Noto_Sans_KR } from "next/font/google";
+import { Fraunces } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -9,7 +9,17 @@ import { Navbar } from "@/components/navbar";
 import { MobileCTA } from "@/components/mobile-cta";
 import { routing } from "@/i18n/routing";
 
-const noto = Noto_Sans_KR({ subsets: ["latin"], display: "swap" });
+// Editorial serif for headings — optical-sizing aware variable font that
+// lends a tango/Buenos Aires editorial feel. Body text uses Pretendard via
+// globals.css (see --font-sans) because it renders Korean far more cleanly
+// than any Google serif.
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-serif",
+  style: ["normal", "italic"],
+  axes: ["SOFT", "opsz"],
+});
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -67,8 +77,8 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <body className={noto.className}>
+    <html lang={locale} className={fraunces.variable} suppressHydrationWarning>
+      <body className="font-sans antialiased">
         <NextIntlClientProvider>
           <ThemeProvider attribute="class" forcedTheme="dark">
             <Navbar />

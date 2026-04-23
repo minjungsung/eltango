@@ -51,11 +51,13 @@ export function Hero() {
       </div>
 
       <div className="container relative z-10 mx-auto max-w-3xl text-center">
-        <Badge className="mb-4 bg-accent">{t("badge")}</Badge>
-        <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl">
+        <Badge className="mb-5 bg-accent">{t("badge")}</Badge>
+        <h1 className="font-serif text-5xl font-medium leading-[1.05] tracking-tight sm:text-7xl">
           {t("title")}
         </h1>
-        <p className="mt-6 text-lg text-muted-foreground">{t("subtitle")}</p>
+        <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+          {t("subtitle")}
+        </p>
         <div className="mt-8 grid w-full grid-cols-1 gap-2 sm:mx-auto sm:max-w-none sm:grid-cols-3 sm:gap-3">
           <Button asChild className="w-full sm:w-auto">
             <a href="#register">
@@ -78,13 +80,15 @@ export function Hero() {
 export function StudioIntro() {
   const t = useTranslations("studio");
   return (
-    <section id="studio" className="container py-12 sm:py-16">
+    <section id="studio" className="container py-16 sm:py-24">
       <div className="mx-auto max-w-3xl text-center">
-        <h2 className="text-3xl font-bold tracking-tight">{t("title")}</h2>
-        <p className="mt-4 text-muted-foreground">{t("description")}</p>
+        <h2 className="font-serif text-4xl font-medium leading-[1.1] tracking-tight sm:text-5xl">{t("title")}</h2>
+        <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
+          {t("description")}
+        </p>
       </div>
 
-      <div className="mt-8 grid gap-6 md:grid-cols-3">
+      <div className="mt-10 grid gap-6 md:grid-cols-3">
         <Card>
           <CardHeader>
             <CardTitle>{t("cards.curriculum.title")}</CardTitle>
@@ -135,10 +139,12 @@ export function StudioIntro() {
 export function Schedule() {
   const t = useTranslations("schedule");
   return (
-    <section id="schedule" className="container py-12 sm:py-16">
+    <section id="schedule" className="container py-16 sm:py-24">
       <div className="mb-6 text-center">
-        <h2 className="text-3xl font-bold tracking-tight">{t("title")}</h2>
-        <p className="mt-2 text-muted-foreground">{t("subtitle")}</p>
+        <h2 className="font-serif text-4xl font-medium leading-[1.1] tracking-tight sm:text-5xl">{t("title")}</h2>
+        <p className="mt-3 text-base leading-relaxed text-muted-foreground sm:text-lg">
+          {t("subtitle")}
+        </p>
       </div>
       <div className="grid gap-6 lg:grid-cols-3">
         <Card>
@@ -183,10 +189,12 @@ export function Gallery() {
     "/images/slides/KakaoTalk_Image_2026-01-29-22-35-34_005.png",
   ];
   return (
-    <section id="gallery" className="container py-12 sm:py-16">
+    <section id="gallery" className="container py-16 sm:py-24">
       <div className="mb-6 text-center">
-        <h2 className="text-3xl font-bold tracking-tight">{t("title")}</h2>
-        <p className="mt-2 text-muted-foreground">{t("subtitle")}</p>
+        <h2 className="font-serif text-4xl font-medium leading-[1.1] tracking-tight sm:text-5xl">{t("title")}</h2>
+        <p className="mt-3 text-base leading-relaxed text-muted-foreground sm:text-lg">
+          {t("subtitle")}
+        </p>
       </div>
       <div className="overflow-x-auto">
         <div className="flex snap-x snap-mandatory gap-4">
@@ -207,11 +215,13 @@ export function Gallery() {
 export function Instructors() {
   const t = useTranslations("instructors");
   return (
-    <section id="instructors" className="container py-12 sm:py-16">
+    <section id="instructors" className="container py-16 sm:py-24">
       <div className="mb-8 text-center lg:mb-12">
-        <h2 className="text-3xl font-bold tracking-tight">{t("title")}</h2>
-        <p className="mt-3 text-muted-foreground">{t("description")}</p>
-        <ul className="mx-auto mt-4 flex max-w-xl flex-col gap-2 text-sm text-muted-foreground sm:flex-row sm:flex-wrap sm:justify-center">
+        <h2 className="font-serif text-4xl font-medium leading-[1.1] tracking-tight sm:text-5xl">{t("title")}</h2>
+        <p className="mt-3 text-base leading-relaxed text-muted-foreground sm:text-lg">
+          {t("description")}
+        </p>
+        <ul className="mx-auto mt-6 flex max-w-xl flex-col gap-2 text-sm text-muted-foreground sm:flex-row sm:flex-wrap sm:justify-center">
           <li className="flex items-center gap-2">
             <CheckCircle2 className="h-4 w-4 text-primary" /> {t("bullets.b1")}
           </li>
@@ -306,10 +316,12 @@ export function Instructors() {
 export function Pricing() {
   const t = useTranslations("pricing");
   return (
-    <section id="pricing" className="container py-12 sm:py-16">
+    <section id="pricing" className="container py-16 sm:py-24">
       <div className="mb-6 text-center">
-        <h2 className="text-3xl font-bold tracking-tight">{t("title")}</h2>
-        <p className="mt-2 text-muted-foreground">{t("subtitle")}</p>
+        <h2 className="font-serif text-4xl font-medium leading-[1.1] tracking-tight sm:text-5xl">{t("title")}</h2>
+        <p className="mt-3 text-base leading-relaxed text-muted-foreground sm:text-lg">
+          {t("subtitle")}
+        </p>
       </div>
       <div className="grid gap-6 lg:grid-cols-3">
         <Card>
@@ -317,7 +329,9 @@ export function Pricing() {
             <CardTitle>{t("p1.title")}</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold">{t("p1.price")}</p>
+            <p className="font-serif text-4xl font-medium tracking-tight">
+              {t("p1.price")}
+            </p>
             <p className="mt-2 text-sm text-muted-foreground">{t("p1.body")}</p>
           </CardContent>
         </Card>
@@ -326,7 +340,9 @@ export function Pricing() {
             <CardTitle>{t("p2.title")}</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold">{t("p2.price")}</p>
+            <p className="font-serif text-4xl font-medium tracking-tight">
+              {t("p2.price")}
+            </p>
             <p className="mt-2 text-sm text-muted-foreground">{t("p2.body")}</p>
           </CardContent>
         </Card>
@@ -335,7 +351,9 @@ export function Pricing() {
             <CardTitle>{t("p3.title")}</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold">{t("p3.price")}</p>
+            <p className="font-serif text-4xl font-medium tracking-tight">
+              {t("p3.price")}
+            </p>
             <p className="mt-2 text-sm text-muted-foreground">{t("p3.body")}</p>
           </CardContent>
         </Card>
@@ -352,9 +370,9 @@ export function FAQ() {
     { q: t("q3"), a: t("a3") },
   ];
   return (
-    <section id="faq" className="container py-12 sm:py-16">
+    <section id="faq" className="container py-16 sm:py-24">
       <div className="mb-6 text-center">
-        <h2 className="text-3xl font-bold tracking-tight">{t("title")}</h2>
+        <h2 className="font-serif text-4xl font-medium leading-[1.1] tracking-tight sm:text-5xl">{t("title")}</h2>
       </div>
       <Accordion type="single" collapsible className="mx-auto max-w-2xl">
         {faqs.map((f, i) => (
@@ -377,7 +395,7 @@ export function Contact() {
     <section id="register" className="container py-14 sm:py-20">
       <div className="mx-auto max-w-xl text-center">
         <Badge className="mb-4 bg-accent">{t("badge")}</Badge>
-        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+        <h2 className="font-serif text-4xl font-medium leading-[1.1] tracking-tight sm:text-5xl">
           {t("title")}
         </h2>
         <p className="mt-3 text-muted-foreground">{t("description")}</p>

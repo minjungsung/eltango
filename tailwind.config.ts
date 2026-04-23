@@ -17,6 +17,17 @@ const config: Config = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)", "sans-serif"],
+        serif: [
+          "var(--font-serif)",
+          "ui-serif",
+          "Georgia",
+          "Cambria",
+          "Times New Roman",
+          "serif",
+        ],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
