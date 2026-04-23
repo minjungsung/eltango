@@ -387,50 +387,50 @@ export function Contact() {
         <RegisterForm source="contact" />
       </div>
 
-      <div className="mx-auto mt-14 max-w-3xl">
-        <div className="flex items-center gap-3 text-xs uppercase tracking-[0.18em] text-muted-foreground">
-          <span className="h-px flex-1 bg-border/60" />
+      <div className="mx-auto mt-16 max-w-5xl">
+        <div className="flex items-center gap-4 text-[11px] font-medium uppercase tracking-[0.24em] text-muted-foreground">
+          <span className="h-px flex-1 bg-gradient-to-r from-transparent to-border/70" />
           <span>{t("otherWays")}</span>
-          <span className="h-px flex-1 bg-border/60" />
+          <span className="h-px flex-1 bg-gradient-to-l from-transparent to-border/70" />
         </div>
 
-        <div className="mt-6 grid gap-3 sm:grid-cols-3">
+        <div className="mt-8 grid gap-4 sm:grid-cols-3">
           <ContactTile
+            index="01"
+            accent="coral"
             icon={<Phone className="h-5 w-5" />}
             eyebrow={t("tiles.phone.eyebrow")}
-            title={t("tiles.phone.value")}
+            value={t("tiles.phone.value")}
             description={t("tiles.phone.description")}
           >
-            <Button asChild size="sm" className="w-full">
+            <Button asChild className="w-full">
               <a href="tel:+821024150563">{t("tiles.phone.callCta")}</a>
             </Button>
-            <Button asChild size="sm" variant="outline" className="w-full">
+            <Button asChild variant="outline" className="w-full">
               <a href="sms:+821024150563">{t("tiles.phone.smsCta")}</a>
             </Button>
           </ContactTile>
 
           <ContactTile
+            index="02"
+            accent="kakao"
             icon={<MessageCircle className="h-5 w-5" />}
-            iconClassName="bg-[#fee500] text-black"
             eyebrow={t("tiles.kakao.eyebrow")}
-            title="@fishlove0"
+            value="@fishlove0"
             description={t("tiles.kakao.description")}
           >
-            <CopyButton
-              text="@fishlove0"
-              className="w-full"
-              variant="outline"
-              size="sm"
-            />
+            <CopyButton text="@fishlove0" className="w-full" variant="outline" />
           </ContactTile>
 
           <ContactTile
+            index="03"
+            accent="amber"
             icon={<MapPin className="h-5 w-5" />}
             eyebrow={t("tiles.directions.eyebrow")}
-            title={t("tiles.directions.value")}
+            value={t("tiles.directions.value")}
             description={t("tiles.directions.description")}
           >
-            <Button asChild size="sm" variant="outline" className="w-full">
+            <Button asChild variant="outline" className="w-full">
               <a href={naverMapUrl} target="_blank" rel="noreferrer">
                 {t("tiles.directions.cta")}
               </a>
@@ -438,7 +438,7 @@ export function Contact() {
           </ContactTile>
         </div>
 
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-center text-xs text-muted-foreground">
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-center text-xs text-muted-foreground">
           <span>{t("address1")}</span>
           <span className="hidden h-1 w-1 rounded-full bg-border sm:inline-block" />
           <span>{t("subway")}</span>
@@ -455,42 +455,85 @@ export function Contact() {
   );
 }
 
+type TileAccent = "coral" | "kakao" | "amber";
+
+const TILE_ACCENTS: Record<
+  TileAccent,
+  { icon: string; glow: string; line: string; index: string }
+> = {
+  coral: {
+    icon: "bg-primary/10 text-primary ring-1 ring-inset ring-primary/30",
+    glow: "bg-[radial-gradient(120%_80%_at_50%_0%,hsl(var(--primary)/0.18),transparent_70%)]",
+    line: "bg-gradient-to-r from-transparent via-primary/70 to-transparent",
+    index: "text-primary/40",
+  },
+  kakao: {
+    icon: "bg-[#fee500] text-black ring-1 ring-inset ring-[#fee500]/60",
+    glow: "bg-[radial-gradient(120%_80%_at_50%_0%,rgba(254,229,0,0.14),transparent_70%)]",
+    line: "bg-gradient-to-r from-transparent via-[#fee500]/70 to-transparent",
+    index: "text-[#fee500]/40",
+  },
+  amber: {
+    icon: "bg-amber-400/10 text-amber-300 ring-1 ring-inset ring-amber-400/30",
+    glow: "bg-[radial-gradient(120%_80%_at_50%_0%,rgba(251,191,36,0.14),transparent_70%)]",
+    line: "bg-gradient-to-r from-transparent via-amber-400/70 to-transparent",
+    index: "text-amber-300/40",
+  },
+};
+
 function ContactTile({
+  index,
+  accent,
   icon,
-  iconClassName,
   eyebrow,
-  title,
+  value,
   description,
   children,
 }: {
+  index: string;
+  accent: TileAccent;
   icon: React.ReactNode;
-  iconClassName?: string;
   eyebrow: string;
-  title: string;
+  value: string;
   description: string;
   children: React.ReactNode;
 }) {
+  const a = TILE_ACCENTS[accent];
   return (
-    <div className="flex h-full flex-col justify-between gap-4 rounded-2xl border border-border/60 bg-card/50 p-5 text-left transition-colors hover:border-border">
-      <div>
+    <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/50 bg-gradient-to-b from-card/80 to-card/30 p-6 text-left transition-all duration-300 hover:-translate-y-0.5 hover:border-border hover:shadow-2xl hover:shadow-black/40">
+      <div
+        aria-hidden
+        className={`pointer-events-none absolute inset-0 opacity-60 transition-opacity duration-300 group-hover:opacity-100 ${a.glow}`}
+      />
+      <div aria-hidden className={`absolute inset-x-0 top-0 h-px ${a.line}`} />
+
+      <div
+        className={`pointer-events-none absolute right-5 top-5 font-mono text-xs tracking-wider ${a.index}`}
+      >
+        {index}
+      </div>
+
+      <div className="relative">
         <div
-          className={`inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary ${
-            iconClassName ?? ""
-          }`}
+          className={`inline-flex h-11 w-11 items-center justify-center rounded-full ${a.icon}`}
         >
           {icon}
         </div>
-        <div className="mt-4 text-[11px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
+
+        <div className="mt-5 text-[10px] font-medium uppercase tracking-[0.22em] text-muted-foreground">
           {eyebrow}
         </div>
-        <div className="mt-1 text-base font-semibold tracking-tight">
-          {title}
+        <div className="mt-1.5 text-lg font-semibold tracking-tight text-foreground">
+          {value}
         </div>
-        <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
+        <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
           {description}
         </p>
       </div>
-      <div className="grid gap-2">{children}</div>
+
+      <div className="relative mt-6 flex-1" />
+      <div aria-hidden className="relative my-4 h-px bg-border/50" />
+      <div className="relative grid gap-2">{children}</div>
     </div>
   );
 }
