@@ -142,24 +142,34 @@
   "contact": {
     "badge": "무료 상담 신청",
     "title": "오픈채팅으로 바로 시작해요",
-    "description": "이름과 연락처만 남기시면 카카오 오픈채팅방으로 연결해드려요. 체험 수업·레벨 상담을 편하게 받아보세요.",
-    "email": "이메일 문의",
-    "phone": "전화 문의",
-    "directions": "오시는 길",
-    "address1": "주소: 서울 서초구 반포동 741번지 2층",
-    "address2": "Address: Banpo-dong 741, 2F, Seoul, Korea 137-903",
-    "subway": "지하철: 신논현역 1번출구, 강남역 10번출구 도보",
-    "phoneCard": {
-      "number": "(82) 1024150563",
-      "call": "전화하기",
-      "sms": "문자 보내기",
-      "note": "표기: 010-2415-0563"
+    "description": "이름과 연락처만 남겨주시면 카카오 오픈채팅방으로 바로 연결해드려요.",
+    "otherWays": "다른 방법으로 문의",
+    "address1": "서울 서초구 반포동 741번지 2층",
+    "address2": "Banpo-dong 741, 2F, Seoul, Korea",
+    "subway": "신논현역 1번출구 · 강남역 10번출구 도보",
+    "tiles": {
+      "phone": {
+        "eyebrow": "전화 · 문자",
+        "value": "010-2415-0563",
+        "description": "평일 낮에는 전화, 그 외 시간은 문자가 빨라요.",
+        "callCta": "전화하기",
+        "smsCta": "문자 보내기"
+      },
+      "kakao": {
+        "eyebrow": "카카오톡 ID",
+        "description": "ID를 복사해 카카오톡에서 친구 추가해 주세요.",
+        "copyCta": "ID 복사"
+      },
+      "directions": {
+        "eyebrow": "오시는 길",
+        "value": "서초구 반포동 741, 2F",
+        "description": "신논현역 1번출구 · 강남역 10번출구 도보 거리.",
+        "cta": "네이버 지도 길찾기"
+      }
     },
     "kakao": {
-      "id": "KakaoTalk ID : @fishlove0",
       "copy": "ID 복사",
-      "copied": "복사됨",
-      "note": "카카오채널/오픈채팅 링크가 있다면 버튼으로 연결 가능합니다."
+      "copied": "복사됨"
     }
   },
   "footer": {
@@ -177,6 +187,7 @@
     "phoneLabel": "전화번호 *",
     "phonePlaceholder": "010-1234-5678",
     "memoLabel": "남기실 말씀 (선택)",
+    "memoAdd": "메모 추가 (선택)",
     "memoPlaceholder": "경험 여부, 문의 내용 등을 자유롭게 적어주세요.",
     "consent": "[필수] 상담 진행을 위해 이름·전화번호 수집·이용에 동의합니다. 보관 기간: 상담 종료 후 1년. 미동의 시 상담이 제한될 수 있어요.",
     "submit": "신청하고 오픈채팅 입장하기",

@@ -8,7 +8,14 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { CheckCircle2, Heart, MapPin, Phone, MessageCircle } from "lucide-react";
+import {
+  CheckCircle2,
+  Heart,
+  MapPin,
+  Phone,
+  MessageCircle,
+  Mail,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { CopyButton } from "@/components/ui/copy-button";
@@ -363,78 +370,128 @@ export function FAQ() {
 
 export function Contact() {
   const t = useTranslations("contact");
+  const naverMapUrl =
+    "https://map.naver.com/p/entry/place/20526245?placePath=/home?from=map&fromPanelNum=1&additionalHeight=76&timestamp=202601292225&locale=ko&svcName=map_pcv5&c=15.00,0,0,0,dh";
+
   return (
-    <section id="register" className="container py-16">
-      <div className="mx-auto max-w-2xl text-center">
+    <section id="register" className="container py-14 sm:py-20">
+      <div className="mx-auto max-w-xl text-center">
         <Badge className="mb-4 bg-accent">{t("badge")}</Badge>
-        <h2 className="text-3xl font-bold tracking-tight">{t("title")}</h2>
-        <p className="mt-2 text-muted-foreground">{t("description")}</p>
+        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+          {t("title")}
+        </h2>
+        <p className="mt-3 text-muted-foreground">{t("description")}</p>
+      </div>
 
-        <div className="mx-auto mt-8 max-w-md rounded-xl border bg-card p-6 shadow-sm">
-          <RegisterForm source="contact" />
+      <div className="mx-auto mt-8 max-w-md rounded-2xl border border-border/60 bg-card/80 p-5 shadow-xl shadow-black/5 backdrop-blur-sm sm:p-7">
+        <RegisterForm source="contact" />
+      </div>
+
+      <div className="mx-auto mt-14 max-w-3xl">
+        <div className="flex items-center gap-3 text-xs uppercase tracking-[0.18em] text-muted-foreground">
+          <span className="h-px flex-1 bg-border/60" />
+          <span>{t("otherWays")}</span>
+          <span className="h-px flex-1 bg-border/60" />
         </div>
 
-        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <Button size="lg" variant="secondary" asChild>
-            <a href="mailto:info@eltango.kr?subject=%5B%EC%97%98%EB%95%85%EA%B3%A0%5D%20%EC%88%98%EA%B0%95%20%EB%AC%B8%EC%9D%98">
-              {t("email")}
-            </a>
-          </Button>
-          <Button size="lg" variant="secondary" asChild>
-            <a href="tel:01024150563">{t("phone")}</a>
-          </Button>
-          <Button size="lg" variant="secondary" asChild>
-            <a
-              href="https://map.naver.com/p/entry/place/20526245?placePath=/home?from=map&fromPanelNum=1&additionalHeight=76&timestamp=202601292225&locale=ko&svcName=map_pcv5&c=15.00,0,0,0,dh"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <MapPin className="mr-2 h-4 w-4" /> {t("directions")}
-            </a>
-          </Button>
-        </div>
-        <div className="mt-6 text-sm text-muted-foreground">
-          <div>{t("address1")}</div>
-          <div>{t("address2")}</div>
-          <div>{t("subway")}</div>
+        <div className="mt-6 grid gap-3 sm:grid-cols-3">
+          <ContactTile
+            icon={<Phone className="h-5 w-5" />}
+            eyebrow={t("tiles.phone.eyebrow")}
+            title={t("tiles.phone.value")}
+            description={t("tiles.phone.description")}
+          >
+            <Button asChild size="sm" className="w-full">
+              <a href="tel:+821024150563">{t("tiles.phone.callCta")}</a>
+            </Button>
+            <Button asChild size="sm" variant="outline" className="w-full">
+              <a href="sms:+821024150563">{t("tiles.phone.smsCta")}</a>
+            </Button>
+          </ContactTile>
+
+          <ContactTile
+            icon={<MessageCircle className="h-5 w-5" />}
+            iconClassName="bg-[#fee500] text-black"
+            eyebrow={t("tiles.kakao.eyebrow")}
+            title="@fishlove0"
+            description={t("tiles.kakao.description")}
+          >
+            <CopyButton
+              text="@fishlove0"
+              className="w-full"
+              variant="outline"
+              size="sm"
+            />
+          </ContactTile>
+
+          <ContactTile
+            icon={<MapPin className="h-5 w-5" />}
+            eyebrow={t("tiles.directions.eyebrow")}
+            title={t("tiles.directions.value")}
+            description={t("tiles.directions.description")}
+          >
+            <Button asChild size="sm" variant="outline" className="w-full">
+              <a href={naverMapUrl} target="_blank" rel="noreferrer">
+                {t("tiles.directions.cta")}
+              </a>
+            </Button>
+          </ContactTile>
         </div>
 
-        <div className="mt-10 mx-auto grid max-w-5xl items-stretch gap-4 sm:grid-cols-2">
-          <div className="rounded-xl border bg-[#ff5ea8] p-6 text-white">
-            <div className="flex items-center gap-3">
-              <div className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-white/20">
-                <Phone className="h-5 w-5" />
-              </div>
-              <div className="text-lg font-semibold tracking-wide">
-                {t("phoneCard.number")}
-              </div>
-            </div>
-            <div className="mt-4 grid grid-cols-2 gap-2">
-              <Button asChild variant="secondary" className="w-full">
-                <a href="tel:+821024150563">{t("phoneCard.call")}</a>
-              </Button>
-              <Button asChild variant="outline" className="w-full">
-                <a href="sms:+821024150563">{t("phoneCard.sms")}</a>
-              </Button>
-            </div>
-            <div className="mt-2 text-xs opacity-90">{t("phoneCard.note")}</div>
-          </div>
-
-          <div className="rounded-xl border bg-neutral-900 p-6 text-white">
-            <div className="flex items-center gap-3">
-              <div className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-[#fee500]">
-                <MessageCircle className="h-5 w-5 text-black" />
-              </div>
-              <div className="text-lg font-semibold tracking-wide">{t("kakao.id")}</div>
-            </div>
-            <div className="mt-4">
-              <CopyButton text="@fishlove0" className="w-full" variant="outline" />
-            </div>
-            <div className="mt-2 text-xs opacity-70">{t("kakao.note")}</div>
-          </div>
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-center text-xs text-muted-foreground">
+          <span>{t("address1")}</span>
+          <span className="hidden h-1 w-1 rounded-full bg-border sm:inline-block" />
+          <span>{t("subway")}</span>
+          <span className="hidden h-1 w-1 rounded-full bg-border sm:inline-block" />
+          <a
+            href="mailto:info@eltango.kr"
+            className="inline-flex items-center gap-1 text-foreground/70 underline-offset-4 hover:text-foreground hover:underline"
+          >
+            <Mail className="h-3 w-3" /> info@eltango.kr
+          </a>
         </div>
       </div>
     </section>
+  );
+}
+
+function ContactTile({
+  icon,
+  iconClassName,
+  eyebrow,
+  title,
+  description,
+  children,
+}: {
+  icon: React.ReactNode;
+  iconClassName?: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex h-full flex-col justify-between gap-4 rounded-2xl border border-border/60 bg-card/50 p-5 text-left transition-colors hover:border-border">
+      <div>
+        <div
+          className={`inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary ${
+            iconClassName ?? ""
+          }`}
+        >
+          {icon}
+        </div>
+        <div className="mt-4 text-[11px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
+          {eyebrow}
+        </div>
+        <div className="mt-1 text-base font-semibold tracking-tight">
+          {title}
+        </div>
+        <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
+          {description}
+        </p>
+      </div>
+      <div className="grid gap-2">{children}</div>
+    </div>
   );
 }
 

@@ -142,24 +142,34 @@
   "contact": {
     "badge": "Free Consultation",
     "title": "Start right away via Open Chat",
-    "description": "Leave your name and phone number and we'll take you straight to our KakaoTalk open chat. Trial lessons and level consultations are welcome.",
-    "email": "Email",
-    "phone": "Call",
-    "directions": "Directions",
-    "address1": "Address: Banpo-dong 741, 2F, Seocho-gu, Seoul, Korea",
-    "address2": "Postal: 137-903",
-    "subway": "Subway: Sinnonhyeon Station Exit 1, Gangnam Station Exit 10 (walking distance)",
-    "phoneCard": {
-      "number": "(82) 10-2415-0563",
-      "call": "Call",
-      "sms": "Text",
-      "note": "Local format: 010-2415-0563"
+    "description": "Leave your name and phone number and we'll take you straight to our KakaoTalk open chat.",
+    "otherWays": "Other ways to reach us",
+    "address1": "Banpo-dong 741, 2F, Seocho-gu, Seoul, Korea",
+    "address2": "Postal 137-903",
+    "subway": "Sinnonhyeon Stn. Exit 1 · Gangnam Stn. Exit 10",
+    "tiles": {
+      "phone": {
+        "eyebrow": "Call or text",
+        "value": "+82 10-2415-0563",
+        "description": "Call us during the day, text us any time.",
+        "callCta": "Call",
+        "smsCta": "Text"
+      },
+      "kakao": {
+        "eyebrow": "KakaoTalk ID",
+        "description": "Copy the ID and add us as a friend on KakaoTalk.",
+        "copyCta": "Copy ID"
+      },
+      "directions": {
+        "eyebrow": "Visit us",
+        "value": "Banpo-dong 741, 2F",
+        "description": "A short walk from Sinnonhyeon or Gangnam Station.",
+        "cta": "Open in Naver Maps"
+      }
     },
     "kakao": {
-      "id": "KakaoTalk ID : @fishlove0",
       "copy": "Copy ID",
-      "copied": "Copied",
-      "note": "If you have a KakaoTalk channel / open chat link we can connect via button."
+      "copied": "Copied"
     }
   },
   "footer": {
@@ -177,6 +187,7 @@
     "phoneLabel": "Phone *",
     "phonePlaceholder": "010-1234-5678",
     "memoLabel": "Message (optional)",
+    "memoAdd": "Add a message (optional)",
     "memoPlaceholder": "Any questions or prior experience you'd like to share.",
     "consent": "[Required] I agree to the collection and use of my name and phone number for consultation purposes. Retention: up to 1 year after consultation ends.",
     "submit": "Submit & Join Open Chat",
