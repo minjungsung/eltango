@@ -19,12 +19,15 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: ["var(--font-sans)", "sans-serif"],
+        // Latin glyphs resolve to Fraunces (display serif). Korean glyphs
+        // aren't in Fraunces so the browser falls through to Noto Serif KR,
+        // which actually *has* Korean — preventing the ugly system-default
+        // CJK serif fallback we saw on "갤러리" etc.
         serif: [
-          "var(--font-serif)",
+          "var(--font-serif-latin)",
+          "var(--font-serif-kr)",
           "ui-serif",
           "Georgia",
-          "Cambria",
-          "Times New Roman",
           "serif",
         ],
       },

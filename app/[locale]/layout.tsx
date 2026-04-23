@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "../globals.css";
-import { Fraunces } from "next/font/google";
+import { Fraunces, Noto_Serif_KR } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -16,9 +16,19 @@ import { routing } from "@/i18n/routing";
 const fraunces = Fraunces({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-serif",
+  variable: "--font-serif-latin",
   style: ["normal", "italic"],
   axes: ["SOFT", "opsz"],
+});
+
+// Korean serif so "갤러리" etc. don't fall back to the browser default
+// Korean serif (which varies across OS and generally looks worse than
+// Pretendard). Noto Serif KR pairs well with Fraunces.
+const notoSerifKr = Noto_Serif_KR({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-serif-kr",
+  weight: ["400", "500", "600"],
 });
 
 export function generateStaticParams() {
@@ -77,7 +87,11 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   return (
-    <html lang={locale} className={fraunces.variable} suppressHydrationWarning>
+    <html
+      lang={locale}
+      className={`${fraunces.variable} ${notoSerifKr.variable}`}
+      suppressHydrationWarning
+    >
       <body className="font-sans antialiased">
         <NextIntlClientProvider>
           <ThemeProvider attribute="class" forcedTheme="dark">
