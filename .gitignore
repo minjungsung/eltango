@@ -5,3 +5,7 @@
 .env
 .env.local
 .env.*.local
+.vercel
+
+# Build artifacts
+tsconfig.tsbuildinfo
