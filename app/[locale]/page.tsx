@@ -1,14 +1,17 @@
 import { setRequestLocale } from "next-intl/server";
 import {
-  Contact,
-  FAQ,
-  Footer,
-  Gallery,
   Hero,
-  Instructors,
-  Pricing,
-  Schedule,
-  StudioIntro,
+  Features,
+  About,
+  Director,
+  Difference,
+  BeginnerClass,
+  Milonga,
+  Testimonials,
+  Audience,
+  FAQ,
+  Contact,
+  Footer,
 } from "@/components/sections";
 
 export default async function Page({
@@ -22,11 +25,14 @@ export default async function Page({
   return (
     <main>
       <Hero />
-      <StudioIntro />
-      <Gallery />
-      <Schedule />
-      <Instructors />
-      <Pricing />
+      <Features />
+      <About />
+      <Director />
+      <Difference />
+      <BeginnerClass />
+      <Milonga />
+      <Testimonials />
+      <Audience />
       <FAQ />
       <Contact />
       <Footer />

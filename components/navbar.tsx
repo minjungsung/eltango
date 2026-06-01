@@ -2,74 +2,75 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { LanguageSwitcher } from "@/components/language-switcher";
 
 export function Navbar() {
   const t = useTranslations("nav");
   const [open, setOpen] = useState(false);
+
+  const links = [
+    { href: "#about", label: t("about") },
+    { href: "#beginner", label: t("classes") },
+    { href: "#director", label: t("instructors") },
+    { href: "#milonga", label: t("schedule") },
+    { href: "#reviews", label: t("reviews") },
+    { href: "#audience", label: t("community") },
+    { href: "#location", label: t("directions") },
+  ];
+
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-background/70 backdrop-blur">
+    <header className="sticky top-0 z-40 w-full border-b border-border/30 bg-background/80 backdrop-blur-md">
       <div className="container flex h-16 items-center justify-between">
-        <a
-          href="#"
-          className="text-[17px] font-bold tracking-[-0.02em]"
-        >
-          {t("brand")}
+        <a href="#" className="flex items-center gap-2">
+          <span className="font-serif text-lg font-bold text-primary">
+            {t("brand")}
+          </span>
+          <span className="hidden text-[10px] text-muted-foreground sm:block">
+            Argentine Tango Studio
+          </span>
         </a>
-        <nav className="hidden gap-8 text-sm md:flex">
-          <a href="#studio" className="text-muted-foreground hover:text-foreground">
-            {t("features")}
-          </a>
-          <a href="#schedule" className="text-muted-foreground hover:text-foreground">
-            {t("schedule")}
-          </a>
-          <a href="#instructors" className="text-muted-foreground hover:text-foreground">
-            {t("instructors")}
-          </a>
-          <a href="#pricing" className="text-muted-foreground hover:text-foreground">
-            {t("pricing")}
-          </a>
-          <a href="#faq" className="text-muted-foreground hover:text-foreground">
-            {t("faq")}
-          </a>
+
+        <nav className="hidden gap-5 text-[13px] lg:flex">
+          {links.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="text-muted-foreground transition-colors hover:text-foreground"
+            >
+              {link.label}
+            </a>
+          ))}
         </nav>
-        <div className="hidden items-center gap-2 md:flex">
-          <LanguageSwitcher />
-          <Button asChild>
+
+        <div className="hidden lg:block">
+          <Button asChild size="sm" className="rounded-sm px-5">
             <a href="#register">{t("cta")}</a>
           </Button>
         </div>
+
         <button
-          className="inline-flex items-center justify-center rounded-md p-2 md:hidden"
+          className="inline-flex items-center justify-center rounded-md p-2 lg:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-label={t("menu")}
         >
-          <Menu className="h-6 w-6" />
+          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
-      <div className={cn("md:hidden border-t", open ? "block" : "hidden")}>
-        <div className="container grid gap-2 py-4 text-sm">
-          <a href="#studio" onClick={() => setOpen(false)}>
-            {t("features")}
-          </a>
-          <a href="#schedule" onClick={() => setOpen(false)}>
-            {t("schedule")}
-          </a>
-          <a href="#instructors" onClick={() => setOpen(false)}>
-            {t("instructors")}
-          </a>
-          <a href="#pricing" onClick={() => setOpen(false)}>
-            {t("pricing")}
-          </a>
-          <a href="#faq" onClick={() => setOpen(false)}>
-            {t("faq")}
-          </a>
-          <div className="mt-2">
-            <LanguageSwitcher onChanged={() => setOpen(false)} className="px-0" />
-          </div>
+
+      <div className={cn("lg:hidden border-t border-border/30", open ? "block" : "hidden")}>
+        <div className="container grid gap-3 py-4 text-sm">
+          {links.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={() => setOpen(false)}
+              className="text-muted-foreground hover:text-foreground"
+            >
+              {link.label}
+            </a>
+          ))}
           <Button asChild className="mt-2">
             <a href="#register" onClick={() => setOpen(false)}>
               {t("cta")}

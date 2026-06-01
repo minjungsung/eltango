@@ -8,69 +8,70 @@
   --font-sans: "Pretendard Variable", Pretendard, -apple-system,
     BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
     "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-  /* Force dark palette at root for no flash of white */
-  --background: 240 10% 3.9%;
-  --foreground: 0 0% 98%;
+  --font-serif: "Playfair Display", "Georgia", serif;
 
-  --muted: 240 3.7% 15.9%;
-  --muted-foreground: 240 5% 64.9%;
+  /* Dark + Gold palette inspired by unnamed.jpg */
+  --background: 0 0% 5%;
+  --foreground: 40 20% 92%;
 
-  --popover: 240 10% 3.9%;
-  --popover-foreground: 0 0% 98%;
+  --muted: 0 0% 12%;
+  --muted-foreground: 40 10% 60%;
 
-  --card: 240 10% 3.9%;
-  --card-foreground: 0 0% 98%;
+  --popover: 0 0% 7%;
+  --popover-foreground: 40 20% 92%;
 
-  --border: 240 3.7% 15.9%;
-  --input: 240 3.7% 15.9%;
+  --card: 0 0% 9%;
+  --card-foreground: 40 20% 92%;
 
-  --primary: 0 84% 60%;
-  --primary-foreground: 0 0% 98%;
+  --border: 40 10% 20%;
+  --input: 0 0% 14%;
 
-  --secondary: 240 3.7% 15.9%;
-  --secondary-foreground: 0 0% 98%;
+  --primary: 38 60% 55%;
+  --primary-foreground: 0 0% 7%;
 
-  --accent: 3 78% 60%;
-  --accent-foreground: 0 0% 100%;
+  --secondary: 0 0% 14%;
+  --secondary-foreground: 40 20% 92%;
+
+  --accent: 38 60% 55%;
+  --accent-foreground: 0 0% 7%;
 
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 98%;
 
-  --ring: 0 84% 60%;
+  --ring: 38 60% 55%;
 
-  --radius: 0.75rem;
+  --radius: 0.5rem;
 }
 
 .dark {
-  /* Mirror root (kept for compatibility) */
-  --background: 240 10% 3.9%;
-  --foreground: 0 0% 98%;
+  --background: 0 0% 5%;
+  --foreground: 40 20% 92%;
 
-  --muted: 240 3.7% 15.9%;
-  --muted-foreground: 240 5% 64.9%;
+  --muted: 0 0% 12%;
+  --muted-foreground: 40 10% 60%;
 
-  --popover: 240 10% 3.9%;
-  --popover-foreground: 0 0% 98%;
+  --popover: 0 0% 7%;
+  --popover-foreground: 40 20% 92%;
 
-  --card: 240 10% 3.9%;
-  --card-foreground: 0 0% 98%;
+  --card: 0 0% 9%;
+  --card-foreground: 40 20% 92%;
 
-  --border: 240 3.7% 15.9%;
-  --input: 240 3.7% 15.9%;
+  --border: 40 10% 20%;
+  --input: 0 0% 14%;
 
-  --primary: 0 84% 60%;
-  --primary-foreground: 0 0% 98%;
+  --primary: 38 60% 55%;
+  --primary-foreground: 0 0% 7%;
 
-  --secondary: 240 3.7% 15.9%;
-  --secondary-foreground: 0 0% 98%;
+  --secondary: 0 0% 14%;
+  --secondary-foreground: 40 20% 92%;
 
-  --accent: 3 78% 60%;
-  --accent-foreground: 0 0% 100%;
+  --accent: 38 60% 55%;
+  --accent-foreground: 0 0% 7%;
 
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 98%;
 
-  --ring: 0 84% 60%;
+  --ring: 38 60% 55%;
 }
 
 * {
@@ -91,9 +92,6 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Display headings: Pretendard at heavy weight. Slight negative tracking
-   prevents the classic "fat sans on big size" airy feeling and keeps
-   Korean + Latin consistent in the same line. */
 h1,
 h2,
 h3 {
@@ -101,7 +99,27 @@ h3 {
   font-feature-settings: "ss01", "cv11", "ss03";
 }
 
-/* Optical kerning for body + headings — subtle but adds up on long KR lines. */
+/* Light alternating sections like unnamed.jpg */
+main > section:nth-child(even) {
+  --background: 40 15% 96%;
+  --foreground: 0 0% 10%;
+  --muted: 40 10% 90%;
+  --muted-foreground: 0 0% 40%;
+  --primary: 38 60% 38%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 40 10% 88%;
+  --secondary-foreground: 0 0% 10%;
+  --border: 40 10% 82%;
+  --input: 40 10% 82%;
+  --ring: 38 60% 38%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 10%;
+  --accent: 38 60% 38%;
+  --accent-foreground: 0 0% 100%;
+  background-color: hsl(40 15% 96%);
+  color: hsl(0 0% 10%);
+}
+
 p,
 li,
 label,

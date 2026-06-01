@@ -7,11 +7,13 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
 import { MobileCTA } from "@/components/mobile-cta";
 import { routing } from "@/i18n/routing";
+import { Playfair_Display } from "next/font/google";
 
-// Single-font system: Pretendard Variable, loaded via globals.css so that
-// the same font carries both Korean and Latin. Weight + size + tracking
-// provide all the hierarchy we need — a serif display pair looked off in
-// Korean (no Fraunces glyphs, fell back to a different serif mid-word).
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-serif",
+  display: "swap",
+});
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -70,7 +72,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className="font-sans antialiased">
+      <body className={`${playfair.variable} font-sans antialiased`}>
         <NextIntlClientProvider>
           <ThemeProvider attribute="class" forcedTheme="dark">
             <Navbar />

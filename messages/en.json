@@ -1,185 +1,175 @@
 {
   "metadata": {
-    "title": "Eltango | Buenos Aires Style Tango",
-    "description": "Eltango, a Buenos Aires style tango studio in Seoul. Learn tango properly, from beginner to master."
+    "title": "EL TANGO | Buenos Aires Style Tango",
+    "description": "17 years in Gangnam — experience authentic Argentine tango at El Tango."
   },
   "nav": {
-    "brand": "Eltango",
-    "features": "Features",
-    "schedule": "Schedule",
+    "brand": "EL TANGO",
+    "about": "About",
+    "classes": "Classes",
     "instructors": "Instructors",
-    "pricing": "Pricing",
-    "faq": "FAQ",
-    "cta": "Join Open Chat",
-    "menu": "Menu",
-    "switchTo": "한국어"
+    "schedule": "Schedule",
+    "reviews": "Reviews",
+    "community": "Community",
+    "directions": "Directions",
+    "cta": "Contact Us",
+    "menu": "Menu"
   },
   "hero": {
-    "badge": "Buenos Aires Style",
-    "title": "The Essence of Tango, at Eltango",
-    "subtitle": "Buenos Aires style tango.\nMusic, connection, partner communication, and a dialogue with the floor.\nLearn it deeply and properly, from the fundamentals.",
-    "ctaPrimary": "Join Open Chat",
-    "ctaSecondary": "See Curriculum",
-    "ctaTertiary": "Gallery"
+    "titleEn": "Change your life style @ El Tango",
+    "subtitle": "Dance transforms the atmosphere of your life",
+    "description": "17 years in Gangnam.\nExperience the real emotion of\nArgentine tango at El Tango.",
+    "sub2": "This is not just a place to learn dance.\nThe warmth of people, soul-stirring music,\nand a space that reconnects the senses of life.",
+    "ctaPrimary": "Book Beginner Class",
+    "ctaSecondary": "Explore El Tango",
+    "ctaTertiary": "Join Open Chat"
   },
-  "studio": {
-    "title": "Eltango Gangnam HQ",
-    "description": "Eltango Seoul Tango Academy Gangnam HQ has been running for 16 years as a specialized Argentine tango school in Gangnam.\n\nLed by director Lee In-kyung, a 24-year veteran instructor, with over 10,000 cumulative students and 100 monthly active students.\n\nA renowned tango institution with a structured, level-based curriculum.",
-    "cards": {
-      "curriculum": {
-        "title": "Level-based Curriculum",
-        "body": "From beginner, upper-beginner, intermediate, and advanced adult classes to training tracks, small-group lessons, and professional programs — structured for steady progression."
-      },
-      "method": {
-        "title": "Authentic Tango Method",
-        "body": "Taught directly by a 2023 Roma Tango Championship champion, focused on musicality and connection, grounded in authentic method."
-      },
-      "lifestyle": {
-        "title": "Gangnam Lifestyle",
-        "body": "Especially loved by Gangnam professionals in their 30s–40s — an after-work hobby, a new community, and a proper adult tango lesson."
-      }
-    },
-    "tagline": "Looking for a Gangnam tango studio or an adult tango lesson? Start properly at Eltango.\nCome by for a level consultation and tour our comfortable facilities!",
-    "badges": {
-      "t1": "Tango Studio",
-      "t2": "Argentine Tango",
-      "t3": "Learn Tango",
-      "t4": "Gangnam Tango",
-      "t5": "After-work Hobby"
-    },
-    "cta": "Book a Consultation"
+  "features": {
+    "f1": { "title": "17 Years of History", "desc": "A trusted tango community built over time" },
+    "f2": { "title": "Authentic Argentine Tango", "desc": "True Buenos Aires style with deep education" },
+    "f3": { "title": "Culture & Connection", "desc": "A salon-like space where music, dance & people meet" },
+    "f4": { "title": "Warm Community", "desc": "A welcoming place where everyone belongs" }
   },
-  "schedule": {
-    "title": "Class Schedule",
-    "subtitle": "Level up with a structured curriculum",
-    "beginner": {
-      "title": "Beginner A",
-      "time": "Tue / Thu 19:30 – 20:40",
-      "body": "Walking, hold, basic rhythm"
+  "whyStay": {
+    "title": "Why do people stay at El Tango?",
+    "quote": "They stay not for the dance, but for the atmosphere.",
+    "stats": {
+      "s1": { "value": "80%", "label": "Re-enrollment rate speaks for itself" },
+      "s2": { "value": "10,000+", "label": "Cumulative students chose this system" },
+      "s3": { "value": "100", "label": "Monthly active students in community" }
     },
-    "upperBeginner": {
-      "title": "Upper Beginner",
-      "time": "Tue / Thu 20:50 – 22:00",
-      "body": "Axis, pivots, ocho / giro"
-    },
-    "practica": {
-      "title": "Práctica",
-      "time": "Sat 15:00 – 17:00",
-      "body": "Open practice & feedback"
+    "voices": {
+      "v1": "My life changed after work!",
+      "v2": "The way I meet people has changed!",
+      "v3": "I found a hobby that excites me at any age^^"
     }
   },
-  "gallery": {
-    "title": "Gallery",
-    "subtitle": "A glimpse of moments at Eltango",
-    "alt": "Eltango gallery"
+  "about": {
+    "eyebrow": "About EL Tango",
+    "title": "Tango as a lifestyle,\nat El Tango",
+    "description": "El Tango is not just a place to learn dance.\nIt's a space to express yourself,\nconnect with others, and find comfort in music.\nIt's okay to be a beginner.\nEl Tango supports your new beginning.",
+    "cta": "Learn more about El Tango →"
   },
-  "instructors": {
-    "title": "Instructors",
-    "description": "We teach grounded in the Buenos Aires local method and musicality.\nBeyond technique — centered on connection and musicality.",
-    "bullets": {
-      "b1": "10+ years of teaching & performance",
-      "b2": "Trained by Buenos Aires maestros",
-      "b3": "Personalized feedback"
-    },
-    "director": {
-      "title": "About Director Lee In-kyung",
-      "items": {
-        "i1": "2003 Roma Tango Championship 1st place (Farabute)",
-        "i2": "2017, 2019 Argentine World Tango Championship semifinalist",
-        "i3": "2015 Metropolitan Tango Competition judge",
-        "i4": "Co-author of the Argentine tango instructor certification textbook",
-        "i5": "Organizer of Daejeon Tango Festival & Seoul Tango Championship",
-        "i6": "Former chairperson of the Korea Argentine Tango Association",
-        "i7": "Former visiting professor, Kookmin University Continuing Education"
-      },
-      "media": "Choreography for TV / film / theater: SBS 'Scent of a Woman', MBC 'We Got Married', dramas 'W', 'Neighborhood Hero', 'My Healing Love', 'Why Family?', film 'Fashion King', stage 'Abrazo', and more."
-    },
-    "fish": {
-      "name": "Fish",
-      "role": "Tango Instructor • Musicality & Technique",
-      "bio": "Guides students from fundamentals upward with a focus on musicality and connection."
-    },
-    "taebong": {
-      "name": "Taebong",
-      "role": "Tango Instructor • Connection & Balance",
-      "bio": "Delivers practical, real-world lessons grounded in solid fundamentals and balance."
-    },
-    "nenia": {
-      "name": "Nenia",
-      "role": "Tango Instructor • Nuevo Specialist",
-      "bio": "Explores creative movement through dynamic lines, control, and the details of nuevo tango."
-    },
-    "portraitAlt": "Instructor portrait"
+  "director": {
+    "eyebrow": "Director",
+    "title": "From TV writer to tango dancer,\nDirector Lee In-kyung",
+    "story": "In 2004, as a TV writer, she backpacked to Argentina for 3 months.\nWhat she saw in Buenos Aires!\nCitizens blocking an 8-lane road in front of the presidential palace, enjoying music, dance, and human connection until dawn.\n\n\"Korea needs this kind of healthy popular culture!\"\nWith that thought, she organized the Daejeon Tango Festival outdoors,\nand in 2009, El Tango in Gangnam was born.",
+    "achievements": "10 training trips to Argentina,\nOrganizer of De Coreanas Tango Festival,\nFormer president of Korea Argentine Tango Association,\nChampion at the 2023 Rome Tango Competition with her husband and partner~",
+    "philosophy": "Change your life through tango culture,\nwith people who share your taste!"
   },
-  "pricing": {
-    "title": "Class Packages",
-    "subtitle": "From an after-work hobby to a level-up track — pick what fits you",
-    "p1": {
-      "title": "Adult Beginner — After-work Hobby (20s–40s)",
-      "price": "₩100,000",
-      "body": "An adult beginner course you can start right after work"
-    },
-    "p2": {
-      "title": "Beautiful Body Line — Training Class",
-      "price": "₩100,000",
-      "body": "Training to improve your lines, control, and body shape"
-    },
-    "p3": {
-      "title": "Level-up Class to Mastery — Upper-intermediate",
-      "price": "₩120,000",
-      "body": "Deepen upper-intermediate technique and musicality"
+  "difference": {
+    "title": "What makes El Tango different",
+    "headers": { "general": "Typical Dance Studio", "eltango": "El Tango" },
+    "rows": {
+      "r1": { "general": "Listing movements", "eltango": "Communication & connection" },
+      "r2": { "general": "Short-term hobby", "eltango": "Long-term lifestyle" },
+      "r3": { "general": "Youth-focused", "eltango": "Professional culture" },
+      "r4": { "general": "Trendy", "eltango": "17 years of consistency" },
+      "r5": { "general": "Competition-focused", "eltango": "Music, emotion, relationships, self-discovery" }
     }
+  },
+  "beginner": {
+    "eyebrow": "Beginner Class",
+    "title": "Beginner Class Open",
+    "subtitle": "Tango is not difficult.",
+    "points": {
+      "p1": { "title": "Beginners Welcome", "desc": "Learn step by step from the basics" },
+      "p2": { "title": "Structured Curriculum", "desc": "Level up naturally with staged lessons" },
+      "p3": { "title": "Warm Atmosphere", "desc": "Start without pressure, enjoy for years" }
+    },
+    "cta": "Book Beginner Consultation →"
+  },
+  "milonga": {
+    "eyebrow": "Community",
+    "title": "A community of like-minded people",
+    "subtitle": "Every Saturday, the most beautiful tango night in Gangnam — Una Vez",
+    "description": "El Tango's Saturday milonga Una Vez is not just a party.\nIt's a refined community that enjoys music, people, and culture.\nPeople say they keep coming back because of this atmosphere."
+  },
+  "testimonials": {
+    "title": "Student Stories",
+    "t1": {
+      "text": "I was worried at first, but now it's my greatest joy. Meeting wonderful people at El Tango has enriched my life.",
+      "author": "– 50s, Office Worker"
+    },
+    "t2": {
+      "text": "I had no confidence in rhythm, but the teachers are so kind. Learning to understand and express music is truly fun.",
+      "author": "– 40s, Professional"
+    },
+    "t3": {
+      "text": "We started as a couple and now understand each other better. Waiting for each other is the charm of tango.",
+      "author": "– 50s, Couple"
+    },
+    "cta": "Read more reviews →"
+  },
+  "audience": {
+    "title": "Who comes to El Tango",
+    "items": {
+      "i1": "Professionals in Gangnam & Pangyo",
+      "i2": "Those seeking a refined hobby",
+      "i3": "Couples looking for a shared culture",
+      "i4": "Those who want to awaken their senses",
+      "i5": "Those who want to meet like-minded people and transform their daily life"
+    },
+    "ctaPrimary": "Book a Trial",
+    "ctaSecondary": "1:1 Trial Request"
   },
   "faq": {
-    "title": "Frequently Asked Questions",
-    "q1": "Can a complete beginner join?",
-    "a1": "Yes. We start step by step, from walking to listening to the music.",
+    "title": "FAQ",
+    "q1": "Can I learn even if I have no rhythm?",
+    "a1": "Most El Tango students are complete beginners. Our classes start from walking, balance, rhythm, and communication fundamentals. Your body line improves and balance gets better, correcting your posture. Many are first-time dancers in their 40s, office workers, and couples.",
     "q2": "Do I need a partner?",
-    "a2": "No. We rotate partners during class.",
+    "a2": "70% of students come alone. Senior helpers will partner with you, so don't worry. Couples can take class together without partner rotation.",
     "q3": "What should I wear?",
-    "a3": "Comfortable clothes and indoor shoes are enough."
+    "a3": "Comfortable clothing and clean indoor shoes are all you need. Budget jazz shoes work great too. Men are encouraged to wear a neat shirt as a courtesy for partner dancing."
   },
   "contact": {
     "badge": "Free Consultation",
-    "title": "Start right away via Open Chat",
-    "description": "Leave your name and phone number and we'll take you straight to our KakaoTalk open chat.",
+    "title": "Get started via KakaoTalk",
+    "description": "Leave your name and number, and we'll connect you to our KakaoTalk open chat.",
     "otherWays": "Other ways to reach us",
-    "address1": "Banpo-dong 741, 2F, Seocho-gu, Seoul, Korea",
-    "address2": "Postal 137-903",
-    "subway": "Sinnonhyeon Stn. Exit 1 · Gangnam Stn. Exit 10",
+    "address1": "320 Seocho-daero, Seocho-gu, Seoul",
+    "address2": "Hwanha Bldg B1, El Tango Studio",
+    "subway": "3 min walk from Gyodae Station",
     "tiles": {
       "phone": {
-        "eyebrow": "Call or text",
-        "value": "+82 10-2415-0563",
-        "description": "Call us during the day, text us any time.",
+        "eyebrow": "Phone / Text",
+        "value": "02-572-1015",
+        "description": "Call during weekday hours; text is faster otherwise.",
         "callCta": "Call",
         "smsCta": "Text"
       },
       "kakao": {
-        "eyebrow": "KakaoTalk ID",
-        "description": "Copy the ID and add us as a friend on KakaoTalk.",
-        "copyCta": "Copy ID"
+        "eyebrow": "Email",
+        "description": "Reach us by email.",
+        "copyCta": "Copy email"
       },
       "directions": {
-        "eyebrow": "Visit us",
-        "value": "Banpo-dong 741, 2F",
-        "description": "A short walk from Sinnonhyeon or Gangnam Station.",
+        "eyebrow": "Directions",
+        "value": "320 Seocho-daero, B1",
+        "description": "3 min walk from Gyodae Station.",
         "cta": "Open in Naver Maps"
       }
     },
     "kakao": {
-      "copy": "Copy ID",
+      "copy": "Copy email",
       "copied": "Copied"
     }
   },
   "footer": {
-    "tagline": "Grow with tango",
-    "rights": "© {year} Eltango. All rights reserved."
+    "brand": "EL TANGO",
+    "brandSub": "Argentine Tango Studio",
+    "tagline": "A space of music, people, and dance.\nEl Tango makes your life more beautiful.",
+    "phone": "02-572-1015",
+    "email": "eltango@eltango.co.kr",
+    "address": "320 Seocho-daero, Seocho-gu, Seoul\nHwanha Bldg B1, El Tango Studio",
+    "rights": "© {year} EL TANGO All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use"
   },
   "mobileCta": {
-    "openChat": "Open Chat",
+    "openChat": "Consult",
     "call": "Call",
-    "kakaoId": "Kakao ID"
+    "kakaoId": "KakaoID"
   },
   "registerForm": {
     "nameLabel": "Name *",
@@ -187,18 +177,18 @@
     "phoneLabel": "Phone *",
     "phonePlaceholder": "010-1234-5678",
     "memoLabel": "Message (optional)",
-    "memoAdd": "Add a message (optional)",
-    "memoPlaceholder": "Any questions or prior experience you'd like to share.",
-    "consent": "[Required] I agree to the collection and use of my name and phone number for consultation purposes. Retention: up to 1 year after consultation ends.",
+    "memoAdd": "Add memo (optional)",
+    "memoPlaceholder": "Experience level, questions, etc.",
+    "consent": "[Required] I consent to the collection of my name and phone number for consultation. Retention: 1 year after consultation ends.",
     "submit": "Submit & Join Open Chat",
     "submitting": "Submitting...",
     "redirecting": "Redirecting...",
-    "success": "Submitted! Redirecting to the KakaoTalk open chat...",
-    "hint": "You'll be redirected to our KakaoTalk open chat right after submission.",
+    "success": "Done! Redirecting to KakaoTalk open chat.",
+    "hint": "You'll be connected to KakaoTalk open chat immediately.",
     "errorName": "Please enter your name.",
     "errorPhone": "Please enter a valid phone number.",
-    "errorConsent": "You must agree to the privacy policy to continue.",
-    "errorServer": "Server is not configured yet. Please try again later.",
+    "errorConsent": "Consent is required.",
+    "errorServer": "Please try again later. (Server configuration needed)",
     "errorGeneric": "Something went wrong. Please try again.",
     "errorNetwork": "Network error. Please try again."
   }
