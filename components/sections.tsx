@@ -28,16 +28,16 @@ export function Hero() {
         <div className="grid items-center gap-10 lg:grid-cols-2">
           {/* Left: text */}
           <div>
-            <h1 className="font-serif text-4xl leading-[1.2] tracking-tight sm:text-5xl md:text-6xl text-primary">
+            <h1 className="font-serif text-4xl leading-[1.2] tracking-tight sm:text-5xl md:text-6xl text-primary whitespace-pre-line md:whitespace-normal">
               {t("titleEn")}
             </h1>
             <p className="mt-6 text-xl text-foreground/90 sm:text-2xl">
               {t("subtitle")}
             </p>
-            <p className="mt-4 text-base leading-relaxed text-muted-foreground whitespace-pre-line">
+            <p className="mt-4 text-base leading-relaxed text-muted-foreground whitespace-pre-line md:whitespace-normal">
               {t("description")}
             </p>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground whitespace-pre-line">
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground whitespace-pre-line md:whitespace-normal">
               {t("sub2")}
             </p>
             <div className="mt-10 flex flex-wrap gap-3">
@@ -111,10 +111,10 @@ export function Features() {
   return (
     <section className="py-16 sm:py-24">
       <div className="container">
-        <h2 className="text-center text-3xl font-bold sm:text-4xl">
+        <h2 className="text-center text-3xl font-bold sm:text-4xl whitespace-pre-line md:whitespace-normal">
           {tw("title")}
         </h2>
-        <p className="mt-4 text-center font-serif text-lg italic text-primary">
+        <p className="mt-4 text-center font-serif text-lg italic text-primary whitespace-pre-line md:whitespace-normal">
           &ldquo;{tw("quote")}&rdquo;
         </p>
 
@@ -159,10 +159,10 @@ export function About() {
             <p className="font-serif text-sm italic text-primary">
               {t("eyebrow")}
             </p>
-            <h2 className="mt-3 text-3xl font-bold leading-tight whitespace-pre-line sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-bold leading-tight whitespace-pre-line md:whitespace-normal sm:text-4xl">
               {t("title")}
             </h2>
-            <p className="mt-6 text-base leading-relaxed text-muted-foreground whitespace-pre-line">
+            <p className="mt-6 text-base leading-relaxed text-muted-foreground whitespace-pre-line md:whitespace-normal">
               {t("description")}
             </p>
             <Button
@@ -170,7 +170,7 @@ export function About() {
               variant="outline"
               className="mt-8 border-primary/50 text-primary hover:bg-primary/10"
             >
-              <a href="#register">{t("cta")}</a>
+              <a href="https://m.place.naver.com/place/20526245/home" target="_blank" rel="noopener noreferrer">{t("cta")}</a>
             </Button>
           </div>
           <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
@@ -210,16 +210,16 @@ export function Director() {
             <p className="font-serif text-sm italic text-primary">
               {t("eyebrow")}
             </p>
-            <h2 className="mt-3 text-2xl font-bold leading-tight whitespace-pre-line sm:text-3xl">
+            <h2 className="mt-3 text-2xl font-bold leading-tight whitespace-pre-line md:whitespace-normal sm:text-3xl">
               {t("title")}
             </h2>
-            <p className="mt-6 text-sm leading-relaxed text-muted-foreground whitespace-pre-line">
+            <p className="mt-6 text-sm leading-relaxed text-muted-foreground whitespace-pre-line md:whitespace-normal">
               {t("story")}
             </p>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground whitespace-pre-line">
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground whitespace-pre-line md:whitespace-normal">
               {t("achievements")}
             </p>
-            <p className="mt-6 text-base font-semibold text-primary whitespace-pre-line">
+            <p className="mt-6 text-base font-semibold text-primary whitespace-pre-line md:whitespace-normal">
               {t("philosophy")}
             </p>
           </div>
@@ -295,24 +295,26 @@ export function BeginnerClass() {
             <p className="font-serif text-sm italic text-primary">
               {t("eyebrow")}
             </p>
-            <h2 className="mt-3 text-3xl font-bold sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-bold sm:text-4xl whitespace-pre-line md:whitespace-normal">
               {t("title")}
             </h2>
-            <p className="mt-3 text-lg text-muted-foreground">
+            <p className="mt-3 text-lg text-muted-foreground whitespace-pre-line md:whitespace-normal">
               {t("subtitle")}
             </p>
-            <div className="mt-10 grid gap-6 sm:grid-cols-3">
+            <div className="mt-8 space-y-4">
               {points.map(({ key, icon }) => (
-                <div key={key} className="text-center">
-                  <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center text-primary">
+                <div key={key} className="flex items-start gap-3">
+                  <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
                     {icon}
                   </div>
-                  <h3 className="font-semibold text-foreground">
-                    {t(`points.${key}.title`)}
-                  </h3>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    {t(`points.${key}.desc`)}
-                  </p>
+                  <div>
+                    <h3 className="font-semibold text-foreground">
+                      {t(`points.${key}.title`)}
+                    </h3>
+                    <p className="mt-0.5 text-sm text-muted-foreground">
+                      {t(`points.${key}.desc`)}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -349,13 +351,13 @@ export function Milonga() {
             <p className="font-serif text-sm italic text-primary">
               {t("eyebrow")}
             </p>
-            <h2 className="mt-3 text-2xl font-bold sm:text-3xl">
+            <h2 className="mt-3 text-2xl font-bold sm:text-3xl whitespace-pre-line md:whitespace-normal">
               {t("title")}
             </h2>
-            <p className="mt-3 text-base font-medium text-foreground/80">
+            <p className="mt-3 text-base font-medium text-foreground/80 whitespace-pre-line md:whitespace-normal">
               {t("subtitle")}
             </p>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground whitespace-pre-line">
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground whitespace-pre-line md:whitespace-normal">
               {t("description")}
             </p>
           </div>
@@ -394,7 +396,7 @@ export function Testimonials() {
                   className="h-12 w-12 flex-shrink-0 rounded-full border border-primary/30"
                 />
                 <div>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
+                  <p className="text-sm leading-relaxed text-muted-foreground whitespace-pre-line md:whitespace-normal">
                     {t(`${key}.text`)}
                   </p>
                   <p className="mt-3 text-xs font-medium text-primary">
@@ -407,10 +409,13 @@ export function Testimonials() {
         </div>
         <div className="mt-10 text-center">
           <Button
+            asChild
             variant="outline"
             className="border-foreground/30 text-foreground hover:bg-foreground/10"
           >
-            {t("cta")}
+            <a href="https://m.place.naver.com/place/20526245/review/visitor" target="_blank" rel="noopener noreferrer">
+              {t("cta")}
+            </a>
           </Button>
         </div>
       </div>
@@ -426,14 +431,14 @@ export function Audience() {
   return (
     <section id="audience" className="py-20 sm:py-28">
       <div className="container">
-        <h2 className="text-center text-3xl font-bold sm:text-4xl">
+        <h2 className="text-center text-3xl font-bold sm:text-4xl whitespace-pre-line md:whitespace-normal">
           {t("title")}
         </h2>
         <ul className="mx-auto mt-10 max-w-xl space-y-4">
           {items.map((key) => (
             <li key={key} className="flex items-start gap-3">
               <span className="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-primary" />
-              <span className="text-base text-muted-foreground">
+              <span className="text-base text-muted-foreground whitespace-pre-line md:whitespace-normal">
                 {t(`items.${key}`)}
               </span>
             </li>
@@ -479,7 +484,7 @@ export function FAQ() {
           {faqs.map((f, i) => (
             <AccordionItem key={i} value={`item-${i}`}>
               <AccordionTrigger>{f.q}</AccordionTrigger>
-              <AccordionContent className="text-muted-foreground">
+              <AccordionContent className="text-muted-foreground whitespace-pre-line md:whitespace-normal">
                 {f.a}
               </AccordionContent>
             </AccordionItem>
@@ -498,7 +503,7 @@ export function Contact() {
       <div className="container">
         <div className="mx-auto max-w-md text-center">
           <h2 className="text-2xl font-bold sm:text-3xl">{t("title")}</h2>
-          <p className="mt-3 text-sm text-muted-foreground">
+          <p className="mt-3 text-sm text-muted-foreground whitespace-pre-line md:whitespace-normal">
             {t("description")}
           </p>
         </div>
@@ -522,7 +527,7 @@ export function Footer() {
               {t("brand")}
             </p>
             <p className="text-xs text-muted-foreground">{t("brandSub")}</p>
-            <p className="mt-4 whitespace-pre-line text-sm text-muted-foreground">
+            <p className="mt-4 whitespace-pre-line md:whitespace-normal text-sm text-muted-foreground">
               {t("tagline")}
             </p>
             {/* Social icons */}
@@ -549,7 +554,7 @@ export function Footer() {
               </p>
               <p className="flex items-center gap-2">
                 <MapPin className="h-4 w-4 text-primary" />
-                <span className="whitespace-pre-line">{t("address")}</span>
+                <span className="whitespace-pre-line md:whitespace-normal">{t("address")}</span>
               </p>
             </div>
           </div>

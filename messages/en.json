@@ -16,7 +16,7 @@
     "menu": "Menu"
   },
   "hero": {
-    "titleEn": "Change your life style @ El Tango",
+    "titleEn": "Feel the Tango,\nFeel Alive.",
     "subtitle": "Dance transforms the atmosphere of your life",
     "description": "17 years in Gangnam.\nExperience the real emotion of\nArgentine tango at El Tango.",
     "sub2": "This is not just a place to learn dance.\nThe warmth of people, soul-stirring music,\nand a space that reconnects the senses of life.",
@@ -127,13 +127,13 @@
     "title": "Get started via KakaoTalk",
     "description": "Leave your name and number, and we'll connect you to our KakaoTalk open chat.",
     "otherWays": "Other ways to reach us",
-    "address1": "320 Seocho-daero, Seocho-gu, Seoul",
-    "address2": "Hwanha Bldg B1, El Tango Studio",
-    "subway": "3 min walk from Gyodae Station",
+    "address1": "12 Juheung-gil, Seocho-gu, Seoul",
+    "address2": "2F Hwanhee Bldg, Seoul Tango Academy El Tango",
+    "subway": "",
     "tiles": {
       "phone": {
         "eyebrow": "Phone / Text",
-        "value": "02-572-1015",
+        "value": "010-2415-0563",
         "description": "Call during weekday hours; text is faster otherwise.",
         "callCta": "Call",
         "smsCta": "Text"
@@ -145,8 +145,8 @@
       },
       "directions": {
         "eyebrow": "Directions",
-        "value": "320 Seocho-daero, B1",
-        "description": "3 min walk from Gyodae Station.",
+        "value": "12 Juheung-gil, 2F",
+        "description": "2F Hwanhee Bldg.",
         "cta": "Open in Naver Maps"
       }
     },
@@ -159,9 +159,9 @@
     "brand": "EL TANGO",
     "brandSub": "Argentine Tango Studio",
     "tagline": "A space of music, people, and dance.\nEl Tango makes your life more beautiful.",
-    "phone": "02-572-1015",
-    "email": "eltango@eltango.co.kr",
-    "address": "320 Seocho-daero, Seocho-gu, Seoul\nHwanha Bldg B1, El Tango Studio",
+    "phone": "010-2415-0563",
+    "email": "fishlow0@daum.net",
+    "address": "12 Juheung-gil, Seocho-gu, Seoul\n2F Hwanhee Bldg, Seoul Tango Academy El Tango",
     "rights": "© {year} EL TANGO All rights reserved.",
     "privacy": "Privacy Policy",
     "terms": "Terms of Use"
