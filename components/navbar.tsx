@@ -12,13 +12,11 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
 
   const links = [
-    { href: `/${locale}#about`, label: t("about") },
+    { href: `/${locale}`, label: t("about") },
     { href: `/${locale}/classes`, label: t("classes") },
     { href: `/${locale}/instructors`, label: t("instructors") },
-    { href: `/${locale}/community#milonga`, label: t("schedule") },
-    { href: `/${locale}/community#reviews`, label: t("reviews") },
-    { href: `/${locale}/community#audience`, label: t("community") },
-    { href: `/${locale}/faq`, label: t("directions") },
+    { href: `/${locale}/community`, label: t("community") },
+    { href: `/${locale}/faq`, label: t("faq") },
   ];
 
   return (

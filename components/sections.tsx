@@ -478,12 +478,12 @@ export function FAQ() {
         </h2>
 
         {/* YouTube Shorts */}
-        <div className="mx-auto mt-12">
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+        <div className="mx-auto mt-12 max-w-5xl">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {shorts.map((id) => (
               <div
                 key={id}
-                className="relative aspect-[9/16] overflow-hidden rounded-lg border border-border/50"
+                className="relative aspect-[9/16] overflow-hidden rounded-xl border border-border/50"
               >
                 <iframe
                   src={`https://www.youtube.com/embed/${id}?loop=1&playlist=${id}`}
