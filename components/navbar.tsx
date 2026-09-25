@@ -1,29 +1,30 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 export function Navbar() {
   const t = useTranslations("nav");
+  const locale = useLocale();
   const [open, setOpen] = useState(false);
 
   const links = [
-    { href: "#about", label: t("about") },
-    { href: "#beginner", label: t("classes") },
-    { href: "#director", label: t("instructors") },
-    { href: "#milonga", label: t("schedule") },
-    { href: "#reviews", label: t("reviews") },
-    { href: "#audience", label: t("community") },
-    { href: "#location", label: t("directions") },
+    { href: `/${locale}#about`, label: t("about") },
+    { href: `/${locale}/classes`, label: t("classes") },
+    { href: `/${locale}/instructors`, label: t("instructors") },
+    { href: `/${locale}/community#milonga`, label: t("schedule") },
+    { href: `/${locale}/community#reviews`, label: t("reviews") },
+    { href: `/${locale}/community#audience`, label: t("community") },
+    { href: `/${locale}/faq`, label: t("directions") },
   ];
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border/30 bg-background/80 backdrop-blur-md">
       <div className="container flex h-16 items-center justify-between">
-        <a href="#" className="flex items-center gap-2">
+        <a href={`/${locale}`} className="flex items-center gap-2">
           <span className="font-serif text-lg font-bold text-primary">
             {t("brand")}
           </span>

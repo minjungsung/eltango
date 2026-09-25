@@ -1,14 +1,10 @@
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+
 import { Phone, Mail, MapPin, Heart, Clock, Users } from "lucide-react";
 import Image from "next/image";
 import { RegisterForm } from "@/components/register-form";
+import { NaverMap } from "@/components/naver-map";
 
 /* ─── Hero (Slide 1) ─── */
 export function Hero() {
@@ -50,7 +46,7 @@ export function Hero() {
                 size="lg"
                 className="text-base px-6 border-foreground/30 text-foreground hover:bg-foreground/10"
               >
-                <a href="#milonga">{t("ctaSecondary")}</a>
+                <a href="https://cafe.naver.com/eltango2009" target="_blank" rel="noopener noreferrer">{t("ctaSecondary")}</a>
               </Button>
               <Button
                 asChild
@@ -58,7 +54,7 @@ export function Hero() {
                 size="lg"
                 className="text-base px-6 border-foreground/30 text-foreground hover:bg-foreground/10"
               >
-                <a href="#audience">{t("ctaTertiary")}</a>
+                <a href="#register">{t("ctaTertiary")}</a>
               </Button>
             </div>
           </div>
@@ -465,31 +461,45 @@ export function Audience() {
 /* ─── FAQ (Slide 5) ─── */
 export function FAQ() {
   const t = useTranslations("faq");
-  const faqs = [
-    { q: t("q1"), a: t("a1") },
-    { q: t("q2"), a: t("a2") },
-    { q: t("q3"), a: t("a3") },
+
+  const shorts = [
+    "LElgWLGh6NY",
+    "_oGGXDz3zWM",
+    "I3A6RqWq_2g",
+    "PhfbTc9GtTk",
+    "WhA0mrus5UU",
   ];
+
   return (
     <section id="faq" className="py-20 sm:py-28">
       <div className="container">
         <h2 className="text-center text-3xl font-bold sm:text-4xl">
           {t("title")}
         </h2>
-        <Accordion
-          type="single"
-          collapsible
-          className="mx-auto mt-10 max-w-2xl"
-        >
-          {faqs.map((f, i) => (
-            <AccordionItem key={i} value={`item-${i}`}>
-              <AccordionTrigger>{f.q}</AccordionTrigger>
-              <AccordionContent className="text-muted-foreground whitespace-pre-line md:whitespace-normal">
-                {f.a}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+
+        {/* YouTube Shorts */}
+        <div className="mx-auto mt-16 max-w-4xl">
+          <h3 className="mb-6 text-center text-xl font-semibold">
+            {t("videosTitle")}
+          </h3>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
+            {shorts.map((id) => (
+              <div
+                key={id}
+                className="relative aspect-[9/16] overflow-hidden rounded-lg border border-border/50"
+              >
+                <iframe
+                  src={`https://www.youtube.com/embed/${id}?loop=1&playlist=${id}`}
+                  title="YouTube Short"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="absolute inset-0 h-full w-full border-0"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -561,13 +571,17 @@ export function Footer() {
           <div>
             <p className="mb-3 text-sm font-semibold">Location</p>
             <div className="aspect-[4/3] overflow-hidden rounded-lg border border-border/50 bg-muted">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.5!2d127.0!3d37.49!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDI5JzI0LjAiTiAxMjfCsDAwJzAwLjAiRQ!5e0!3m2!1sko!2skr!4v1"
-                className="h-full w-full border-0"
-                loading="lazy"
-                title="엘땅고 위치"
-              />
+              <NaverMap />
             </div>
+            <a
+              href="https://naver.me/xdp3zeag"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 inline-flex items-center gap-1 text-xs text-primary hover:underline"
+            >
+              <MapPin className="h-3 w-3" />
+              {t("mapCta")}
+            </a>
           </div>
         </div>
         <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-border/50 pt-6 text-xs text-muted-foreground sm:flex-row">

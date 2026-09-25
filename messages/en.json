@@ -120,7 +120,8 @@
     "q2": "Do I need a partner?",
     "a2": "70% of students come alone. Senior helpers will partner with you, so don't worry. Couples can take class together without partner rotation.",
     "q3": "What should I wear?",
-    "a3": "Comfortable clothing and clean indoor shoes are all you need. Budget jazz shoes work great too. Men are encouraged to wear a neat shirt as a courtesy for partner dancing."
+    "a3": "Comfortable clothing and clean indoor shoes are all you need. Budget jazz shoes work great too. Men are encouraged to wear a neat shirt as a courtesy for partner dancing.",
+    "videosTitle": "Watch a preview"
   },
   "contact": {
     "badge": "Free Consultation",
@@ -162,6 +163,7 @@
     "phone": "010-2415-0563",
     "email": "fishlow0@daum.net",
     "address": "12 Juheung-gil, Seocho-gu, Seoul\n2F Hwanhee Bldg, Seoul Tango Academy El Tango",
+    "mapCta": "View on Naver Maps →",
     "rights": "© {year} EL TANGO All rights reserved.",
     "privacy": "Privacy Policy",
     "terms": "Terms of Use"

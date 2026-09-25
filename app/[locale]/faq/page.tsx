@@ -1,7 +1,7 @@
 import { setRequestLocale } from "next-intl/server";
-import { Hero, Features, About } from "@/components/sections";
+import { FAQ } from "@/components/sections";
 
-export default async function Page({
+export default async function FaqPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -11,9 +11,7 @@ export default async function Page({
 
   return (
     <main>
-      <Hero />
-      <Features />
-      <About />
+      <FAQ />
     </main>
   );
 }
