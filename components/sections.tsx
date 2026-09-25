@@ -38,7 +38,7 @@ export function Hero() {
             </p>
             <div className="mt-10 flex flex-wrap gap-3">
               <Button asChild size="lg" className="text-base px-6">
-                <a href="#register">{t("ctaPrimary")}</a>
+                <a href="https://open.kakao.com/o/sVeY3gPi" target="_blank" rel="noopener noreferrer">{t("ctaPrimary")}</a>
               </Button>
               <Button
                 asChild
@@ -316,7 +316,7 @@ export function BeginnerClass() {
             </div>
             <div className="mt-10">
               <Button asChild size="lg" className="px-10 text-base">
-                <a href="#register">{t("cta")}</a>
+                <a href="https://open.kakao.com/o/sVeY3gPi" target="_blank" rel="noopener noreferrer">{t("cta")}</a>
               </Button>
             </div>
           </div>
