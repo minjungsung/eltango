@@ -101,6 +101,62 @@ h3 {
   font-feature-settings: "ss01", "cv11", "ss03";
 }
 
+/* ─── Viewport-responsive scaling ─── */
+h1 {
+  font-size: clamp(1.5rem, 4vw, 3.75rem);
+}
+h2 {
+  font-size: clamp(1.1rem, 2.5vw, 2.25rem);
+}
+h3 {
+  font-size: clamp(0.9rem, 1.8vw, 1.5rem);
+}
+
+/* Body text scales too */
+.fp-section p {
+  font-size: clamp(0.75rem, 1.4vw, 1rem);
+}
+.fp-section .text-sm {
+  font-size: clamp(0.65rem, 1.2vw, 0.875rem);
+}
+.fp-section .text-xs {
+  font-size: clamp(0.6rem, 1vw, 0.75rem);
+}
+
+/* Buttons scale */
+.fp-section button,
+.fp-section a[class*="btn"],
+.fp-section [class*="Button"] {
+  font-size: clamp(0.7rem, 1.3vw, 1rem);
+  padding: clamp(0.25rem, 0.8vh, 0.75rem) clamp(0.5rem, 1.5vw, 1.5rem);
+}
+
+/* Scale spacing with viewport */
+.container {
+  padding-left: clamp(0.75rem, 3vw, 2rem);
+  padding-right: clamp(0.75rem, 3vw, 2rem);
+}
+
+/* Section internal padding scales with viewport height */
+.fp-section section,
+.fp-section footer {
+  padding-top: clamp(0.5rem, 3vh, 4rem);
+  padding-bottom: clamp(0.5rem, 3vh, 4rem);
+}
+
+/* Scale gaps in grids */
+.fp-section .grid {
+  gap: clamp(0.375rem, 1.5vw, 1.5rem);
+}
+
+/* Margin-top scales */
+.fp-section .mt-3 { margin-top: clamp(0.25rem, 0.8vh, 0.75rem); }
+.fp-section .mt-4 { margin-top: clamp(0.25rem, 1vh, 1rem); }
+.fp-section .mt-6 { margin-top: clamp(0.375rem, 1.2vh, 1.5rem); }
+.fp-section .mt-8 { margin-top: clamp(0.5rem, 1.5vh, 2rem); }
+.fp-section .mt-10 { margin-top: clamp(0.5rem, 2vh, 2.5rem); }
+.fp-section .mt-12 { margin-top: clamp(0.75rem, 2vh, 3rem); }
+
 /* Light alternating sections like unnamed.jpg */
 main > section:nth-child(even) {
   --background: 40 15% 96%;
@@ -131,4 +187,75 @@ button,
 input,
 textarea {
   font-feature-settings: "ss01", "cv11";
+}
+
+/* ─── Full-page scroll (Apple-style) ─── */
+.fp-container {
+  position: fixed;
+  top: 4rem; /* navbar h-16 */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.fp-wrapper {
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+  will-change: transform;
+}
+
+.fp-section {
+  height: calc(100dvh - 4rem);
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.fp-section > * {
+  width: 100%;
+}
+
+/* Dot navigation */
+.fp-dots {
+  position: fixed;
+  right: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 30;
+}
+
+.fp-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: hsl(var(--muted-foreground) / 0.3);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.fp-dot:hover {
+  background: hsl(var(--muted-foreground) / 0.6);
+}
+
+.fp-dot-active {
+  background: hsl(var(--primary));
+  transform: scale(1.4);
+}
+
+/* 모바일: 도트 위치 조정 */
+@media (max-width: 768px) {
+  .fp-dots {
+    right: 0.5rem;
+  }
+  .fp-dot {
+    width: 0.375rem;
+    height: 0.375rem;
+  }
 }

@@ -8,17 +8,15 @@
     "about": "About",
     "classes": "Classes",
     "instructors": "Instructors",
-    "schedule": "Schedule",
     "reviews": "Reviews",
-    "community": "Community",
+    "sns": "SNS",
     "directions": "Directions",
-    "faq": "FAQ",
     "cta": "Contact Us",
     "menu": "Menu"
   },
   "hero": {
-    "titleEn": "Feel the Tango,\nFeel Alive.",
-    "subtitle": "Dance transforms the atmosphere of your life",
+    "titleEn": "Change Your\nLife Style.",
+    "subtitle": "Tango as a life hobby — change the atmosphere of your life!",
     "description": "17 years in Gangnam.\nExperience the real emotion of\nArgentine tango at El Tango.",
     "sub2": "This is not just a place to learn dance.\nThe warmth of people, soul-stirring music,\nand a space that reconnects the senses of life.",
     "ctaPrimary": "Book Beginner Class",
@@ -32,17 +30,17 @@
     "f4": { "title": "Warm Community", "desc": "A welcoming place where everyone belongs" }
   },
   "whyStay": {
-    "title": "Why do people stay at El Tango?",
-    "quote": "They stay not for the dance, but for the atmosphere.",
-    "stats": {
-      "s1": { "value": "80%", "label": "Re-enrollment rate speaks for itself" },
-      "s2": { "value": "10,000+", "label": "Cumulative students chose this system" },
-      "s3": { "value": "100", "label": "Monthly active students in community" }
-    },
-    "voices": {
-      "v1": "My life changed after work!",
-      "v2": "The way I meet people has changed!",
-      "v3": "I found a hobby that excites me at any age^^"
+    "title": "Tango changes\neverything",
+    "quote": "Time to return to yourself",
+    "items": {
+      "i1": { "title": "Self-Discovery", "desc": "A self-discovery class for women in their 40s–50s" },
+      "i2": { "title": "Posture Correction", "desc": "Body alignment and healthy movement" },
+      "i3": { "title": "After-Work Healing", "desc": "One hour after work, just for yourself" },
+      "i4": { "title": "Full-Body Exercise", "desc": "A whole-body workout from just walking" },
+      "i5": { "title": "Evening Hobby", "desc": "An exciting new evening routine" },
+      "i6": { "title": "Couple's Hobby", "desc": "A shared hobby for couples after retirement" },
+      "i7": { "title": "New Friendships", "desc": "Real friendships with fun people" },
+      "i8": { "title": "Community", "desc": "A new community for professionals in their 20s–40s" }
     }
   },
   "about": {
@@ -55,7 +53,7 @@
     "eyebrow": "Director",
     "title": "From TV writer to tango dancer,\nDirector Lee In-kyung",
     "story": "In 2004, as a TV writer, she backpacked to Argentina for 3 months.\nWhat she saw in Buenos Aires!\nCitizens blocking an 8-lane road in front of the presidential palace, enjoying music, dance, and human connection until dawn.\n\n\"Korea needs this kind of healthy popular culture!\"\nWith that thought, she organized the Daejeon Tango Festival outdoors,\nand in 2009, El Tango in Gangnam was born.",
-    "achievements": "10 training trips to Argentina,\nOrganizer of De Coreanas Tango Festival,\nFormer president of Korea Argentine Tango Association,\nChampion at the 2023 Rome Tango Competition with her husband and partner~",
+    "achievements": "10 training trips to Argentina\nOrganizer of De Coreanas Tango Festival\nFormer president of Korea Argentine Tango Association\nChampion at the 2023 Rome Tango Competition with her husband and partner~",
     "philosophy": "Change your life through tango culture,\nwith people who share your taste!"
   },
   "difference": {
@@ -124,6 +122,14 @@
     "a3": "Comfortable clothing and clean indoor shoes are all you need. Budget jazz shoes work great too. Men are encouraged to wear a neat shirt as a courtesy for partner dancing.",
     "videosTitle": "Watch a preview"
   },
+  "sns": {
+    "title": "SNS",
+    "description": "Follow El Tango on social media.",
+    "youtube": "YouTube",
+    "instagram": "Instagram",
+    "cafe": "Naver Cafe",
+    "videosTitle": "Watch a preview"
+  },
   "contact": {
     "badge": "Free Consultation",
     "title": "Get started via KakaoTalk",
@@ -159,6 +165,7 @@
   },
   "footer": {
     "brand": "EL TANGO",
+    "directionsTitle": "Directions",
     "brandSub": "Argentine Tango Studio",
     "tagline": "A space of music, people, and dance.\nEl Tango makes your life more beautiful.",
     "phone": "010-2415-0563",

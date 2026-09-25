@@ -6,7 +6,6 @@ import { notFound } from "next/navigation";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
 import { MobileCTA } from "@/components/mobile-cta";
-import { Footer, Contact } from "@/components/sections";
 import { routing } from "@/i18n/routing";
 import { Playfair_Display } from "next/font/google";
 
@@ -78,8 +77,6 @@ export default async function LocaleLayout({
           <ThemeProvider attribute="class" forcedTheme="dark">
             <Navbar />
             {children}
-            <Contact />
-            <Footer />
             <MobileCTA />
           </ThemeProvider>
         </NextIntlClientProvider>

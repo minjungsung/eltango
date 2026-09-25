@@ -25,7 +25,7 @@ function pickLocale(request: NextRequest): Locale {
 
 const intlMiddleware = createMiddleware(routing);
 
-export default function middleware(request: NextRequest) {
+export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const hasExplicitPrefix =

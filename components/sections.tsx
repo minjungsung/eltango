@@ -9,19 +9,12 @@ import { NaverMap } from "@/components/naver-map";
 /* ─── Hero (Slide 1) ─── */
 export function Hero() {
   const t = useTranslations("hero");
-  const tf = useTranslations("features");
-  const featureItems = [
-    { key: "f1", icon: <Clock className="h-5 w-5" /> },
-    { key: "f2", icon: <MapPin className="h-5 w-5" /> },
-    { key: "f3", icon: <Heart className="h-5 w-5" /> },
-    { key: "f4", icon: <Users className="h-5 w-5" /> },
-  ] as const;
 
   return (
     <section className="relative flex flex-col overflow-hidden">
       {/* Main hero area */}
-      <div className="container flex-1 py-20">
-        <div className="grid items-center gap-10 lg:grid-cols-2">
+      <div className="container flex-1 py-3 sm:py-6">
+        <div className="grid items-center gap-6 md:grid-cols-2">
           {/* Left: text */}
           <div>
             <h1 className="font-serif text-4xl leading-[1.2] tracking-tight sm:text-5xl md:text-6xl text-primary whitespace-pre-line md:whitespace-normal">
@@ -59,7 +52,7 @@ export function Hero() {
             </div>
           </div>
           {/* Right: couple image */}
-          <div className="relative hidden aspect-[3/4] overflow-hidden rounded-lg lg:block">
+          <div className="relative hidden aspect-[3/4] overflow-hidden rounded-lg md:block">
             <Image
               src="/images/main.png"
               alt="탱고 커플"
@@ -75,66 +68,36 @@ export function Hero() {
           </div>
         </div>
       </div>
-
-      {/* Bottom feature strip */}
-      <div className="border-t border-border/30">
-        <div className="container py-8">
-          <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
-            {featureItems.map(({ key, icon }) => (
-              <div key={key} className="flex items-center gap-3">
-                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center text-primary">
-                  {icon}
-                </div>
-                <div>
-                  <p className="text-sm font-semibold">{tf(`${key}.title`)}</p>
-                  <p className="text-xs text-muted-foreground">{tf(`${key}.desc`)}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
     </section>
   );
 }
 
-/* ─── WhyStay (Slide 2) ─── */
+/* ─── WhyStay / Tango Value (Slide 2) ─── */
 export function Features() {
   const tw = useTranslations("whyStay");
-  const stats = ["s1", "s2", "s3"] as const;
-  const voices = ["v1", "v2", "v3"] as const;
+  const items = ["i1", "i2", "i3", "i4", "i5", "i6", "i7", "i8"] as const;
 
   return (
-    <section className="py-16 sm:py-24">
+    <section className="">
       <div className="container">
         <h2 className="text-center text-3xl font-bold sm:text-4xl whitespace-pre-line md:whitespace-normal">
           {tw("title")}
         </h2>
-        <p className="mt-4 text-center font-serif text-lg italic text-primary whitespace-pre-line md:whitespace-normal">
+        <p className="mt-2 text-center font-serif text-lg italic text-primary whitespace-pre-line md:whitespace-normal">
           &ldquo;{tw("quote")}&rdquo;
         </p>
 
-        <div className="mx-auto mt-12 grid max-w-3xl gap-8 sm:grid-cols-3">
-          {stats.map((key) => (
-            <div key={key} className="text-center">
-              <p className="text-4xl font-bold text-primary">
-                {tw(`stats.${key}.value`)}
-              </p>
-              <p className="mt-2 text-sm text-muted-foreground">
-                {tw(`stats.${key}.label`)}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        <div className="mx-auto mt-12 grid max-w-3xl gap-4 sm:grid-cols-3">
-          {voices.map((key) => (
+        <div className="mx-auto mt-6 grid max-w-4xl gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {items.map((key) => (
             <div
               key={key}
-              className="rounded-lg border p-5 text-center"
+              className="rounded-lg border border-border/50 bg-card/50 p-3 text-center"
             >
-              <p className="text-sm">
-                &ldquo;{tw(`voices.${key}`)}&rdquo;
+              <p className="text-base font-bold text-primary">
+                {tw(`items.${key}.title`)}
+              </p>
+              <p className="mt-1 text-sm text-muted-foreground">
+                {tw(`items.${key}.desc`)}
               </p>
             </div>
           ))}
@@ -147,10 +110,11 @@ export function Features() {
 /* ─── About ─── */
 export function About() {
   const t = useTranslations("about");
+
   return (
-    <section id="about" className="py-20 sm:py-28">
+    <section className="">
       <div className="container">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
+        <div className="grid items-center gap-6 md:grid-cols-2">
           <div>
             <p className="font-serif text-sm italic text-primary">
               {t("eyebrow")}
@@ -169,9 +133,9 @@ export function About() {
               <a href="https://m.place.naver.com/place/20526245/home" target="_blank" rel="noopener noreferrer">{t("cta")}</a>
             </Button>
           </div>
-          <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
+          <div className="relative aspect-[4/3] w-full max-h-[25vh] md:max-h-[60vh] overflow-hidden rounded-lg">
             <Image
-              src="/images/studio-interior.png"
+              src="/images/14194.jpg"
               alt="엘땅고 스튜디오"
               fill
               className="object-cover"
@@ -189,10 +153,10 @@ export function About() {
 export function Director() {
   const t = useTranslations("director");
   return (
-    <section id="director" className="py-20 sm:py-28">
+    <section className="">
       <div className="container">
-        <div className="grid items-start gap-12 lg:grid-cols-2">
-          <div className="relative aspect-[3/4] overflow-hidden rounded-lg">
+        <div className="grid items-start gap-4 md:grid-cols-2">
+          <div className="relative aspect-[3/4] w-full max-h-[30vh] md:max-h-[70vh] overflow-hidden rounded-lg">
             <Image
               src="/images/fish.jpg"
               alt="이인경 대표원장"
@@ -212,7 +176,7 @@ export function Director() {
             <p className="mt-6 text-sm leading-relaxed text-muted-foreground whitespace-pre-line md:whitespace-normal">
               {t("story")}
             </p>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground whitespace-pre-line md:whitespace-normal">
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground whitespace-pre-line">
               {t("achievements")}
             </p>
             <p className="mt-6 text-base font-semibold text-primary whitespace-pre-line md:whitespace-normal">
@@ -228,34 +192,60 @@ export function Director() {
 /* ─── Difference (Slide 4) ─── */
 export function Difference() {
   const t = useTranslations("difference");
+  const tf = useTranslations("features");
   const rows = ["r1", "r2", "r3", "r4", "r5"] as const;
+  const featureItems = [
+    { key: "f1", icon: <Clock className="h-5 w-5" /> },
+    { key: "f2", icon: <MapPin className="h-5 w-5" /> },
+    { key: "f3", icon: <Heart className="h-5 w-5" /> },
+    { key: "f4", icon: <Users className="h-5 w-5" /> },
+  ] as const;
 
   return (
-    <section className="py-20 sm:py-28">
+    <section className="">
       <div className="container">
         <h2 className="text-center text-3xl font-bold sm:text-4xl">
           {t("title")}
         </h2>
-        <div className="mx-auto mt-10 max-w-2xl overflow-hidden rounded-lg border border-border/50">
-          <div className="grid grid-cols-2 bg-card/80 text-center text-sm font-semibold">
-            <div className="border-r border-border/50 p-4 text-muted-foreground">
-              {t("headers.general")}
+
+        <div className="mt-6 space-y-6">
+          {/* Comparison table */}
+          <div className="mx-auto max-w-2xl overflow-hidden rounded-lg border border-border/50">
+            <div className="grid grid-cols-2 bg-card/80 text-center text-sm font-semibold">
+              <div className="border-r border-border/50 p-3 text-muted-foreground">
+                {t("headers.general")}
+              </div>
+              <div className="p-3 text-primary">{t("headers.eltango")}</div>
             </div>
-            <div className="p-4 text-primary">{t("headers.eltango")}</div>
+            {rows.map((key) => (
+              <div
+                key={key}
+                className="grid grid-cols-2 border-t border-border/50 text-center text-sm"
+              >
+                <div className="border-r border-border/50 p-3 text-muted-foreground">
+                  {t(`rows.${key}.general`)}
+                </div>
+                <div className="p-3 text-foreground">
+                  {t(`rows.${key}.eltango`)}
+                </div>
+              </div>
+            ))}
           </div>
-          {rows.map((key) => (
-            <div
-              key={key}
-              className="grid grid-cols-2 border-t border-border/50 text-center text-sm"
-            >
-              <div className="border-r border-border/50 p-4 text-muted-foreground">
-                {t(`rows.${key}.general`)}
+
+          {/* Feature strip */}
+          <div className="mx-auto grid max-w-3xl grid-cols-4 gap-4 place-items-center">
+            {featureItems.map(({ key, icon }) => (
+              <div key={key} className="flex flex-col items-center gap-2 text-center">
+                <div className="flex h-10 w-10 items-center justify-center text-primary">
+                  {icon}
+                </div>
+                <div>
+                  <p className="text-sm font-semibold">{tf(`${key}.title`)}</p>
+                  <p className="text-xs text-muted-foreground">{tf(`${key}.desc`)}</p>
+                </div>
               </div>
-              <div className="p-4 text-foreground">
-                {t(`rows.${key}.eltango`)}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -272,14 +262,14 @@ export function BeginnerClass() {
   ] as const;
 
   return (
-    <section id="beginner" className="relative py-20 sm:py-28 overflow-hidden">
+    <section className="relative overflow-hidden">
       <div className="container relative z-10">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
+        <div className="grid items-center gap-4 md:grid-cols-2 md:gap-12">
           {/* Left: image */}
-          <div className="relative aspect-[3/4] overflow-hidden rounded-lg">
+          <div className="relative aspect-[4/3] w-full max-h-[25vh] md:max-h-[60vh] overflow-hidden rounded-lg">
             <Image
-              src="/images/beginner-feet.png"
-              alt="왕초급반"
+              src="/images/schedule.png"
+              alt="수업 시간표"
               fill
               className="object-cover"
               sizes="(min-width: 1024px) 50vw, 100vw"
@@ -330,9 +320,9 @@ export function BeginnerClass() {
 export function Milonga() {
   const t = useTranslations("milonga");
   return (
-    <section id="milonga" className="py-20 sm:py-28">
+    <section className="py-20 sm:py-28">
       <div className="container">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
+        <div className="grid items-center gap-6 sm:grid-cols-2">
           <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
             <Image
               src="/images/community.png"
@@ -373,7 +363,7 @@ export function Testimonials() {
   ] as const;
 
   return (
-    <section id="reviews" className="py-20 sm:py-28">
+    <section className="">
       <div className="container">
         <h2 className="text-center text-3xl font-bold sm:text-4xl">
           {t("title")}
@@ -425,7 +415,7 @@ export function Audience() {
   const items = ["i1", "i2", "i3", "i4", "i5"] as const;
 
   return (
-    <section id="audience" className="py-20 sm:py-28">
+    <section className="py-20 sm:py-28">
       <div className="container">
         <h2 className="text-center text-3xl font-bold sm:text-4xl whitespace-pre-line md:whitespace-normal">
           {t("title")}
@@ -471,7 +461,7 @@ export function FAQ() {
   ];
 
   return (
-    <section id="faq" className="py-20 sm:py-28">
+    <section className="py-20 sm:py-28">
       <div className="container">
         <h2 className="text-center text-3xl font-bold sm:text-4xl">
           {t("title")}
@@ -503,10 +493,62 @@ export function FAQ() {
 }
 
 /* ─── Contact / Register ─── */
+/* ─── SNS (Slide 8) ─── */
+export function SNS() {
+  const t = useTranslations("sns");
+
+  const videoId = "LElgWLGh6NY";
+
+  const socialLinks = [
+    { label: t("youtube"), href: "https://www.youtube.com/@eltango2009" },
+    { label: t("instagram"), href: "https://www.instagram.com/eltango_buenos_aires/" },
+    { label: t("cafe"), href: "https://cafe.naver.com/eltango2009" },
+  ];
+
+  return (
+    <section className="">
+      <div className="container">
+        <h2 className="text-center text-3xl font-bold sm:text-4xl">
+          {t("title")}
+        </h2>
+        <p className="mt-3 text-center text-muted-foreground">
+          {t("description")}
+        </p>
+        <div className="mx-auto mt-4 flex max-w-md justify-center gap-4">
+          {socialLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col items-center gap-1 rounded-lg border border-border/50 px-5 py-3 text-sm text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+        <div className="mx-auto mt-6 flex max-w-[200px] justify-center">
+          <div className="relative aspect-[9/16] w-full overflow-hidden rounded-xl border border-border/50">
+            <iframe
+              src={`https://www.youtube.com/embed/${videoId}?loop=1&playlist=${videoId}`}
+              title="YouTube Short"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="absolute inset-0 h-full w-full border-0"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── Contact (Slide 9) ─── */
 export function Contact() {
   const t = useTranslations("contact");
   return (
-    <section id="register" className="py-20 sm:py-28">
+    <section className="">
       <div className="container">
         <div className="mx-auto max-w-md text-center">
           <h2 className="text-2xl font-bold sm:text-3xl">{t("title")}</h2>
@@ -526,8 +568,9 @@ export function Contact() {
 export function Footer() {
   const t = useTranslations("footer");
   return (
-    <footer id="location" className="border-t border-border/50 py-12">
+    <footer className="border-t border-border/50 pt-6 pb-20">
       <div className="container">
+        <h2 className="mb-6 text-center text-2xl font-bold">{t("directionsTitle")}</h2>
         <div className="grid gap-10 md:grid-cols-3">
           <div>
             <p className="font-serif text-xl font-bold text-primary">

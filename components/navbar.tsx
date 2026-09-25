@@ -5,6 +5,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { navigateToSection } from "@/components/full-page-scroll";
 
 export function Navbar() {
   const t = useTranslations("nav");
@@ -12,17 +13,28 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
 
   const links = [
-    { href: `/${locale}`, label: t("about") },
-    { href: `/${locale}/classes`, label: t("classes") },
-    { href: `/${locale}/instructors`, label: t("instructors") },
-    { href: `/${locale}/community`, label: t("community") },
-    { href: `/${locale}/faq`, label: t("faq") },
+    { hash: "about", label: t("about") },
+    { hash: "beginner", label: t("classes") },
+    { hash: "director", label: t("instructors") },
+    { hash: "reviews", label: t("reviews") },
+    { hash: "sns", label: t("sns") },
+    { hash: "location", label: t("directions") },
   ];
+
+  function handleClick(e: React.MouseEvent<HTMLAnchorElement>, hash: string) {
+    e.preventDefault();
+    window.history.pushState(null, "", `#${hash}`);
+    navigateToSection(hash);
+  }
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border/30 bg-background/80 backdrop-blur-md">
       <div className="container flex h-16 items-center justify-between">
-        <a href={`/${locale}`} className="flex items-center gap-2">
+        <a
+          href={`/${locale}`}
+          onClick={(e) => handleClick(e, "hero")}
+          className="flex items-center gap-2"
+        >
           <span className="font-serif text-lg font-bold text-primary">
             {t("brand")}
           </span>
@@ -34,8 +46,9 @@ export function Navbar() {
         <nav className="hidden gap-5 text-[13px] lg:flex">
           {links.map((link) => (
             <a
-              key={link.href}
-              href={link.href}
+              key={link.hash}
+              href={`#${link.hash}`}
+              onClick={(e) => handleClick(e, link.hash)}
               className="text-muted-foreground transition-colors hover:text-foreground"
             >
               {link.label}
@@ -45,7 +58,12 @@ export function Navbar() {
 
         <div className="hidden lg:block">
           <Button asChild size="sm" className="rounded-sm px-5">
-            <a href="#register">{t("cta")}</a>
+            <a
+              href="#register"
+              onClick={(e) => handleClick(e, "register")}
+            >
+              {t("cta")}
+            </a>
           </Button>
         </div>
 
@@ -58,20 +76,34 @@ export function Navbar() {
         </button>
       </div>
 
-      <div className={cn("lg:hidden border-t border-border/30", open ? "block" : "hidden")}>
+      <div
+        className={cn(
+          "lg:hidden border-t border-border/30",
+          open ? "block" : "hidden",
+        )}
+      >
         <div className="container grid gap-3 py-4 text-sm">
           {links.map((link) => (
             <a
-              key={link.href}
-              href={link.href}
-              onClick={() => setOpen(false)}
+              key={link.hash}
+              href={`#${link.hash}`}
+              onClick={(e) => {
+                setOpen(false);
+                handleClick(e, link.hash);
+              }}
               className="text-muted-foreground hover:text-foreground"
             >
               {link.label}
             </a>
           ))}
           <Button asChild className="mt-2">
-            <a href="#register" onClick={() => setOpen(false)}>
+            <a
+              href="#register"
+              onClick={(e) => {
+                setOpen(false);
+                handleClick(e, "register");
+              }}
+            >
               {t("cta")}
             </a>
           </Button>

@@ -1,7 +1,7 @@
 import { setRequestLocale } from "next-intl/server";
-import { Director } from "@/components/sections";
+import { SNSPageClient } from "./sns-page";
 
-export default async function InstructorsPage({
+export default async function SNSPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -9,9 +9,5 @@ export default async function InstructorsPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  return (
-    <main>
-      <Director />
-    </main>
-  );
+  return <SNSPageClient />;
 }
