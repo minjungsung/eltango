@@ -478,11 +478,8 @@ export function FAQ() {
         </h2>
 
         {/* YouTube Shorts */}
-        <div className="mx-auto mt-16 max-w-4xl">
-          <h3 className="mb-6 text-center text-xl font-semibold">
-            {t("videosTitle")}
-          </h3>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
+        <div className="mx-auto mt-12">
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
             {shorts.map((id) => (
               <div
                 key={id}
