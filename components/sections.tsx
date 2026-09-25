@@ -499,8 +499,8 @@ export function SNS() {
   const videoId = "LElgWLGh6NY";
 
   const socialLinks = [
-    { label: t("youtube"), href: "https://www.youtube.com/@eltango2009" },
-    { label: t("instagram"), href: "https://www.instagram.com/eltango_buenos_aires/" },
+    { label: t("youtube"), href: "https://www.youtube.com/@seoultango?si=TcnvuLDOZOW0qCmk" },
+    { label: t("instagram"), href: "https://www.instagram.com/seoultangoacademy_eltango" },
     { label: t("cafe"), href: "https://cafe.naver.com/eltango2009" },
   ];
 
