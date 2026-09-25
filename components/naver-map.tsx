@@ -70,7 +70,7 @@ export function NaverMap() {
     // Fallback: Google Maps embed if no Naver API key configured
     return (
       <iframe
-        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1582.5!2d127.005!3d37.483!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3e155716ccb%3A0xd5027b17875462fc!2z7ZmY7Z2s67mM65Sp!5e0!3m2!1sko!2skr"
+        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1582.5!2d127.005!3d37.483!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3e7f01b0d29%3A0x66251633371a6c99!2sEl+Tango+Cafe!5e0!3m2!1sko!2skr"
         className="h-full w-full border-0"
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
