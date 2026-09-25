@@ -217,6 +217,10 @@ textarea {
   width: 100%;
 }
 
+.fp-section:last-child {
+  align-items: flex-start;
+}
+
 /* Dot navigation */
 .fp-dots {
   position: fixed;

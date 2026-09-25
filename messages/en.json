@@ -86,17 +86,18 @@
   },
   "testimonials": {
     "title": "Student Stories",
+    "subtitle": "Excerpted from Naver Place visitor reviews",
     "t1": {
-      "text": "I was worried at first, but now it's my greatest joy. Meeting wonderful people at El Tango has enriched my life.",
-      "author": "– 50s, Office Worker"
+      "text": "After almost 2 years, I can't imagine life without tango. If you're looking for a lifelong hobby, I highly recommend it! The music, people, and atmosphere are all amazing. The daily programs are so well-organized that I grow while having fun.",
+      "author": "– Naver Visitor Review"
     },
     "t2": {
-      "text": "I had no confidence in rhythm, but the teachers are so kind. Learning to understand and express music is truly fun.",
-      "author": "– 40s, Professional"
+      "text": "At first I wanted to learn flashy moves quickly, but after a year I've learned that beauty comes from solid fundamentals and delicacy. Thank you El Tango for giving me a hobby I want to cherish forever.",
+      "author": "– Naver Visitor Review"
     },
     "t3": {
-      "text": "We started as a couple and now understand each other better. Waiting for each other is the charm of tango.",
-      "author": "– 50s, Couple"
+      "text": "The curriculum is well-structured and the instructors are excellent for each class. Even as a complete beginner with no dance experience, I could follow along easily. Highly recommend for anyone wanting to learn authentic Argentine tango!",
+      "author": "– Naver Visitor Review"
     },
     "cta": "Read more reviews →"
   },

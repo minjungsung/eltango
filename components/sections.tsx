@@ -356,11 +356,7 @@ export function Milonga() {
 /* ─── Testimonials (Slide 2 voices) ─── */
 export function Testimonials() {
   const t = useTranslations("testimonials");
-  const items = [
-    { key: "t1", img: "/images/avatar-1.png" },
-    { key: "t2", img: "/images/avatar-2.png" },
-    { key: "t3", img: "/images/avatar-3.png" },
-  ] as const;
+  const items = ["t1", "t2", "t3"] as const;
 
   return (
     <section className="">
@@ -368,35 +364,38 @@ export function Testimonials() {
         <h2 className="text-center text-3xl font-bold sm:text-4xl">
           {t("title")}
         </h2>
-        <div className="mt-12 grid gap-8 md:grid-cols-3">
-          {items.map(({ key, img }) => (
+        <p className="mt-2 text-center text-xs text-muted-foreground">
+          {t("subtitle")}
+        </p>
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          {items.map((key) => (
             <div
               key={key}
-              className="rounded-lg border border-border/50 bg-card p-6"
+              className="rounded-lg border border-border/50 bg-card p-5"
             >
-              <div className="flex items-start gap-4">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={img}
-                  alt=""
-                  className="h-12 w-12 flex-shrink-0 rounded-full border border-primary/30"
-                />
-                <div>
-                  <p className="text-sm leading-relaxed text-muted-foreground whitespace-pre-line md:whitespace-normal">
-                    {t(`${key}.text`)}
-                  </p>
-                  <p className="mt-3 text-xs font-medium text-primary">
-                    {t(`${key}.author`)}
-                  </p>
-                </div>
+              {/* Stars */}
+              <div className="flex items-center gap-1 text-yellow-400">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} className="h-4 w-4 fill-current" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                &ldquo;{t(`${key}.text`)}&rdquo;
+              </p>
+              <div className="mt-3 flex items-center gap-2">
+                <span className="inline-flex h-5 w-5 items-center justify-center rounded bg-[#03C75A] text-[10px] font-bold text-white">N</span>
+                <span className="text-xs text-muted-foreground">{t(`${key}.author`)}</span>
               </div>
             </div>
           ))}
         </div>
-        <div className="mt-10 text-center">
+        <div className="mt-6 text-center">
           <Button
             asChild
             variant="outline"
+            size="sm"
             className="border-foreground/30 text-foreground hover:bg-foreground/10"
           >
             <a href="https://m.place.naver.com/place/20526245/review/visitor" target="_blank" rel="noopener noreferrer">
