@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useTranslations } from "next-intl";
 
 declare global {
   interface Window {
@@ -31,6 +32,7 @@ const LNG = 127.0085;
 
 export function NaverMap() {
   const mapRef = useRef<HTMLDivElement>(null);
+  const t = useTranslations("footer");
 
   useEffect(() => {
     if (!NAVER_MAP_CLIENT_ID || !mapRef.current) return;
@@ -78,13 +80,13 @@ export function NaverMap() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/map.png"
-          alt="엘땅고 위치"
+          alt={t("mapAlt")}
           className="h-full w-full object-cover"
           loading="lazy"
         />
         <div className="absolute inset-0 flex items-end justify-center pb-4 bg-gradient-to-t from-black/40 to-transparent">
           <span className="rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-gray-800 shadow">
-            네이버 지도에서 보기 →
+            {t("mapCta")}
           </span>
         </div>
       </a>
