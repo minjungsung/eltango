@@ -46,6 +46,14 @@ export async function generateMetadata({
       type: "website",
       url: "https://eltango.vercel.app",
       locale: locale === "ko" ? "ko_KR" : "en_US",
+      images: [
+        {
+          url: "/images/14194.jpg",
+          width: 960,
+          height: 720,
+          alt: t("title"),
+        },
+      ],
     },
     metadataBase: new URL("https://eltango.vercel.app"),
     alternates: {

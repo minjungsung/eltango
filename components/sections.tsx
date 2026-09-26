@@ -85,7 +85,7 @@ export function Features() {
           &ldquo;{tw("quote")}&rdquo;
         </p>
 
-        <div className="mx-auto mt-6 grid max-w-4xl gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mx-auto mt-6 grid max-w-5xl gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
           {items.map((key) => (
             <div
               key={key}
@@ -500,7 +500,11 @@ export function FAQ() {
 export function SNS() {
   const t = useTranslations("sns");
 
-  const videoId = "LElgWLGh6NY";
+  const shorts = [
+    "LElgWLGh6NY",
+    "_oGGXDz3zWM",
+    "I3A6RqWq_2g",
+  ];
 
   const socialLinks = [
     { label: t("youtube"), href: "https://www.youtube.com/@seoultango?si=TcnvuLDOZOW0qCmk" },
@@ -530,28 +534,34 @@ export function SNS() {
             </a>
           ))}
         </div>
-        <div className="mx-auto mt-6 flex max-w-[200px] justify-center">
-          <a
-            href={`https://www.youtube.com/shorts/${videoId}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="relative block aspect-[9/16] w-full overflow-hidden rounded-2xl border border-border/30"
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={`https://img.youtube.com/vi/${videoId}/oar2.jpg`}
-              alt="YouTube Short"
-              className="absolute inset-0 h-full w-full object-cover"
-              loading="lazy"
-            />
-            <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/90">
-                <svg className="h-7 w-7 text-red-600 ml-1" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
+        {/* Shorts: 1 on mobile, 2 on tablet, 3 on desktop */}
+        <div className="mx-auto mt-6 grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {shorts.map((id, i) => (
+            <a
+              key={id}
+              href={`https://www.youtube.com/shorts/${id}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`relative block aspect-[9/16] max-h-[50vh] overflow-hidden rounded-2xl border border-border/30 mx-auto w-full max-w-[200px] sm:max-w-none ${
+                i === 1 ? "hidden sm:block" : ""
+              } ${i === 2 ? "hidden lg:block" : ""}`}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`https://img.youtube.com/vi/${id}/oar2.jpg`}
+                alt="YouTube Short"
+                className="absolute inset-0 h-full w-full object-cover"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/90">
+                  <svg className="h-6 w-6 text-red-600 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
               </div>
-            </div>
-          </a>
+            </a>
+          ))}
         </div>
       </div>
     </section>
