@@ -1,10 +1,6 @@
 version: 2
 updates:
-  - package-ecosystem: "npm"
+  - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 10
-    labels:
-      - "dependencies"
-    # Only security updates auto-merge; version updates need review
