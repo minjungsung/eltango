@@ -1,0 +1,21 @@
+name: Init Wiki
+on:
+  workflow_dispatch:
+jobs:
+  init-wiki:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Initialize Wiki
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global user.email "minjungsung@users.noreply.github.com"
+          git config --global user.name "minjungsung"
+          mkdir wiki-init && cd wiki-init
+          git init --initial-branch=master
+          echo "# Welcome" > Home.md
+          git add . && git commit -m "Initialize wiki"
+          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.wiki.git"
+          git push -u origin master 2>&1 || echo "WIKI_PUSH_FAILED"
