@@ -7,17 +7,13 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: Initialize wiki
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v4
+      - name: Create wiki files
         run: |
-          git config --global user.email "minjungsung1994@gmail.com"
-          git config --global user.name "minjungsung"
-          mkdir wiki && cd wiki
-          git init
-          echo "# Wiki" > Home.md
-          echo "Initializing..." >> Home.md
-          git add .
-          git commit -m "docs: initialize wiki"
-          git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.wiki.git"
-          git push -u origin master || git push -u origin main
+          mkdir -p wiki
+          echo "# Wiki" > wiki/Home.md
+          echo "Initializing..." >> wiki/Home.md
+      - uses: Andrew-Chen-Wang/github-wiki-action@v4
+        with:
+          path: wiki/
+          token: ${{ secrets.GITHUB_TOKEN }}
