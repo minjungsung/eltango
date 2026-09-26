@@ -154,18 +154,6 @@ export function FullPageScroll({ sectionIds, children }: FullPageScrollProps) {
           ))}
         </div>
       </div>
-
-      <nav className="fp-dots" aria-label="Page sections">
-        {children.map((_, i) => (
-          <button
-            key={sectionIds[i]}
-            onClick={() => goTo(i)}
-            className={`fp-dot ${i === current ? "fp-dot-active" : ""}`}
-            aria-label={`Section ${i + 1}`}
-            aria-current={i === current ? "true" : undefined}
-          />
-        ))}
-      </nav>
     </>
   );
 }

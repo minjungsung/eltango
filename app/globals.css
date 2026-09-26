@@ -10,21 +10,21 @@
     "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
   --font-serif: "Playfair Display", "Georgia", serif;
 
-  /* Dark + Gold palette inspired by unnamed.jpg */
-  --background: 0 0% 5%;
+  /* Dark Burgundy + Gold — Buenos Aires milonga palette */
+  --background: 345 30% 7%;
   --foreground: 40 20% 92%;
 
-  --muted: 0 0% 12%;
+  --muted: 345 20% 12%;
   --muted-foreground: 40 10% 60%;
 
-  --popover: 0 0% 7%;
+  --popover: 345 25% 8%;
   --popover-foreground: 40 20% 92%;
 
-  --card: 0 0% 9%;
+  --card: 345 20% 11%;
   --card-foreground: 40 20% 92%;
 
-  --border: 40 10% 20%;
-  --input: 0 0% 14%;
+  --border: 345 15% 22%;
+  --input: 345 15% 14%;
 
   --primary: 38 60% 55%;
   --primary-foreground: 0 0% 7%;
@@ -44,20 +44,20 @@
 }
 
 .dark {
-  --background: 0 0% 5%;
+  --background: 345 30% 7%;
   --foreground: 40 20% 92%;
 
-  --muted: 0 0% 12%;
+  --muted: 345 20% 12%;
   --muted-foreground: 40 10% 60%;
 
-  --popover: 0 0% 7%;
+  --popover: 345 25% 8%;
   --popover-foreground: 40 20% 92%;
 
-  --card: 0 0% 9%;
+  --card: 345 20% 11%;
   --card-foreground: 40 20% 92%;
 
-  --border: 40 10% 20%;
-  --input: 0 0% 14%;
+  --border: 345 15% 22%;
+  --input: 345 15% 14%;
 
   --primary: 38 60% 55%;
   --primary-foreground: 0 0% 7%;
@@ -157,25 +157,114 @@ h3 {
 .fp-section .mt-10 { margin-top: clamp(0.5rem, 2vh, 2.5rem); }
 .fp-section .mt-12 { margin-top: clamp(0.75rem, 2vh, 3rem); }
 
-/* Light alternating sections like unnamed.jpg */
-main > section:nth-child(even) {
-  --background: 40 15% 96%;
-  --foreground: 0 0% 10%;
-  --muted: 40 10% 90%;
-  --muted-foreground: 0 0% 40%;
-  --primary: 38 60% 38%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 40 10% 88%;
-  --secondary-foreground: 0 0% 10%;
-  --border: 40 10% 82%;
-  --input: 40 10% 82%;
-  --ring: 38 60% 38%;
-  --card: 0 0% 100%;
-  --card-foreground: 0 0% 10%;
-  --accent: 38 60% 38%;
-  --accent-foreground: 0 0% 100%;
-  background-color: hsl(40 15% 96%);
-  color: hsl(0 0% 10%);
+/* All sections share the same base dark burgundy — no alternating colors */
+
+/* ─── Subtle grain / noise texture (modern trend) ─── */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* ─── Glassmorphism cards ─── */
+.glass-card {
+  background: hsl(var(--card) / 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid hsl(var(--border) / 0.4);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.glass-card:hover {
+  background: hsl(var(--card) / 0.8);
+  border-color: hsl(var(--primary) / 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px hsl(var(--primary) / 0.08);
+}
+
+/* ─── Glow accent for primary elements ─── */
+.glow-primary {
+  box-shadow: 0 0 20px hsl(var(--primary) / 0.15),
+              0 0 60px hsl(var(--primary) / 0.05);
+}
+
+/* ─── Ambient glow blobs (floating background accents) ─── */
+.ambient-glow {
+  position: relative;
+  overflow: hidden;
+}
+.ambient-glow::before {
+  content: "";
+  position: absolute;
+  width: 40vw;
+  height: 40vw;
+  max-width: 500px;
+  max-height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, hsl(345 40% 20% / 0.3) 0%, transparent 70%);
+  top: -10%;
+  right: -10%;
+  pointer-events: none;
+  z-index: 0;
+}
+.ambient-glow::after {
+  content: "";
+  position: absolute;
+  width: 30vw;
+  height: 30vw;
+  max-width: 400px;
+  max-height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, hsl(38 60% 55% / 0.08) 0%, transparent 70%);
+  bottom: -5%;
+  left: -5%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Hero: cinematic vignette */
+.fp-section:first-child > section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 40%,
+    hsl(345 30% 9% / 0) 30%,
+    hsl(345 35% 4% / 0.6) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Footer: gradient fade to deep */
+.fp-section:last-child > footer {
+  background: linear-gradient(
+    to bottom,
+    hsl(345 30% 7%) 0%,
+    hsl(345 25% 4%) 100%
+  );
+}
+
+/* ─── Micro-interaction: smooth card hover lift ─── */
+[class*="rounded-lg"][class*="border"] {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.3s ease;
+}
+[class*="rounded-lg"][class*="border"]:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px hsl(var(--primary) / 0.06);
+  border-color: hsl(var(--border) / 0.8);
+}
+
+/* ─── Sections share a seamless background ─── */
+.fp-section {
+  position: relative;
 }
 
 p,
@@ -211,6 +300,12 @@ textarea {
   overflow-x: hidden;
   display: flex;
   align-items: center;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.fp-section::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
 }
 
 .fp-section > * {

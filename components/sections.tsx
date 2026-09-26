@@ -11,7 +11,7 @@ export function Hero() {
   const t = useTranslations("hero");
 
   return (
-    <section className="relative flex flex-col overflow-hidden">
+    <section className="relative flex flex-col overflow-hidden ambient-glow">
       {/* Main hero area */}
       <div className="container flex-1 py-3 sm:py-6">
         <div className="grid items-center gap-6 md:grid-cols-2">
@@ -52,7 +52,7 @@ export function Hero() {
             </div>
           </div>
           {/* Right: couple image */}
-          <div className="relative hidden aspect-[3/4] overflow-hidden rounded-lg md:block">
+          <div className="relative hidden aspect-[3/4] overflow-hidden rounded-2xl md:block">
             <Image
               src="/images/main.png"
               alt="탱고 커플"
@@ -62,9 +62,6 @@ export function Hero() {
               sizes="(min-width: 1024px) 50vw, 100vw"
               quality={95}
             />
-            <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-background" />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-transparent to-transparent" />
           </div>
         </div>
       </div>
@@ -91,7 +88,7 @@ export function Features() {
           {items.map((key) => (
             <div
               key={key}
-              className="rounded-lg border border-border/50 bg-card/50 p-3 text-center"
+              className="glass-card rounded-2xl p-3 text-center"
             >
               <p className="text-base font-bold text-primary">
                 {tw(`items.${key}.title`)}
@@ -133,7 +130,7 @@ export function About() {
               <a href="https://m.place.naver.com/place/20526245/home" target="_blank" rel="noopener noreferrer">{t("cta")}</a>
             </Button>
           </div>
-          <div className="relative aspect-[4/3] w-full max-h-[25vh] md:max-h-[60vh] overflow-hidden rounded-lg">
+          <div className="relative aspect-[4/3] w-full max-h-[25vh] md:max-h-[60vh] overflow-hidden rounded-2xl">
             <Image
               src="/images/14194.jpg"
               alt="엘땅고 스튜디오"
@@ -141,7 +138,6 @@ export function About() {
               className="object-cover"
               sizes="(min-width: 1024px) 50vw, 100vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-background/30 via-transparent to-transparent" />
           </div>
         </div>
       </div>
@@ -156,7 +152,7 @@ export function Director() {
     <section className="">
       <div className="container">
         <div className="grid items-start gap-4 md:grid-cols-2">
-          <div className="relative aspect-[3/4] w-full max-h-[30vh] md:max-h-[70vh] overflow-hidden rounded-lg">
+          <div className="relative aspect-[3/4] w-full max-h-[30vh] md:max-h-[70vh] overflow-hidden rounded-2xl">
             <Image
               src="/images/fish.jpg"
               alt="이인경 대표원장"
@@ -164,7 +160,6 @@ export function Director() {
               className="object-cover"
               sizes="(min-width: 1024px) 50vw, 100vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-l from-background/30 via-transparent to-transparent" />
           </div>
           <div>
             <p className="font-serif text-sm italic text-primary">
@@ -202,7 +197,7 @@ export function Difference() {
   ] as const;
 
   return (
-    <section className="">
+    <section className="ambient-glow">
       <div className="container">
         <h2 className="text-center text-3xl font-bold sm:text-4xl">
           {t("title")}
@@ -210,9 +205,9 @@ export function Difference() {
 
         <div className="mt-6 space-y-6">
           {/* Comparison table */}
-          <div className="mx-auto max-w-2xl overflow-hidden rounded-lg border border-border/50">
-            <div className="grid grid-cols-2 bg-card/80 text-center text-sm font-semibold">
-              <div className="border-r border-border/50 p-3 text-muted-foreground">
+          <div className="glass-card mx-auto max-w-2xl overflow-hidden rounded-2xl">
+            <div className="grid grid-cols-2 text-center text-sm font-semibold">
+              <div className="border-r border-border/30 p-3 text-muted-foreground">
                 {t("headers.general")}
               </div>
               <div className="p-3 text-primary">{t("headers.eltango")}</div>
@@ -220,9 +215,9 @@ export function Difference() {
             {rows.map((key) => (
               <div
                 key={key}
-                className="grid grid-cols-2 border-t border-border/50 text-center text-sm"
+                className="grid grid-cols-2 border-t border-border/20 text-center text-sm"
               >
-                <div className="border-r border-border/50 p-3 text-muted-foreground">
+                <div className="border-r border-border/20 p-3 text-muted-foreground">
                   {t(`rows.${key}.general`)}
                 </div>
                 <div className="p-3 text-foreground">
@@ -235,7 +230,7 @@ export function Difference() {
           {/* Feature strip */}
           <div className="mx-auto grid max-w-3xl grid-cols-4 gap-4 place-items-center">
             {featureItems.map(({ key, icon }) => (
-              <div key={key} className="flex flex-col items-center gap-2 text-center">
+              <div key={key} className="glass-card flex flex-col items-center gap-2 rounded-2xl p-3 text-center">
                 <div className="flex h-10 w-10 items-center justify-center text-primary">
                   {icon}
                 </div>
@@ -266,7 +261,7 @@ export function BeginnerClass() {
       <div className="container relative z-10">
         <div className="grid items-center gap-4 md:grid-cols-2 md:gap-12">
           {/* Left: image */}
-          <div className="relative aspect-[4/3] w-full max-h-[25vh] md:max-h-[60vh] overflow-hidden rounded-lg">
+          <div className="relative aspect-[4/3] w-full max-h-[25vh] md:max-h-[60vh] overflow-hidden rounded-2xl">
             <Image
               src="/images/schedule.png"
               alt="수업 시간표"
@@ -274,7 +269,6 @@ export function BeginnerClass() {
               className="object-cover"
               sizes="(min-width: 1024px) 50vw, 100vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-background/40" />
           </div>
           {/* Right: content */}
           <div>
@@ -287,9 +281,9 @@ export function BeginnerClass() {
             <p className="mt-3 text-lg text-muted-foreground whitespace-pre-line md:whitespace-normal">
               {t("subtitle")}
             </p>
-            <div className="mt-8 space-y-4">
+            <div className="mt-8 space-y-3">
               {points.map(({ key, icon }) => (
-                <div key={key} className="flex items-start gap-3">
+                <div key={key} className="glass-card flex items-start gap-3 rounded-2xl p-3">
                   <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
                     {icon}
                   </div>
@@ -323,7 +317,7 @@ export function Milonga() {
     <section className="py-20 sm:py-28">
       <div className="container">
         <div className="grid items-center gap-6 sm:grid-cols-2">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
             <Image
               src="/images/community.png"
               alt="밀롱가 우나베스"
@@ -331,7 +325,6 @@ export function Milonga() {
               className="object-cover"
               sizes="(min-width: 1024px) 50vw, 100vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-background/30 via-transparent to-transparent" />
           </div>
           <div>
             <p className="font-serif text-sm italic text-primary">
@@ -371,7 +364,7 @@ export function Testimonials() {
           {items.map((key) => (
             <div
               key={key}
-              className="rounded-lg border border-border/50 bg-card p-5"
+              className="glass-card rounded-2xl p-5"
             >
               {/* Stars */}
               <div className="flex items-center gap-1 text-yellow-400">
@@ -472,7 +465,7 @@ export function FAQ() {
             {shorts.map((id) => (
               <div
                 key={id}
-                className="relative aspect-[9/16] overflow-hidden rounded-xl border border-border/50"
+                className="glass-card relative aspect-[9/16] overflow-hidden rounded-2xl"
               >
                 <iframe
                   src={`https://www.youtube.com/embed/${id}?loop=1&playlist=${id}`}
@@ -520,7 +513,7 @@ export function SNS() {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col items-center gap-1 rounded-lg border border-border/50 px-5 py-3 text-sm text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"
+              className="glass-card flex flex-col items-center gap-1 rounded-2xl px-5 py-3 text-sm text-muted-foreground"
             >
               {link.label}
             </a>
@@ -531,7 +524,7 @@ export function SNS() {
             href={`https://www.youtube.com/shorts/${videoId}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="relative block aspect-[9/16] w-full overflow-hidden rounded-xl border border-border/50"
+            className="relative block aspect-[9/16] w-full overflow-hidden rounded-2xl border border-border/30"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -566,7 +559,7 @@ export function Contact() {
             {t("description")}
           </p>
         </div>
-        <div className="mx-auto mt-8 max-w-md rounded-xl border border-border/60 bg-card p-6 shadow-xl shadow-black/10">
+        <div className="mx-auto mt-8 max-w-md glass-card rounded-2xl p-6 glow-primary">
           <RegisterForm source="contact" />
         </div>
       </div>
@@ -578,63 +571,28 @@ export function Contact() {
 export function Footer() {
   const t = useTranslations("footer");
   return (
-    <footer className="border-t border-border/50 pt-6 pb-20">
-      <div className="container">
-        <h2 className="mb-6 text-center text-2xl font-bold">{t("directionsTitle")}</h2>
-        <div className="grid gap-10 md:grid-cols-3">
-          <div>
-            <p className="font-serif text-xl font-bold text-primary">
-              {t("brand")}
-            </p>
-            <p className="text-xs text-muted-foreground">{t("brandSub")}</p>
-            <p className="mt-4 whitespace-pre-line md:whitespace-normal text-sm text-muted-foreground">
-              {t("tagline")}
-            </p>
-            {/* Social icons */}
-            <div className="mt-4 flex gap-3">
-              <a href="#" className="flex h-8 w-8 items-center justify-center rounded-full bg-muted text-muted-foreground hover:text-foreground" aria-label="Instagram">
-                <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-              </a>
-              <a href="#" className="flex h-8 w-8 items-center justify-center rounded-full bg-muted text-muted-foreground hover:text-foreground" aria-label="YouTube">
-                <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-              </a>
-              <a href="#" className="flex h-8 w-8 items-center justify-center rounded-full bg-muted text-muted-foreground hover:text-foreground" aria-label="KakaoTalk">
-                <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3c-5.523 0-10 3.582-10 8 0 2.844 1.888 5.34 4.727 6.756-.18.654-.652 2.37-.747 2.735-.12.46.168.454.354.33.146-.097 2.321-1.576 3.263-2.217A11.4 11.4 0 0012 19c5.523 0 10-3.582 10-8s-4.477-8-10-8z"/></svg>
-              </a>
-            </div>
-          </div>
-          <div>
-            <p className="mb-3 text-sm font-semibold">Contact</p>
-            <div className="space-y-2 text-sm text-muted-foreground">
-              <p className="flex items-center gap-2">
-                <Phone className="h-4 w-4 text-primary" /> {t("phone")}
-              </p>
-              <p className="flex items-center gap-2">
-                <Mail className="h-4 w-4 text-primary" /> {t("email")}
-              </p>
-              <p className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-primary" />
-                <span className="whitespace-pre-line md:whitespace-normal">{t("address")}</span>
-              </p>
-            </div>
-          </div>
-          <div>
-            <p className="mb-3 text-sm font-semibold">Location</p>
-            <div className="aspect-[4/3] overflow-hidden rounded-lg border border-border/50 bg-muted">
-              <NaverMap />
-            </div>
-            <a
-              href="https://naver.me/xdp3zeag"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-2 inline-flex items-center gap-1 text-xs text-primary hover:underline"
-            >
-              <MapPin className="h-3 w-3" />
-              {t("mapCta")}
-            </a>
-          </div>
+    <footer className="flex flex-col h-full">
+      <div className="container flex-1 flex flex-col justify-center py-4">
+        <h2 className="mb-3 text-center text-xl font-bold">{t("directionsTitle")}</h2>
+        {/* Map — large, prominent */}
+        <div className="mx-auto w-full max-w-2xl aspect-[2/1] max-h-[35vh] overflow-hidden rounded-2xl border border-border/30 bg-muted">
+          <NaverMap />
         </div>
-        <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-border/50 pt-6 text-xs text-muted-foreground sm:flex-row">
+
+        {/* Contact info — vertical list */}
+        <div className="mx-auto mt-3 max-w-2xl space-y-1.5 text-sm text-muted-foreground">
+          <p className="font-serif text-base font-bold text-primary">{t("brand")}</p>
+          <p className="flex items-center gap-2"><Phone className="h-3.5 w-3.5 text-primary" /> {t("phone")}</p>
+          <p className="flex items-center gap-2"><Mail className="h-3.5 w-3.5 text-primary" /> {t("email")}</p>
+          <p className="flex items-center gap-2">
+            <MapPin className="h-3.5 w-3.5 text-primary" />
+            <span className="whitespace-pre-line md:whitespace-normal">{t("address")}</span>
+          </p>
+        </div>
+      </div>
+      {/* Bottom bar — always visible */}
+      <div className="container pb-2">
+        <div className="flex flex-col items-center justify-between gap-1 border-t border-border/30 pt-2 text-xs text-muted-foreground sm:flex-row">
           <p>{t("rights", { year: new Date().getFullYear() })}</p>
           <div className="flex gap-4">
             <span>{t("privacy")}</span>
