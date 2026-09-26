@@ -33,13 +33,10 @@
     "title": "Tango changes\neverything",
     "quote": "Time to return to yourself",
     "items": {
-      "i1": { "title": "Self-Discovery", "desc": "A self-discovery class for women in their 40s–50s" },
       "i2": { "title": "Posture Correction", "desc": "Body alignment and healthy movement" },
       "i3": { "title": "After-Work Healing", "desc": "One hour after work, just for yourself" },
       "i4": { "title": "Full-Body Exercise", "desc": "A whole-body workout from just walking" },
-      "i5": { "title": "Evening Hobby", "desc": "An exciting new evening routine" },
       "i6": { "title": "Couple's Hobby", "desc": "A shared hobby for couples after retirement" },
-      "i7": { "title": "New Friendships", "desc": "Real friendships with fun people" },
       "i8": { "title": "Community", "desc": "A new community for professionals in their 20s–40s" }
     }
   },

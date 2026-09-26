@@ -75,7 +75,7 @@ export function Hero() {
 /* ─── WhyStay / Tango Value (Slide 2) ─── */
 export function Features() {
   const tw = useTranslations("whyStay");
-  const items = ["i1", "i2", "i3", "i4", "i5", "i6", "i7", "i8"] as const;
+  const items = ["i2", "i3", "i4", "i6", "i8"] as const;
 
   return (
     <section className="">
