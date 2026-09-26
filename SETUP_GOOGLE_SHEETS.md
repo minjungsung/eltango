@@ -12,6 +12,17 @@ function doPost(e) {
   var sheet = ss.getSheets()[0];
   var data = JSON.parse(e.postData.contents);
   sheet.appendRow([new Date(), data.name, data.phone, data.memo, data.source]);
+
+  // 이메일 알림 — 새 신청이 들어오면 즉시 이메일로 알려줍니다
+  var to = "fishlow0@daum.net"; // 받을 이메일 주소 (변경 가능)
+  var subject = "[엘땅고] 새 상담 신청: " + data.name;
+  var body = "이름: " + data.name + "\n"
+           + "전화번호: " + data.phone + "\n"
+           + "메모: " + (data.memo || "없음") + "\n"
+           + "출처: " + (data.source || "-") + "\n"
+           + "시간: " + new Date().toLocaleString("ko-KR", {timeZone: "Asia/Seoul"});
+  MailApp.sendEmail(to, subject, body);
+
   return ContentService.createTextOutput('{"ok":true}').setMimeType(ContentService.MimeType.JSON);
 }
 ```
