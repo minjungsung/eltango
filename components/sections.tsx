@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 
@@ -127,7 +128,7 @@ export function About() {
               variant="outline"
               className="mt-8 border-primary/50 text-primary hover:bg-primary/10"
             >
-              <a href="https://m.place.naver.com/place/20526245/home" target="_blank" rel="noopener noreferrer">{t("cta")}</a>
+              <a href="https://cafe.naver.com/eltango2009" target="_blank" rel="noopener noreferrer">{t("cta")}</a>
             </Button>
           </div>
           <div className="relative aspect-[4/3] w-full max-h-[25vh] md:max-h-[60vh] overflow-hidden rounded-2xl">
@@ -350,6 +351,7 @@ export function Milonga() {
 export function Testimonials() {
   const t = useTranslations("testimonials");
   const items = ["t1", "t2", "t3"] as const;
+  const [expandedKey, setExpandedKey] = useState<string | null>(null);
 
   return (
     <section className="">
@@ -360,26 +362,35 @@ export function Testimonials() {
         <p className="mt-2 text-center text-xs text-muted-foreground">
           {t("subtitle")}
         </p>
-        <div className="mt-8 grid gap-4 md:grid-cols-3">
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
           {items.map((key) => (
-            <div
-              key={key}
-              className="glass-card rounded-2xl p-5"
-            >
+            <div key={key} className="glass-card rounded-2xl p-5">
               {/* Stars */}
               <div className="flex items-center gap-1 text-yellow-400">
                 {[...Array(5)].map((_, i) => (
-                  <svg key={i} className="h-4 w-4 fill-current" viewBox="0 0 20 20">
+                  <svg key={i} className="h-3.5 w-3.5 fill-current" viewBox="0 0 20 20">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                   </svg>
                 ))}
               </div>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                &ldquo;{t(`${key}.text`)}&rdquo;
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                &ldquo;{t(`${key}.short`)}&rdquo;
               </p>
-              <div className="mt-3 flex items-center gap-2">
+              {expandedKey === key && (
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground/80">
+                  {t(`${key}.text`)}
+                </p>
+              )}
+              <button
+                onClick={() => setExpandedKey(expandedKey === key ? null : key)}
+                className="mt-2 text-xs text-primary hover:underline"
+              >
+                {expandedKey === key ? t("less") : t("more")}
+              </button>
+              <div className="mt-2 flex items-center gap-2">
                 <span className="inline-flex h-5 w-5 items-center justify-center rounded bg-[#03C75A] text-[10px] font-bold text-white">N</span>
                 <span className="text-xs text-muted-foreground">{t(`${key}.author`)}</span>
+                <span className="text-xs text-muted-foreground/60">· {t(`${key}.period`)}</span>
               </div>
             </div>
           ))}
@@ -493,7 +504,7 @@ export function SNS() {
 
   const socialLinks = [
     { label: t("youtube"), href: "https://www.youtube.com/@seoultango?si=TcnvuLDOZOW0qCmk" },
-    { label: t("instagram"), href: "https://www.instagram.com/seoultangoacademy_eltango" },
+    { label: t("instagram"), href: "https://www.instagram.com/eltango_seoultangoacademy" },
     { label: t("cafe"), href: "https://cafe.naver.com/eltango2009" },
   ];
 

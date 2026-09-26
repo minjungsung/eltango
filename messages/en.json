@@ -84,17 +84,43 @@
   "testimonials": {
     "title": "Student Stories",
     "subtitle": "Excerpted from Naver Place visitor reviews",
+    "more": "Read more",
+    "less": "Show less",
     "t1": {
-      "text": "After almost 2 years, I can't imagine life without tango. If you're looking for a lifelong hobby, I highly recommend it! The music, people, and atmosphere are all amazing. The daily programs are so well-organized that I grow while having fun.",
-      "author": "– Naver Visitor Review"
+      "short": "I finally understood why Kim Yuna's performances were pure art — beauty comes from solid fundamentals and delicacy.",
+      "text": "The director has incredibly rich teaching experience and explains body mechanics in a way each student can understand. The curriculum is rich and there are multiple instructors, so you hear diverse perspectives on the same movement. Don't hesitate, come learn with us!",
+      "author": "리얼초코***25",
+      "period": "1 year"
     },
     "t2": {
-      "text": "At first I wanted to learn flashy moves quickly, but after a year I've learned that beauty comes from solid fundamentals and delicacy. Thank you El Tango for giving me a hobby I want to cherish forever.",
-      "author": "– Naver Visitor Review"
+      "short": "Almost 2 years in — I can't imagine life without tango. We nicknamed it 'El Tango Gym' because you grow every single day while having fun!",
+      "text": "The music, people, and atmosphere are all amazing. The daily programs are so well-organized it's like a tango gym — you go to have fun and grow seriously. My husband and I started together, and I highly recommend starting with a partner!",
+      "author": "순정****",
+      "period": "1 year 9 months"
     },
     "t3": {
-      "text": "The curriculum is well-structured and the instructors are excellent for each class. Even as a complete beginner with no dance experience, I could follow along easily. Highly recommend for anyone wanting to learn authentic Argentine tango!",
-      "author": "– Naver Visitor Review"
+      "short": "Systematic curriculum from basics to advanced, skilled and kind teachers, and a great system connecting classes with práctica and milongas.",
+      "text": "I've been learning at El Tango for almost 2 years. The tuition is reasonable, and the progression from ELF to Eldorado courses is very helpful.",
+      "author": "신*조",
+      "period": "2 years"
+    },
+    "t4": {
+      "short": "Visited alone on a friend's recommendation — the Sunday morning guided práctica was amazing. 3 hours flew by!",
+      "text": "The teacher gave detailed individual feedback and explained things in an easy-to-understand way, so even beginners could join without pressure. About 20 people from their 30s to 60s were practicing together and the atmosphere was great.",
+      "author": "용용블루",
+      "period": "First visit"
+    },
+    "t5": {
+      "short": "Only 1.5 months in and I had a blast at my second milonga! The foundation classes are really solid.",
+      "text": "There are many instructors and senior students who really help beginners along. I even danced a vals and milonga tanda!",
+      "author": "필라테스애플",
+      "period": "1 month"
+    },
+    "t6": {
+      "short": "El Tango is seriously fun. The beginning is tough but once you get through it, just follow along and you'll find yourself dancing well lol",
+      "text": "The curriculum is well-guided by the teachers, just follow along and you'll be fine.",
+      "author": "별그로구",
+      "period": "Student"
     },
     "cta": "Read more reviews →"
   },
