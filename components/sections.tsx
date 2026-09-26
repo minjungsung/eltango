@@ -527,16 +527,27 @@ export function SNS() {
           ))}
         </div>
         <div className="mx-auto mt-6 flex max-w-[200px] justify-center">
-          <div className="relative aspect-[9/16] w-full overflow-hidden rounded-xl border border-border/50">
-            <iframe
-              src={`https://www.youtube.com/embed/${videoId}?loop=1&playlist=${videoId}`}
-              title="YouTube Short"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="absolute inset-0 h-full w-full border-0"
+          <a
+            href={`https://www.youtube.com/shorts/${videoId}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative block aspect-[9/16] w-full overflow-hidden rounded-xl border border-border/50"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`https://img.youtube.com/vi/${videoId}/oar2.jpg`}
+              alt="YouTube Short"
+              className="absolute inset-0 h-full w-full object-cover"
               loading="lazy"
             />
-          </div>
+            <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/90">
+                <svg className="h-7 w-7 text-red-600 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
+            </div>
+          </a>
         </div>
       </div>
     </section>

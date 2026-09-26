@@ -67,16 +67,27 @@ export function NaverMap() {
   }, []);
 
   if (!NAVER_MAP_CLIENT_ID) {
-    // Fallback: Google Maps embed if no Naver API key configured
+    // Fallback: static map image linking to Naver Maps
     return (
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1582.5!2d127.005!3d37.483!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3e7f01b0d29%3A0x66251633371a6c99!2sEl+Tango+Cafe!5e0!3m2!1sko!2skr"
-        className="h-full w-full border-0"
-        loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-        title="엘땅고 위치"
-        allowFullScreen
-      />
+      <a
+        href="https://naver.me/xdp3zeag"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="relative block h-full w-full"
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/map.png"
+          alt="엘땅고 위치"
+          className="h-full w-full object-cover"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 flex items-end justify-center pb-4 bg-gradient-to-t from-black/40 to-transparent">
+          <span className="rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-gray-800 shadow">
+            네이버 지도에서 보기 →
+          </span>
+        </div>
+      </a>
     );
   }
 

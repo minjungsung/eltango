@@ -221,6 +221,10 @@ textarea {
   align-items: flex-start;
 }
 
+.fp-section iframe {
+  pointer-events: none;
+}
+
 /* Dot navigation */
 .fp-dots {
   position: fixed;
