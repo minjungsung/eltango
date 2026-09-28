@@ -267,9 +267,11 @@ export function BeginnerClass() {
   const [showFullscreen, setShowFullscreen] = useState(false);
   const lastTapRef = useRef(0);
 
-  const handleTap = useCallback(() => {
+  const handleTouchEnd = useCallback((e: React.TouchEvent) => {
     const now = Date.now();
     if (now - lastTapRef.current < 300) {
+      e.preventDefault();
+      e.stopPropagation();
       setShowFullscreen(true);
     }
     lastTapRef.current = now;
@@ -288,7 +290,7 @@ export function BeginnerClass() {
           {/* Left: image — double-tap to fullscreen */}
           <div
             className="relative aspect-[4/3] w-full max-h-[25vh] md:max-h-[60vh] overflow-hidden rounded-2xl cursor-zoom-in"
-            onClick={handleTap}
+            onTouchEnd={handleTouchEnd}
             onDoubleClick={() => setShowFullscreen(true)}
           >
             <Image
