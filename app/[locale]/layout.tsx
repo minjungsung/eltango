@@ -48,9 +48,9 @@ export async function generateMetadata({
       locale: locale === "ko" ? "ko_KR" : "en_US",
       images: [
         {
-          url: "/images/14194.jpg",
-          width: 960,
-          height: 720,
+          url: "/images/main.png",
+          width: 2000,
+          height: 3000,
           alt: t("title"),
         },
       ],

@@ -52,7 +52,19 @@ export function Hero() {
               </Button>
             </div>
           </div>
-          {/* Right: couple image */}
+          {/* Mobile: main image */}
+          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl md:hidden">
+            <Image
+              src="/images/main.png"
+              alt="탱고 커플"
+              fill
+              className="object-cover"
+              priority
+              sizes="100vw"
+              quality={95}
+            />
+          </div>
+          {/* Desktop: couple image */}
           <div className="relative hidden aspect-[3/4] overflow-hidden rounded-2xl md:block">
             <Image
               src="/images/main.png"
