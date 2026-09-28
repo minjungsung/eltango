@@ -170,6 +170,7 @@ export function Director() {
               src="/images/fish.jpg"
               alt="이인경 대표원장"
               fill
+              priority
               className="object-cover"
               sizes="(min-width: 1024px) 50vw, 100vw"
             />
