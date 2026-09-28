@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 
@@ -264,6 +264,17 @@ export function Difference() {
 /* ─── Beginner Class (Slide 5 intro) ─── */
 export function BeginnerClass() {
   const t = useTranslations("beginner");
+  const [showFullscreen, setShowFullscreen] = useState(false);
+  const lastTapRef = useRef(0);
+
+  const handleTap = useCallback(() => {
+    const now = Date.now();
+    if (now - lastTapRef.current < 300) {
+      setShowFullscreen(true);
+    }
+    lastTapRef.current = now;
+  }, []);
+
   const points = [
     { key: "p1", icon: <Clock className="h-5 w-5" /> },
     { key: "p2", icon: <MapPin className="h-5 w-5" /> },
@@ -274,8 +285,12 @@ export function BeginnerClass() {
     <section className="relative overflow-hidden">
       <div className="container relative z-10">
         <div className="grid items-center gap-4 md:grid-cols-2 md:gap-12">
-          {/* Left: image */}
-          <div className="relative aspect-[4/3] w-full max-h-[25vh] md:max-h-[60vh] overflow-hidden rounded-2xl">
+          {/* Left: image — double-tap to fullscreen */}
+          <div
+            className="relative aspect-[4/3] w-full max-h-[25vh] md:max-h-[60vh] overflow-hidden rounded-2xl cursor-zoom-in"
+            onClick={handleTap}
+            onDoubleClick={() => setShowFullscreen(true)}
+          >
             <Image
               src="/images/schedule.png"
               alt="수업 시간표"
@@ -320,6 +335,31 @@ export function BeginnerClass() {
           </div>
         </div>
       </div>
+
+      {/* Fullscreen overlay */}
+      {showFullscreen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
+          onClick={() => setShowFullscreen(false)}
+        >
+          <button
+            className="absolute top-4 right-4 text-white/70 hover:text-white text-3xl leading-none"
+            onClick={() => setShowFullscreen(false)}
+            aria-label="닫기"
+          >
+            ✕
+          </button>
+          <div className="relative h-[90vh] w-[90vw]">
+            <Image
+              src="/images/schedule.png"
+              alt="수업 시간표"
+              fill
+              className="object-contain"
+              sizes="90vw"
+            />
+          </div>
+        </div>
+      )}
     </section>
   );
 }
