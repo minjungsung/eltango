@@ -29,7 +29,6 @@ export function FullPageScroll({ sectionIds, children }: FullPageScrollProps) {
   const total = children.length;
 
   const sectionIdsRef = useRef(sectionIds);
-  sectionIdsRef.current = sectionIds;
 
   const goTo = useCallback(
     (index: number) => {
