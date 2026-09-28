@@ -103,31 +103,31 @@ h3 {
 
 /* ─── Viewport-responsive scaling (senior-friendly mobile) ─── */
 h1 {
-  font-size: clamp(2rem, 4vw, 3.75rem);
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
 }
 h2 {
-  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+  font-size: clamp(1.75rem, 3.5vw, 2.25rem);
 }
 h3 {
-  font-size: clamp(1.15rem, 1.8vw, 1.5rem);
+  font-size: clamp(1.25rem, 2.2vw, 1.5rem);
 }
 
 /* Body text scales too */
 .fp-section p {
-  font-size: clamp(0.95rem, 1.4vw, 1rem);
+  font-size: clamp(1rem, 1.6vw, 1.125rem);
 }
 .fp-section .text-sm {
-  font-size: clamp(0.85rem, 1.2vw, 0.875rem);
+  font-size: clamp(0.9rem, 1.4vw, 1rem);
 }
 .fp-section .text-xs {
-  font-size: clamp(0.75rem, 1vw, 0.75rem);
+  font-size: clamp(0.8rem, 1.2vw, 0.875rem);
 }
 
 /* Buttons scale */
 .fp-section button,
 .fp-section a[class*="btn"],
 .fp-section [class*="Button"] {
-  font-size: clamp(0.9rem, 1.3vw, 1rem);
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
   padding: clamp(0.3rem, 0.8vh, 0.75rem) clamp(0.6rem, 1.5vw, 1.5rem);
 }
 
