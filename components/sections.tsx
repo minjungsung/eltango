@@ -243,7 +243,7 @@ export function Difference() {
           {/* Feature strip */}
           <div className="mx-auto grid max-w-3xl grid-cols-4 gap-4 place-items-stretch">
             {featureItems.map(({ key, icon }) => (
-              <div key={key} className="glass-card flex flex-col items-center gap-2 rounded-2xl p-3 text-center h-full justify-center">
+              <div key={key} className="glass-card flex flex-col items-center gap-2 rounded-2xl p-3 text-center h-full justify-start pt-4">
                 <div className="flex h-10 w-10 items-center justify-center text-primary">
                   {icon}
                 </div>
