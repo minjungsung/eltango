@@ -363,7 +363,7 @@ export function Milonga() {
 /* ─── Testimonials (Slide 2 voices) ─── */
 export function Testimonials() {
   const t = useTranslations("testimonials");
-  const items = ["t1", "t2", "t3"] as const;
+  const items = ["t1", "t2"] as const;
   const [expandedKey, setExpandedKey] = useState<string | null>(null);
 
   return (
@@ -375,7 +375,7 @@ export function Testimonials() {
         <p className="mt-2 text-center text-xs text-muted-foreground">
           {t("subtitle")}
         </p>
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+        <div className="mt-8 grid gap-4 sm:grid-cols-2">
           {items.map((key) => (
             <div key={key} className="glass-card rounded-2xl p-5">
               {/* Stars */}
