@@ -647,8 +647,8 @@ export function Contact() {
 export function Footer() {
   const t = useTranslations("footer");
   return (
-    <footer className="flex flex-col h-full justify-end">
-      <div className="container flex-1 flex flex-col justify-end py-4">
+    <footer className="flex flex-col h-full">
+      <div className="container flex-1 flex flex-col justify-center py-4">
         <h2 className="mb-3 text-center text-xl font-bold">{t("directionsTitle")}</h2>
         {/* Map — large, prominent */}
         <div className="mx-auto w-full max-w-2xl aspect-[2/1] max-h-[35vh] overflow-hidden rounded-2xl border border-border/30 bg-muted">
