@@ -1,21 +1,33 @@
 name: Init Wiki
 on:
   workflow_dispatch:
+permissions:
+  contents: read
 jobs:
+  verify-publication:
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/strict-publication-validation.yml
   init-wiki:
+    needs: verify-publication
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
       - name: Initialize Wiki
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
         run: |
-          git config --global user.email "minjungsung@users.noreply.github.com"
-          git config --global user.name "minjungsung"
-          mkdir wiki-init && cd wiki-init
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          wiki_directory=$(mktemp -d)
+          cd "$wiki_directory"
           git init --initial-branch=master
           echo "# Welcome" > Home.md
           git add . && git commit -m "Initialize wiki"
-          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.wiki.git"
-          git push -u origin master 2>&1 || echo "WIKI_PUSH_FAILED"
+          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${REPOSITORY}.wiki.git"
+          git push -u origin master

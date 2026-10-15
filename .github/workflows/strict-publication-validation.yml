@@ -1,0 +1,28 @@
+name: Strict Publication Validation
+on:
+  workflow_call:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '20'
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: minjungsung/.github
+          ref: 53eef31813cadd2611ade5062449c5089bbe1774
+          path: .publication-policy-source
+          persist-credentials: false
+      - name: Strictly validate the exact publication application commit
+        env:
+          PROJECT_JSON: '{"name":"root-node","ecosystem":"npm","path":".","runtime-version":"20","manifest":"package.json","lockfile":"package-lock.json","timeout-minutes":15}'
+          PYTHONPATH: .publication-policy-source/dependency-policy
+        run: python3 .publication-policy-source/dependency-policy/scripts/run_project.py --project-json "$PROJECT_JSON" --repository-root "$GITHUB_WORKSPACE"
