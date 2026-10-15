@@ -29,3 +29,7 @@ Note: historical commit messages were mostly Korean shorthand (`temp`, `폰`, `�
 **Shipped:** Initial Buenos Aires tango landing page on Next.js 14 (App Router) + Tailwind + shadcn-style components. Three instructor profiles (fish, taebong, nenia) with photos under `public/images/`. Always-dark theme, responsive mobile layout, directions/map section (오시는길), enrollment link (수강신청). Accordion, card, button, badge UI primitives under `components/ui/`.
 **Commits:** 6fdd804, a813789, 97c4285, 8fff0c9, 86a25fc, 8f57831, d4b5994, 4f4e1ec, adf7cd1, 532b9ad, d4a3fb5, 5dc1772
 **Why:** Public face of the tango school — promote classes and capture interest.
+
+## 2026-10-15 — Next.js security patch
+
+Upgrade Next.js and its matching lint configuration to16.3.8 to address six Next.js advisories. Strict clean installation, lint and production build passed. No application behavior changed. Unpatched braces in lint tooling remains unresolved; GitHub alert closure is verified after merge.

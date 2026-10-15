@@ -10,3 +10,5 @@
 - `SETUP_GOOGLE_FORMS.md` — new setup walkthrough (untracked)
 
 When this ships, write an ADR at `.agent/decisions/YYYY-MM-DD-google-forms-backend.md` marking `decisions/2026-04-24-google-sheets-backend.md` as superseded, and append a JOURNAL entry.
+
+Security maintenance: Next.js and its matching ESLint config are updated to16.3.8 for six Next.js advisories. Strict clean install, lint and production build pass. Unpatched braces in lint tooling remains separately unresolved.
