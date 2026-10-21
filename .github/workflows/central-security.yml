@@ -12,6 +12,6 @@ concurrency:
   cancel-in-progress: true
 jobs:
   scan:
-    uses: minjungsung/.github/.github/workflows/secret-scanning.yml@dd7c92388e505f6dd3e65e0dd5d0c7f66d5e19f7
+    uses: minjungsung/.github/.github/workflows/secret-scanning.yml@7077965711cd49d0216b69345aa4491fe2350da0
     with:
       policy-ref: dd7c92388e505f6dd3e65e0dd5d0c7f66d5e19f7
