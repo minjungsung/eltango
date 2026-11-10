@@ -246,7 +246,8 @@
     "answer": "A. {text}",
     "ctaTitle": "Start an elegant lifestyle at El Tango Gangnam",
     "ctaDescription": "17 years of tango · Lessons with a 2023 Rome champion · 3 minutes from Sinnonhyeon Station · Onnuri gift certificate discounts",
-    "ctaRegister": "Apply for cruises & classes",
+    "ctaCruise": "Apply for cruises & classes",
+    "ctaForm": "Apply for beginner lessons (Google Form)",
     "ctaPlace": "View Naver Place",
     "home": "El Tango home →",
     "posts": {
@@ -329,7 +330,102 @@
             "answer": "Tango lessons can focus on gentle walking, but whether dancing is suitable depends on your condition. Ask a healthcare professional before starting if you have a disc problem, ongoing pain, or a knee injury, and tell your instructor so the lesson can be adapted."
           }
         ]
-      }
+      },
+        "tango-vs-salsa-guide": {
+          "title": "Salsa or Argentine Tango: Which Dance Suits You? (A Candid Comparison)",
+          "description": "Fast beats and energy in salsa, deep breathing and connection in Argentine tango. Director Fish, who has danced for 24 years, helps you choose.",
+          "category": "Beginner & Comparison",
+          "tags": [
+            "TangoVsSalsa",
+            "SalsaTangoDifference",
+            "DanceHobbies",
+            "ArgentineTango",
+            "ElTango"
+          ],
+          "content": "## Salsa and tango are both Latin dances, so what is the difference?\n\nHello, I am Fish (In-kyung Lee), director of El Tango in Sinnonhyeon, with 24 years of tango experience and a 2023 Rome world championship title.\n\nI first met salsa in 1999 in a Varanasi guesthouse while backpacking through India, and in 2004 in Buenos Aires I fell for Argentine tango. I have stayed on this path for 24 years since.\n\n### Key comparison: salsa vs tango\n\n1. **Music and tempo**: salsa is upbeat and driven by percussion; tango follows the bandoneon and feels closer to classic chamber music.\n2. **Character of movement**: salsa centers on quick steps and energy; tango centers on balance, weight shift, and breathing with a partner.\n3. **Depth of connection**: salsa is playful, energetic communication; tango is the quiet comfort of the abrazo.\n\nBoth are lovely and different. Choose the evening you want to have, and the dance follows.",
+          "faq": [
+            {
+              "question": "I am a total beginner — which is easier, salsa or tango?",
+              "answer": "Salsa asks you to learn quick step patterns, while tango starts from standing and walking together, which many beginners find comfortable. The surest way to decide is to try a one-day class in each and notice which music you want to keep listening to."
+            }
+          ]
+        },
+        "tango-beginner-alone-guide": {
+          "title": "Can I Start Tango Alone, Without a Partner?",
+          "description": "About 80% of our students enroll alone. How partner rotation, a relaxed studio culture, and class balance make coming alone completely normal.",
+          "category": "Enrollment & Q&A",
+          "tags": [
+            "TangoAlone",
+            "SoloHobby",
+            "OfficeWorkerHobbies",
+            "TangoBeginner",
+            "ElTango"
+          ],
+          "content": "## Short answer: about 80% of enrolled students come alone!\n\nMany people assume tango is danced in pairs, so they need a partner before signing up. In practice, most students open the door on their own.\n\n### Three reasons coming alone is easy here\n1. **Natural partner rotation**: everyone changes partners during class, so no one is left out.\n2. **A relaxed, private atmosphere**: we do not ask about age or job; most people go by a nickname.\n3. **Balanced classes**: we adjust the number and ratio of leaders and followers each term to keep the room comfortable.\n\nSince most students started alone, there is nothing to feel awkward about in your first class.",
+          "faq": [
+            {
+              "question": "Will it really not feel awkward to come alone?",
+              "answer": "Eight of ten students come alone, so people understand each other quickly. Tell the instructor before your first class that you came alone and we will walk you through the rotation and where to stand."
+            }
+          ]
+        },
+        "ballroom-vs-argentine-tango": {
+          "title": "Ballroom Tango vs Argentine Tango: What Is the Difference?",
+          "description": "Same name, different music and embrace. A competitive sport in an open V-hold versus the improvised social dance of the close abrazo.",
+          "category": "Tango Basics & Comparison",
+          "tags": [
+            "BallroomTango",
+            "ArgentineTango",
+            "TangoDifference",
+            "Abrazo",
+            "ElTango"
+          ],
+          "content": "## Why is the tango in a ballroom so different from Argentine tango?\n\nBallroom tango was standardized in England and Europe as a competitive sport. Argentine tango was born in Buenos Aires as a social dance and is recognized by UNESCO as intangible cultural heritage.\n\n### Two decisive differences\n1. **The embrace**: ballroom tango uses an open V-hold with the upper body angled away; Argentine tango uses the A-shaped abrazo with chests close together.\n2. **Choreography vs improvisation**: ballroom tango reproduces a fixed routine for judging; Argentine tango changes every moment with the music and the partner.\n\nThat is why Argentine tango shines in the milonga, the social dance evening, rather than on a competition floor.",
+          "faq": [
+            {
+              "question": "I learned ballroom first. Does that help with Argentine tango?",
+              "answer": "Balance and rhythm awareness carry over. It still helps to start fresh with basic walking, releasing tension in the upper body and following your partner's breathing."
+            }
+          ]
+        },
+        "tango-academy-vs-club-choice": {
+          "title": "Tango Academy or Tango Club: Where Should a Beginner Start?",
+          "description": "Basic posture and walking, practice space, and comfort coming alone. A practical guide from a director with 24 years of teaching.",
+          "category": "Choosing a School",
+          "tags": [
+            "TangoAcademy",
+            "TangoClub",
+            "TangoBeginner",
+            "GangnamTango",
+            "ElTango"
+          ],
+          "content": "## For beginners, where you learn the basics shapes the next three months\n\nAfter 24 years of teaching, I have seen that a club is a good fit if socializing is your first priority.\n\nIf you want to build basic technique, posture and walking, with a structured curriculum, a professional academy is the better start. El Tango links lessons to a weekly Saturday milonga (Una Vez), so what you learn can be used right away.",
+          "faq": [
+            {
+              "question": "Is there space to practice after class?",
+              "answer": "Our second-floor studio in Gangnam hosts the weekend milonga and open practice time (practica). Ask at the desk for the current schedule."
+            }
+          ]
+        },
+        "milonga-cabeceo-etiquette": {
+          "title": "Asking and Declining a Dance at the Milonga: A Cabeceo Guide",
+          "description": "A century-old etiquette of asking with a glance and declining quietly. How to enjoy a real milonga without awkwardness.",
+          "category": "Milonga & Etiquette",
+          "tags": [
+            "Cabeceo",
+            "Milonga",
+            "TangoParty",
+            "TangoEtiquette",
+            "ElTango"
+          ],
+          "content": "## What if someone says no when I ask for a dance?\n\nTango has a courteous asking culture refined over more than a century, called the cabeceo.\n\nInstead of walking up to a stranger, you catch their eye from across the room (la mirada) and give a small nod. If they want to rest or dance with someone else, they simply look away. No one on the floor can tell whether a request was declined, so nothing embarrassing is left behind.\n\nAt your first milonga, watch the floor and the music for a while, then nod lightly to someone whose eyes you meet. That is all it takes.",
+          "faq": [
+            {
+              "question": "Can a beginner go to a milonga in the first month?",
+              "answer": "Yes. Our beginner classes practice the cabeceo together, so the first party feels manageable. Watching and greeting people is more than enough at the start."
+            }
+          ]
+        }
     }
   },
   "school": {

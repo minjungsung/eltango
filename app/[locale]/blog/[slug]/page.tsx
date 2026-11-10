@@ -8,6 +8,9 @@ import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { blogPosts, getBlogPosts } from "@/lib/blog-data";
 import {
+  BEGINNER_FORM_URL,
+  CRUISE_REGISTRATION_URL,
+  NAVER_PLACE_URL,
   SCHOOL_ID,
   SITE_URL,
   localizedAlternates,
@@ -56,6 +59,9 @@ export default async function BlogPostPage({ params }: Props) {
   ]);
   const post = posts.find((item) => item.slug === slug);
   if (!post) notFound();
+  const ctaHref =
+    post.cta === "cruise" ? CRUISE_REGISTRATION_URL : BEGINNER_FORM_URL;
+  const ctaLabel = post.cta === "cruise" ? t("ctaCruise") : t("ctaForm");
   const url = localizedUrl(locale, `/blog/${slug}`);
   const schema = {
     "@context": "https://schema.org",
@@ -183,15 +189,15 @@ export default async function BlogPostPage({ params }: Props) {
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <a
-              href="https://dulcenaleo.com/eltango"
+              href={ctaHref}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex min-h-10 items-center justify-center rounded-md bg-primary px-6 py-2 text-sm font-medium text-primary-foreground hover:opacity-90"
             >
-              {t("ctaRegister")}
+              {ctaLabel}
             </a>
             <a
-              href="https://m.place.naver.com/place/20526245"
+              href={NAVER_PLACE_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex min-h-10 items-center justify-center rounded-md border border-primary px-6 py-2 text-sm font-medium text-primary hover:bg-primary/10"
