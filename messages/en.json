@@ -11,6 +11,8 @@
     "reviews": "Reviews",
     "sns": "SNS",
     "directions": "Directions",
+    "blog": "Columns",
+    "tagline": "Argentine Tango Studio",
     "cta": "Contact Us",
     "menu": "Menu"
   },
@@ -226,5 +228,114 @@
     "errorServer": "Please try again later. (Server configuration needed)",
     "errorGeneric": "Something went wrong. Please try again.",
     "errorNetwork": "Network error. Please try again."
+  },
+  "blog": {
+    "eyebrow": "EL TANGO Column & Guide",
+    "title": "Argentine Tango Columns & Beginner Guides",
+    "description": "Tango, posture and wellness, and preparation for a 2027 cruise with director In-kyung Lee, a tango instructor with 24 years of experience.",
+    "metadataTitle": "Argentine Tango Columns & Guides | El Tango Gangnam",
+    "metadataDescription": "Cruise party preparation, posture and wellness, tango shoes, lesson costs, and learning timelines. Expert columns from director In-kyung Lee.",
+    "readMore": "Read column →",
+    "backHome": "← Back to El Tango",
+    "backToBlog": "← All columns",
+    "author": "Written by {name}",
+    "authorName": "In-kyung Lee",
+    "authorRole": "Director",
+    "faqTitle": "Frequently Asked Questions",
+    "question": "Q. {text}",
+    "answer": "A. {text}",
+    "ctaTitle": "Start an elegant lifestyle at El Tango Gangnam",
+    "ctaDescription": "17 years of tango · Lessons with a 2023 Rome champion · 3 minutes from Sinnonhyeon Station · Onnuri gift certificate discounts",
+    "ctaRegister": "Apply for cruises & classes",
+    "ctaPlace": "View Naver Place",
+    "home": "El Tango home →",
+    "posts": {
+      "cruise-2027-tango-preparation": {
+        "title": "Prepare for a 2027 Cruise Party: A Beginner Tango Guide at El Tango Gangnam",
+        "description": "Learn to walk elegantly to music at cruise evening parties. Monday and Wednesday 10:30 a.m. brunch tango classes for beginners in their 50s and 60s.",
+        "category": "Cruises & Seniors",
+        "tags": [
+          "CruiseTravel",
+          "CruiseParties",
+          "ArgentineTango",
+          "SeniorHobbies",
+          "ElTango"
+        ],
+        "content": "## Your 2027 cruise: join the dancing at the evening party\n\nImagine arriving at a gala dinner or evening party in a beautiful dress or tuxedo, with a live orchestra playing. Learning a few tango foundations can help you feel ready to join your partner on the floor.\n\nArgentine tango is a social dance built around walking elegantly with a partner and responding to music. You do not need to memorize complex routines to begin. Like Al Pacino in *Scent of a Woman*, you can start by listening to the music and walking together.\n\n### Morning brunch tango lessons for learners in their 50s and 60s\n\nPrepare for your 2027 journey at El Tango, a Gangnam studio with 17 years of history. Morning lessons offer time to move, learn, and enjoy brunch with classmates.\n\n- **Who it is for**: People preparing for a 2027 cruise, couples looking for a shared hobby, and beginners interested in upright walking. The class has an average age in the mid-50s; 90% began as complete beginners.\n- **Monday, 10:30 a.m.**: Cruise beginner class, covering basic walking, party etiquette, and elegant poses.\n- **Wednesday, 10:30 a.m.**: Cruise choreography class, preparing a complete piece for a party performance.\n- **Location**: 2F, 12 Juheung-gil, Seocho-gu, Seoul, a three-minute walk from Sinnonhyeon Station Exit 1.\n- **Parking**: Seocho Eongubi public parking, two minutes away on foot; KRW 1,800 per hour, open 24 hours daily.\n- **Benefit**: Onnuri gift certificate discounts; check current eligibility and rates before purchasing.",
+        "faq": [
+          {
+            "question": "Can I learn tango for a cruise party if I have never danced?",
+            "answer": "Yes. Tango starts with upright walking (caminata) and communicating with your partner. Two to three months of basic lessons can help beginners become comfortable moving to music at a party."
+          },
+          {
+            "question": "Can I join without a partner?",
+            "answer": "Yes. More than 80% of students start on their own. Classes rotate partners so that you can learn with different classmates without bringing a partner."
+          }
+        ]
+      },
+      "latin-shoes-vs-jazz-sneakers": {
+        "title": "Latin Dance Heels or Jazz Sneakers? A Tango Instructor’s Guide to Your First Shoes",
+        "description": "Should tango beginners buy heels or low jazz sneakers? Director In-kyung Lee compares ankle comfort, cost, and turning feel after 24 years of teaching.",
+        "category": "Shoes & Tips",
+        "tags": [
+          "TangoShoes",
+          "JazzSneakers",
+          "LatinDanceShoes",
+          "TangoClothing",
+          "ElTango"
+        ],
+        "content": "## Start your first one to three months in comfortable jazz sneakers\n\nMany beginners picture 7–9 cm Latin or tango heels when they think about tango shoes. High heels can make it harder to find a comfortable balance before you have learned to control your axis.\n\n### Why jazz sneakers can help beginners\n\n1. **Split soles**: Separate forefoot and heel sections let the foot flex more freely.\n2. **Cushioning**: Cushioned soles can make walking practice more comfortable.\n3. **Spin spots**: Some models have a turning pad designed for smooth turns on a dance floor.\n\nComfortable jazz sneakers or clean indoor trainers can help you develop foot awareness in the first one to three months. Beginner jazz sneakers often cost around KRW 20,000–30,000. Ask your instructor about fit and floor grip before moving to tango heels.",
+        "faq": [
+          {
+            "question": "What shoes should I bring to my first tango lesson?",
+            "answer": "Bring clean trainers or sneakers that have not been worn outdoors, or indoor slipper socks. Wait until after your first lesson to buy dance shoes so your instructor can help you choose a suitable pair."
+          }
+        ]
+      },
+      "tango-lesson-cost-duration-guide": {
+        "title": "2026 Tango Lesson Costs and Learning Timelines: Trial Classes and Onnuri Benefits",
+        "description": "A guide to introductory Argentine tango lesson fees around Gangnam, one-day trial classes, and the time needed to prepare for a social tango party.",
+        "category": "Classes & Fees",
+        "tags": [
+          "TangoLessonFees",
+          "TangoLessons",
+          "TrialClass",
+          "OnnuriCertificates",
+          "ElTango"
+        ],
+        "content": "## Tango lesson costs and timelines in 2026\n\nIntroductory Argentine tango courses around Gangnam commonly cost KRW 100,000–150,000 for four to six weeks, with one 60–80 minute lesson per week.\n\n### 1. A one-day trial class\n\n- **Lesson fee**: KRW 30,000.\n- **Review benefit**: A KRW 10,000 refund after posting a Naver receipt photo review, bringing the effective cost to KRW 20,000.\n- **Full credit toward a regular course**: Register for a regular beginner course on the day of your trial and the full KRW 30,000 trial fee is deducted from tuition.\n\n### 2. Onnuri gift certificate benefits\n\nEl Tango Gangnam accepts Onnuri gift certificates. Purchase discounts and potential income-tax deductions depend on the current program, payment method, and eligibility; confirm the applicable terms before paying.",
+        "faq": [
+          {
+            "question": "How long does it take to dance at a milonga?",
+            "answer": "Students typically spend the first one to two months learning walking and the embrace (abrazo), then add turns and changes of direction in months three and four. Around six months of practice can help you feel ready for social tango parties, though progress varies."
+          }
+        ]
+      },
+      "office-workers-posture-tango-wellness": {
+        "title": "Argentine Tango for Office Workers: Posture, Walking, and Everyday Wellness",
+        "description": "A music-led movement hobby for office workers in their 40s and 50s who want to practice upright walking and take a break from screens.",
+        "category": "Posture & Wellness",
+        "tags": [
+          "Posture",
+          "UprightWalking",
+          "OfficeWorkerHobbies",
+          "Wellness",
+          "DigitalDetox"
+        ],
+        "content": "## Practice upright walking through tango\n\nAfter a day at a computer, tango offers a chance to focus on movement and music. Lessons begin with standing comfortably and walking (caminata), before introducing more elaborate steps.\n\nPaying attention to your feet, pelvis, and balance can help build awareness of how you stand and move. Walking with music for an hour is also an opportunity to step away from screens and enjoy a shared activity.\n\nTango is a movement hobby rather than a medical treatment. Choose a comfortable pace and tell your instructor about any movement limitations.",
+        "faq": [
+          {
+            "question": "Can I dance tango if I have back or knee problems?",
+            "answer": "Tango lessons can focus on gentle walking, but whether dancing is suitable depends on your condition. Ask a healthcare professional before starting if you have a disc problem, ongoing pain, or a knee injury, and tell your instructor so the lesson can be adapted."
+          }
+        ]
+      }
+    }
+  },
+  "school": {
+    "name": "El Tango Gangnam",
+    "alternateName": "Seoul Tango Academy",
+    "description": "An Argentine tango academy in Gangnam with 17 years of history. Adult hobby, cruise preparation, and one-day trial classes with director In-kyung Lee, a 2023 Rome tango champion.",
+    "founderDescription": "Tango instructor with 24 years of experience, former KBS broadcast writer, and a 2023 Rome tango competition champion."
   }
 }

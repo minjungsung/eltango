@@ -6,7 +6,9 @@ import { notFound } from "next/navigation";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
 import { MobileCTA } from "@/components/mobile-cta";
+import { JsonLd } from "@/components/json-ld";
 import { routing } from "@/i18n/routing";
+import { SITE_URL, localizedAlternates, localizedUrl } from "@/lib/site";
 import { Playfair_Display } from "next/font/google";
 
 const playfair = Playfair_Display({
@@ -25,6 +27,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) notFound();
   const t = await getTranslations({ locale, namespace: "metadata" });
   return {
     title: t("title"),
@@ -44,7 +47,7 @@ export async function generateMetadata({
       title: t("title"),
       description: t("description"),
       type: "website",
-      url: "https://eltango.vercel.app",
+      url: localizedUrl(locale),
       locale: locale === "ko" ? "ko_KR" : "en_US",
       images: [
         {
@@ -55,12 +58,10 @@ export async function generateMetadata({
         },
       ],
     },
-    metadataBase: new URL("https://eltango.vercel.app"),
+    metadataBase: new URL(SITE_URL),
     alternates: {
-      languages: {
-        ko: "/",
-        en: "/en",
-      },
+      canonical: localizedUrl(locale),
+      languages: localizedAlternates(),
     },
   };
 }
@@ -80,6 +81,9 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
+      <head>
+        <JsonLd locale={locale} />
+      </head>
       <body className={`${playfair.variable} font-sans antialiased`}>
         <NextIntlClientProvider>
           <ThemeProvider attribute="class" forcedTheme="dark">

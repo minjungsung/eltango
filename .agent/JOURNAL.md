@@ -6,6 +6,15 @@ Note: historical commit messages were mostly Korean shorthand (`temp`, `폰`, `�
 
 ---
 
+## 2026-11-10 — AEO crawl metadata and localized tango columns
+
+**Delivered locally:** Applied the supplied AEO bundle to the latest application state. Added four columns in both locales, static article pages with rendered Markdown and visible FAQs, school/article/FAQ JSON-LD, crawl rules, and a 14-page bilingual sitemap. Corrected Promise-based route parameters, default-locale canonical URLs, language alternates, and desktop/mobile links back to landing-page sections. All new visible copy is in the translation bundles; `react-markdown` renders article bodies without enabling raw HTML.
+**Validation:** Clean dependency installation, lint, and production build passed. Lint reported only two existing unused-directive warnings. HTTP checks covered all sitemap URLs, canonical/alternate metadata, JSON-LD consistency, and invalid-route 404s. Headless desktop/mobile checks covered navigation, both locales, Markdown, scroll restoration, layout overflow, and browser errors.
+**Publication:** Changes are local and uncommitted. Production deployment has not been triggered.
+**Follow-ups:** Publish when requested. The separate Google Forms registration migration remains pending.
+
+---
+
 ## 2026-04-24 — Internationalization (EN/KO) + registration form + Google Sheets backend
 
 **Shipped:** Migrated to `next-intl` with `app/[locale]/` routing and locale-detecting `middleware.ts`. Added `components/language-switcher.tsx`, `messages/{en,ko}.json` translation bundles. New `components/register-form.tsx` submitting to `app/api/register/route.ts`, which proxies to a Google Apps Script endpoint (`GOOGLE_SCRIPT_URL`) backing a Google Sheet. On successful submit, redirects to a Kakao open-chat URL (`NEXT_PUBLIC_KAKAO_OPENCHAT_URL`). Setup instructions in `SETUP_GOOGLE_SHEETS.md`.

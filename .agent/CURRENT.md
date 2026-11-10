@@ -1,14 +1,20 @@
 # Current focus
 
-**Status:** in-progress
-**Working on:** Migrating the registration backend from **Google Apps Script → Google Forms direct submit**. Replacing `GOOGLE_SCRIPT_URL` + Apps Script `doPost` with `GOOGLE_FORM_ID` + per-field `GOOGLE_FORM_ENTRY_*` IDs that POST straight to `formResponse`. Motivation: no OAuth, no Apps Script deploy dance, instructors can still see submissions in the Form's linked Sheet.
-**Next step:** (1) finish editing `app/api/register/route.ts` to POST to `https://docs.google.com/forms/d/e/{GOOGLE_FORM_ID}/formResponse` with the entry-ID map, (2) rename / delete the stale `SETUP_GOOGLE_SHEETS.md`, (3) manually test one submission end-to-end, (4) ship.
+**Status:** verified locally; not published
+**Working on:** Applied the `eltango_aeo_patch` bundle to the current application, preserving the latest dependency and security maintenance changes.
 
-### Uncommitted changes in working tree
-- `.env.example` — migrated to `GOOGLE_FORM_ID` / `GOOGLE_FORM_ENTRY_*` vars
-- `app/api/register/route.ts` — migration in progress (still check `git diff`)
-- `SETUP_GOOGLE_FORMS.md` — new setup walkthrough (untracked)
+## Delivered locally
 
-When this ships, write an ADR at `.agent/decisions/YYYY-MM-DD-google-forms-backend.md` marking `decisions/2026-04-24-google-sheets-backend.md` as superseded, and append a JOURNAL entry.
+- Four tango columns in Korean and English, with static index and article routes, formatted Markdown, visible FAQs, and enrollment links.
+- Localized school, article, and FAQ structured data, with escaped JSON-LD serialization and supported Schema.org types.
+- Crawl rules for search and AI agents, plus a sitemap covering 14 canonical pages across both locales.
+- Canonical URLs, language alternates, and article Open Graph metadata that follow the existing default-locale routing convention.
+- Desktop and mobile navigation between columns and the correct landing-page sections.
 
-Security maintenance: Next.js and its matching ESLint config are updated to16.3.8 for six Next.js advisories. Strict clean install, lint and production build pass. Unpatched braces in lint tooling remains separately unresolved.
+**Validation:** Clean `npm ci`, `npm run lint` (zero errors; two pre-existing unused-directive warnings), and `npm run build` passed. HTTP checks verified all sitemap routes, metadata, article/FAQ data, and missing-page responses. Headless browser checks verified both locales, desktop/mobile navigation, Markdown rendering, scroll restoration, and no browser errors.
+
+**Next step:** Publish the verified changes when deployment is requested. Pushing `main` triggers Vercel production deployment.
+
+## Existing follow-up
+
+The earlier Google Forms registration migration remains pending. The current tracked registration endpoint still uses Google Apps Script; there are no migration changes in this working tree. Confirm the desired backend and production configuration before resuming that separate task.
