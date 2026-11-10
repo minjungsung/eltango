@@ -6,6 +6,16 @@ Note: historical commit messages were mostly Korean shorthand (`temp`, `폰`, `�
 
 ---
 
+## 2026-11-11 — Blog CTA patch v2.1 and five new columns
+
+**Shipped:** Applied the director's v2.1 patch (mailed `eltango_cta_patch_v2.zip`, 2026-11-11). Each column's bottom CTA now resolves per post: the cruise column links to `https://dulcenaleo.com/eltango`, all other columns link to the current beginner Google Form `https://forms.gle/sCXBTGPkSn7WHQ229`. Added five new columns in both locales (salsa vs tango, learning alone, ballroom vs Argentine tango, academy vs club, milonga cabeceo), bringing the blog to nine columns per locale. Naver Place identifier confirmed as `20526245`.
+**Why per-column CTA:** The patch shipped a single-language page with a slug conditional. Rather than overwrite the next-intl version, CTA destinations moved to `lib/site.ts` constants selected by `cta` metadata in `lib/blog-data.ts`, so copy stays in the JSON bundles and links stay in code.
+**Editorial:** Existing claim adjustments were preserved (no medical-treatment or discount guarantees); the new columns follow the same standard, including guidance to consult a healthcare professional rather than promising relief.
+**Validation:** Both bundles parse, nine slugs match across locales, `ci` (`npm ci` + `next build`, Node 20) and the dependency gate passed on PR #66, and the Vercel preview build completed. The preview URL sits behind Vercel SSO, so rendered checks happen on production.
+**Follow-ups:** Confirm the production deployment and rendered links; PR #65 (`feature/aeo-blog-system`) is superseded by `main` and should be closed.
+
+---
+
 ## 2026-11-10 — Publish the AEO patch to main
 
 **Shipped:** Feature commit `b90f4e1` (`feat: add localized tango columns and AEO metadata`) was pushed to `main` following the user's explicit commit-and-push request. The push triggers the project's automatic Vercel production deployment.
