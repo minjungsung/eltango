@@ -6,6 +6,14 @@ Note: historical commit messages were mostly Korean shorthand (`temp`, `폰`, `�
 
 ---
 
+## 2026-11-10 — Publish the AEO patch to main
+
+**Shipped:** Feature commit `b90f4e1` (`feat: add localized tango columns and AEO metadata`) was pushed to `main` following the user's explicit commit-and-push request. The push triggers the project's automatic Vercel production deployment.
+**Validation:** The previously completed clean installation, lint, production build, HTTP checks, and desktop/mobile browser checks apply to this feature commit. No application changes were made between validation and publication.
+**Follow-ups:** Verify deployment and GitHub checks. The separate Google Forms registration migration remains pending.
+
+---
+
 ## 2026-11-10 — AEO crawl metadata and localized tango columns
 
 **Delivered locally:** Applied the supplied AEO bundle to the latest application state. Added four columns in both locales, static article pages with rendered Markdown and visible FAQs, school/article/FAQ JSON-LD, crawl rules, and a 14-page bilingual sitemap. Corrected Promise-based route parameters, default-locale canonical URLs, language alternates, and desktop/mobile links back to landing-page sections. All new visible copy is in the translation bundles; `react-markdown` renders article bodies without enabling raw HTML.

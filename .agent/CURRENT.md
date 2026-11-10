@@ -1,9 +1,9 @@
 # Current focus
 
-**Status:** verified locally; not published
+**Status:** published to `main`; production deployment pending verification
 **Working on:** Applied the `eltango_aeo_patch` bundle to the current application, preserving the latest dependency and security maintenance changes.
 
-## Delivered locally
+## Delivered
 
 - Four tango columns in Korean and English, with static index and article routes, formatted Markdown, visible FAQs, and enrollment links.
 - Localized school, article, and FAQ structured data, with escaped JSON-LD serialization and supported Schema.org types.
@@ -13,7 +13,9 @@
 
 **Validation:** Clean `npm ci`, `npm run lint` (zero errors; two pre-existing unused-directive warnings), and `npm run build` passed. HTTP checks verified all sitemap routes, metadata, article/FAQ data, and missing-page responses. Headless browser checks verified both locales, desktop/mobile navigation, Markdown rendering, scroll restoration, and no browser errors.
 
-**Next step:** Publish the verified changes when deployment is requested. Pushing `main` triggers Vercel production deployment.
+**Publication:** Feature commit `b90f4e1` was pushed to `main` on 2026-11-10 after the user explicitly requested publication. The push triggers automatic Vercel deployment.
+
+**Next step:** Verify the GitHub checks and Vercel production deployment for the published commit.
 
 ## Existing follow-up
 
