@@ -1,14 +1,12 @@
 # Current focus
 
-**Status:** in-progress
-**Working on:** Migrating the registration backend from **Google Apps Script → Google Forms direct submit**. Replacing `GOOGLE_SCRIPT_URL` + Apps Script `doPost` with `GOOGLE_FORM_ID` + per-field `GOOGLE_FORM_ENTRY_*` IDs that POST straight to `formResponse`. Motivation: no OAuth, no Apps Script deploy dance, instructors can still see submissions in the Form's linked Sheet.
-**Next step:** (1) finish editing `app/api/register/route.ts` to POST to `https://docs.google.com/forms/d/e/{GOOGLE_FORM_ID}/formResponse` with the entry-ID map, (2) rename / delete the stale `SETUP_GOOGLE_SHEETS.md`, (3) manually test one submission end-to-end, (4) ship.
+**Status:** ready-to-ship
+**Working on:** Added **AEO (AI Engine Optimization) & Blog System** to `eltango.vercel.app`:
+1. `app/robots.ts`: Opened crawling to all AI bots (`GPTBot`, `ClaudeBot`, `Google-Extended`, `PerplexityBot`, `Yeti`, etc.).
+2. `app/sitemap.ts`: Dynamic sitemap for static pages and AEO blog routes.
+3. `components/json-ld.tsx`: Schema.org `DanceSchool` structured data for Gangnam studio, Director In-kyung Lee, 2023 Rome champion achievements, and links.
+4. `app/[locale]/blog/`: Static blog index and individual post pages (`[slug]`) with `FAQPage` JSON-LD schema for AI answer engine citation.
+5. `lib/blog-data.ts`: Initial 4 killer AEO articles (Cruise 2027 tango, shoes comparison, lesson costs, posture & wellness).
+6. Updated metadata in `messages/ko.json` with keyword-rich titles and descriptions.
 
-### Uncommitted changes in working tree
-- `.env.example` — migrated to `GOOGLE_FORM_ID` / `GOOGLE_FORM_ENTRY_*` vars
-- `app/api/register/route.ts` — migration in progress (still check `git diff`)
-- `SETUP_GOOGLE_FORMS.md` — new setup walkthrough (untracked)
-
-When this ships, write an ADR at `.agent/decisions/YYYY-MM-DD-google-forms-backend.md` marking `decisions/2026-04-24-google-sheets-backend.md` as superseded, and append a JOURNAL entry.
-
-Security maintenance: Next.js and its matching ESLint config are updated to16.3.8 for six Next.js advisories. Strict clean install, lint and production build pass. Unpatched braces in lint tooling remains separately unresolved.
+**Next step:** Push to `main` branch on GitHub (`minjungsung/eltango`) to trigger automatic Vercel production deployment.

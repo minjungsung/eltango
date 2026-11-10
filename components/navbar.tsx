@@ -19,6 +19,7 @@ export function Navbar() {
     { hash: "reviews", label: t("reviews") },
     { hash: "sns", label: t("sns") },
     { hash: "location", label: t("directions") },
+    { hash: "blog", label: t("blog"), href: `/${locale}/blog` },
   ];
 
   function handleClick(e: React.MouseEvent<HTMLAnchorElement>, hash: string) {
@@ -47,8 +48,11 @@ export function Navbar() {
           {links.map((link) => (
             <a
               key={link.hash}
-              href={`#${link.hash}`}
-              onClick={(e) => handleClick(e, link.hash)}
+              href={link.href || `#${link.hash}`}
+              onClick={(e) => {
+                if (link.href) return;
+                handleClick(e, link.hash);
+              }}
               className="text-muted-foreground transition-colors hover:text-foreground"
             >
               {link.label}
@@ -86,9 +90,10 @@ export function Navbar() {
           {links.map((link) => (
             <a
               key={link.hash}
-              href={`#${link.hash}`}
+              href={link.href || `#${link.hash}`}
               onClick={(e) => {
                 setOpen(false);
+                if (link.href) return;
                 handleClick(e, link.hash);
               }}
               className="text-muted-foreground hover:text-foreground"

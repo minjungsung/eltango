@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
 import { MobileCTA } from "@/components/mobile-cta";
+import { JsonLd } from "@/components/json-ld";
 import { routing } from "@/i18n/routing";
 import { Playfair_Display } from "next/font/google";
 
@@ -80,6 +81,9 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
+      <head>
+        <JsonLd />
+      </head>
       <body className={`${playfair.variable} font-sans antialiased`}>
         <NextIntlClientProvider>
           <ThemeProvider attribute="class" forcedTheme="dark">
