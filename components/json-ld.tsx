@@ -27,7 +27,7 @@ export async function JsonLd({ locale }: { locale: Locale }) {
     description: t("description"),
     url: localizedUrl(locale),
     image: `${SITE_URL}/images/main.png`,
-    telephone: "+82-10-2415-0563",
+    telephone: "+82-507-1404-9899",
     address: {
       "@type": "PostalAddress",
       streetAddress: "주흥길 12, 2층",
@@ -45,7 +45,7 @@ export async function JsonLd({ locale }: { locale: Locale }) {
     sameAs: [
       "https://m.place.naver.com/place/20526245",
       "https://cafe.naver.com/eltango2009",
-      "https://www.instagram.com/eltango_seoultangoacademy",
+      "https://www.instagram.com/gangnamtango/",
       "https://www.youtube.com/@seoultango",
       "https://dulcenaleo.com/eltango",
     ],
