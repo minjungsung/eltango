@@ -1,23 +1,23 @@
 # Current focus
 
-**Status:** v2.1 blog CTA patch merged to `main`; production deployment verification in progress
-**Working on:** Applied the director's v2.1 CTA patch (per-column CTA links) and five new tango columns on top of the localized blog system.
+**Status:** warm-white v4 patch merged to `main` (PR #76, `40db641`); production verified
+**Working on:** The director's v4 final patch: Korean home renewal, crawler routing, AI-bot allow-list, and the safe-number phone / new Instagram handle.
 
 ## Delivered
 
-- Per-column CTA: the cruise column (`cruise-2027-tango-preparation`) links to the Dulce cruise/class page (`https://dulcenaleo.com/eltango`); every other column links to the current beginner enrollment Google Form (`https://forms.gle/sCXBTGPkSn7WHQ229`).
-- Five new columns in Korean and English: salsa vs Argentine tango, learning alone without a partner, ballroom tango vs Argentine tango, academy vs club, and milonga cabeceo etiquette. The blog now carries nine columns in both locales.
-- CTA destinations centralized in `lib/site.ts` and chosen per post from `cta` metadata in `lib/blog-data.ts`; no URLs are hardcoded in translation bundles.
-- Naver Place identifier confirmed as `20526245` in the column CTA and JSON-LD.
+- Korean home `/` is the warm-white editorial page: `app/warmwhite.css`, `components/warmwhite-home.tsx`, `warmwhite-nav.tsx`, `warmwhite-cta.tsx` (fixed mobile call/one-day bar), `app/[locale]/warmwhite-page.tsx`, and ten photos in `public/images/warmwhite/` including a Korean `og-cover.jpg`.
+- `/en` keeps the existing screen and its `Navbar` / `MobileCTA`; only its footer contact phone changed.
+- `proxy.ts`: cookie-less requests are rendered in Korean instead of being redirected to `/en` by country; `/en` is still English and `/ko` still redirects to `/`.
+- `app/robots.ts`: thirteen AI/search crawlers explicitly allowed.
+- Phone is the safe number `0507-1404-9899` (`+82-507-1404-9899` in JSON-LD) and Instagram is `@gangnamtango` in the footer, the SNS page and structured data.
 
-**Editorial handling:** The supplied patch files were written against the pre-i18n single-language page, so they were not copied over. Only the patch's changes were ported into the localized structure, keeping next-intl routing, JSON-LD, and metadata intact. Previously applied wording adjustments (no medical-treatment or discount guarantees) were kept, and the same standard was applied to the new columns.
+**Patch handling:** The patch's translation bundles and `json-ld.tsx` predate the i18n blog/AEO work, so they were not copied over — the bundles would have lost the `school`/`blog` namespaces and the component would have dropped the `StructuredData` export the blog imports. Only the patch's intent was ported into the localized structure, as with v2.1.
 
-**Validation:** Translation bundles parse; all nine slugs exist in both locales with title, description, category, tags, content, and FAQ. `ci` (`npm ci` + `next build` on Node 20) and the dependency gate passed on the pull request, and the Vercel preview build completed.
+**Validation:** `ci` (`npm ci` + `next build`, Node 20), the dependency gate, secret scanning and the Vercel preview build passed on PR #76. Production after merge: `/` 200 with warm-white markup, `/en` 200, `/ko` 307 to `/`, `/robots.txt` with the thirteen bots, `/blog` and column pages 200, JSON-LD carrying the safe number and the new Instagram URL.
 
-**Publication:** Squash-merged to `main`, which triggers the automatic Vercel production deployment.
+**Next step:** Ask the director about `components/mobile-cta.tsx:48` — the English mobile bar still dials the personal number `+821024150563`; the patch leaves that file untouched, so it needs her decision.
 
-**Next step:** Confirm the production deployment and check the rendered CTA links in both locales. Close the superseded PR #65 (`feature/aeo-blog-system`), whose single-language AEO version is fully replaced by `main`.
+## Existing follow-ups
 
-## Existing follow-up
-
-The earlier Google Forms registration migration remains pending. The current tracked registration endpoint still uses Google Apps Script; there are no migration changes in this working tree. Confirm the desired backend and production configuration before resuming that separate task.
+- English translation of the new Korean home is out of scope in v4; `/en` intentionally serves the previous page.
+- The earlier Google Forms registration migration remains pending. The current tracked registration endpoint still uses Google Apps Script; confirm the desired backend and production configuration before resuming that separate task.
