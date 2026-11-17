@@ -45,7 +45,7 @@ export function MobileCTA() {
           {t("openChat")}
         </a>
         <a
-          href="tel:+821024150563"
+          href="tel:+8250714049899"
           className="flex items-center gap-2 rounded-full bg-card px-4 py-2.5 text-sm font-medium text-foreground shadow-lg border border-border/50"
           onClick={() => setOpen(false)}
         >
