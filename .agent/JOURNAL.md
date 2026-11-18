@@ -6,6 +6,14 @@ Note: historical commit messages were mostly Korean shorthand (`temp`, `폰`, `�
 
 ---
 
+## 2026-11-19 — Standalone intro page pushed; production deployment rate limited
+
+**Delivered to source:** Retrieved the director's `intro.html` from the Drive file linked in her November 18 email and copied it verbatim to `public/intro.html`. Source SHA-256: `6bf06c08136baac87f002b50862f3b5653afdcdfc178146f66a852e3a53d37dc`. The self-contained HTML needs no build or configuration changes. Commit `b2f3454` was pushed to `main`.
+**Validation:** Inspected the HTML structure and references; local automated tests were not run, per the user's preference. GitHub's automatic `ci` and secret scanning checks passed after the push. Production `https://eltango.vercel.app/intro.html` still returns 404.
+**Deployment blocker:** Vercel marked the commit failed: "Deployment rate limited — retry in 24 hours." Retry after the limit clears and confirm the production response matches the source hash before calling this published.
+
+---
+
 ## 2026-11-18 — English mobile CTA dials the safe number
 
 **Shipped:** `components/mobile-cta.tsx:48` now links `tel:+8250714049899` instead of the personal mobile `tel:+821024150563`, so the `/en` mobile bar no longer exposes the personal number. Prompted by the owner after the v4 report; the v4 patch itself left this file untouched.

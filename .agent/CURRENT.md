@@ -1,7 +1,14 @@
 # Current focus
 
-**Status:** warm-white v4 patch merged to `main` (PR #76, `40db641`); production verified; English mobile CTA moved to the safe number (`d805e8e`)
-**Working on:** The director's v4 final patch: Korean home renewal, crawler routing, AI-bot allow-list, and the safe-number phone / new Instagram handle.
+**Status:** The standalone intro page is committed and pushed to `main` (`b2f3454`). Production remains on the previous deployment because Vercel rejected the new deployment with "Deployment rate limited — retry in 24 hours." The requested `/intro.html` URL currently returns 404.
+**Working on:** Publishing and verifying the director's November 18 intro page request once Vercel accepts a deployment.
+
+## Intro page delivery
+
+- Copied the director's Drive `intro.html` verbatim to `public/intro.html`. SHA-256: `6bf06c08136baac87f002b50862f3b5653afdcdfc178146f66a852e3a53d37dc`.
+- The file is self-contained. Its non-embedded references are external booking, place, café, Instagram, and YouTube links. No application configuration changed.
+- The commit is on GitHub `main`. The automatic `ci` and secret scanning checks passed; no local automated tests were run, per the user's preference.
+- Vercel reported deployment rate limiting for this commit. Retry deployment after the limit clears, then verify `https://eltango.vercel.app/intro.html` returns 200 and matches the source hash before reporting publication complete.
 
 ## Delivered
 
@@ -15,7 +22,7 @@
 
 **Validation:** `ci` (`npm ci` + `next build`, Node 20), the dependency gate, secret scanning and the Vercel preview build passed on PR #76. Production after merge: `/` 200 with warm-white markup, `/en` 200, `/ko` 307 to `/`, `/robots.txt` with the thirteen bots, `/blog` and column pages 200, JSON-LD carrying the safe number and the new Instagram URL.
 
-**Next step:** v4 is fully closed out — the mobile CTA number is fixed and the director was sent the completion reply (thread `1a1ea3efc2f2c4a9`, message `1a1ebf4878d6679c`). Wait for her next patch or feedback.
+**Next step:** Retry deployment of the intro page after Vercel's rate limit clears and verify the production URL. The v4 work is closed out; its completion reply was already sent (thread `1a1ea3efc2f2c4a9`, message `1a1ebf4878d6679c`).
 
 ## Existing follow-ups
 
