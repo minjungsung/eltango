@@ -6,6 +6,14 @@ Note: historical commit messages were mostly Korean shorthand (`temp`, `폰`, `�
 
 ---
 
+## 2026-11-18 — English mobile CTA dials the safe number
+
+**Shipped:** `components/mobile-cta.tsx:48` now links `tel:+8250714049899` instead of the personal mobile `tel:+821024150563`, so the `/en` mobile bar no longer exposes the personal number. Prompted by the owner after the v4 report; the v4 patch itself left this file untouched.
+**Validation:** Repo-wide grep (excluding `node_modules`, `.git`, `.agent`) finds no `010-2415-0563` / `821024150563` left in code. Pushed straight to `main` (`d805e8e`, both required status checks were expected on the push), and `CI`, `Dependency Gate` and `Security Scanning` all finished green on that SHA. Production serves the new bundle: the `/en` JS chunk contains `tel:+8250714049899` and no `821024150563`; `/`, `/en`, `/blog`, `/robots.txt` all 200; `/` and `/en` HTML carry no personal number.
+**Follow-ups:** None for the number. The director (이인경 원장님) was told about this change in the v4 completion reply.
+
+---
+
 ## 2026-11-18 — Warm-white v4: Korean home renewal, crawler routing, AI bots
 
 **Shipped:** Applied the director's v4 patch (`eltango_warmwhite_v4_code.zip` from mail of 2026-11-18 01:02 KST; full set with photos from Drive `eltango_warmwhite_v4_final.zip`). The Korean home `/` is now the warm-white editorial page (`app/warmwhite.css`, `components/warmwhite-home.tsx`, `warmwhite-nav.tsx`, `warmwhite-cta.tsx`, `app/[locale]/warmwhite-page.tsx`) with ten new photos under `public/images/warmwhite/`, a fixed mobile bar with call/one-day booking, and an `og-cover.jpg` for Korean social cards. `/en` keeps the existing screen. `proxy.ts` now answers cookie-less requests in Korean instead of redirecting non-KR traffic to `/en`, `app/robots.ts` allows thirteen AI/search crawlers, and the phone moved to the safe number `0507-1404-9899` (`+82-507-1404-9899` in JSON-LD) with Instagram `@gangnamtango` in the footer, SNS page and structured data. The v3 deep-green mail was not applied anywhere.
