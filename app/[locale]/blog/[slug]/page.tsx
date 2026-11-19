@@ -2,11 +2,14 @@ import type { Metadata } from "next";
 import { hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
-import Markdown from "react-markdown";
-import { StructuredData } from "@/components/json-ld";
+import { BlogFaq } from "@/components/blog-faq";
+import { BlogMarkdown } from "@/components/blog-markdown";
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { BreadcrumbJsonLd, StructuredData } from "@/components/json-ld";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { blogPosts, getBlogPosts } from "@/lib/blog-data";
+import { OG_SIZE, ogImageFor } from "@/lib/og-images";
 import {
   BEGINNER_FORM_URL,
   CRUISE_REGISTRATION_URL,
@@ -29,22 +32,34 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = (await getBlogPosts(locale)).find((item) => item.slug === slug);
   if (!post) notFound();
   const t = await getTranslations({ locale, namespace: "blog" });
+  const url = localizedUrl(locale, `/blog/${slug}`);
+  const image = ogImageFor(slug);
+
   return {
     title: `${post.title} | El Tango`,
     description: post.description,
     keywords: post.tags,
     alternates: {
-      canonical: localizedUrl(locale, `/blog/${slug}`),
+      canonical: url,
       languages: localizedAlternates(`/blog/${slug}`),
     },
     openGraph: {
       title: post.title,
       description: post.description,
       type: "article",
-      url: localizedUrl(locale, `/blog/${slug}`),
+      url,
       locale: locale === "ko" ? "ko_KR" : "en_US",
       publishedTime: post.date,
+      modifiedTime: post.date,
       authors: [t("authorName")],
+      // v5: 글마다 다른 1200×630 카드 (public/og/{slug}.png)
+      images: [{ url: image, ...OG_SIZE, alt: post.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
+      images: [image],
     },
   };
 }
@@ -59,10 +74,19 @@ export default async function BlogPostPage({ params }: Props) {
   ]);
   const post = posts.find((item) => item.slug === slug);
   if (!post) notFound();
-  const ctaHref =
-    post.cta === "cruise" ? CRUISE_REGISTRATION_URL : BEGINNER_FORM_URL;
+
+  const isKo = locale === "ko";
+  const ctaHref = post.cta === "cruise" ? CRUISE_REGISTRATION_URL : BEGINNER_FORM_URL;
   const ctaLabel = post.cta === "cruise" ? t("ctaCruise") : t("ctaForm");
   const url = localizedUrl(locale, `/blog/${slug}`);
+  const image = ogImageFor(slug);
+
+  const crumbs = [
+    { label: isKo ? "홈" : "Home", href: "/" },
+    { label: isKo ? "칼럼" : "Column", href: "/blog" },
+    { label: post.title },
+  ];
+
   const schema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -76,13 +100,27 @@ export default async function BlogPostPage({ params }: Props) {
         inLanguage: locale,
         mainEntityOfPage: url,
         url,
-        image: `${SITE_URL}/images/main.png`,
+        image: [image],
+        keywords: post.tags.join(", "),
+        articleSection: post.category,
         author: {
           "@type": "Person",
           name: t("authorName"),
           jobTitle: t("authorRole"),
+          worksFor: { "@id": SCHOOL_ID },
         },
-        publisher: { "@id": SCHOOL_ID },
+        publisher: {
+          "@type": "Organization",
+          "@id": SCHOOL_ID,
+          name: "엘땅고 강남본점",
+          // 구글 Article 필수 항목(publisher.logo) — 기존 누락분 보강
+          logo: {
+            "@type": "ImageObject",
+            url: `${SITE_URL}/og/logo.png`,
+            width: 512,
+            height: 512,
+          },
+        },
       },
       ...(post.faq.length
         ? [
@@ -104,22 +142,22 @@ export default async function BlogPostPage({ params }: Props) {
   return (
     <main className="min-h-screen bg-background px-4 py-16 sm:px-6 lg:px-8">
       <StructuredData data={schema} />
+      <BreadcrumbJsonLd
+        id={`${url}#breadcrumb`}
+        items={[
+          { name: isKo ? "홈" : "Home", url: localizedUrl(locale, "/") },
+          { name: isKo ? "칼럼" : "Column", url: localizedUrl(locale, "/blog") },
+          { name: post.title, url },
+        ]}
+      />
       <article className="mx-auto max-w-3xl">
+        <Breadcrumbs items={crumbs} />
         <header className="mb-8">
-          <Link
-            href="/blog"
-            className="text-xs text-muted-foreground transition-colors hover:text-primary"
-          >
-            {t("backToBlog")}
-          </Link>
-          <div className="mt-4 flex flex-wrap items-center gap-2">
+          <div className="mt-2 flex flex-wrap items-center gap-2">
             <span className="rounded-full bg-primary/20 px-2.5 py-0.5 text-xs font-semibold text-primary">
               {post.category}
             </span>
-            <time
-              dateTime={post.date}
-              className="text-xs text-muted-foreground"
-            >
+            <time dateTime={post.date} className="text-xs text-muted-foreground">
               {post.date}
             </time>
             <span className="text-xs text-muted-foreground">
@@ -129,64 +167,17 @@ export default async function BlogPostPage({ params }: Props) {
           <h1 className="mt-3 text-2xl font-bold leading-snug tracking-tight text-foreground sm:text-3xl md:text-4xl">
             {post.title}
           </h1>
-        </header>
-        <div className="glass-card mb-10 space-y-4 rounded-2xl p-6 text-sm leading-relaxed text-foreground/90 sm:p-8 sm:text-base">
-          <Markdown
-            components={{
-              h2: ({ children }) => (
-                <h2 className="mb-4 mt-8 text-2xl font-bold first:mt-0">
-                  {children}
-                </h2>
-              ),
-              h3: ({ children }) => (
-                <h3 className="mb-3 mt-6 text-xl font-semibold">{children}</h3>
-              ),
-              p: ({ children }) => <p className="my-4">{children}</p>,
-              ul: ({ children }) => (
-                <ul className="my-4 list-disc space-y-2 pl-6">{children}</ul>
-              ),
-              ol: ({ children }) => (
-                <ol className="my-4 list-decimal space-y-2 pl-6">{children}</ol>
-              ),
-              strong: ({ children }) => (
-                <strong className="font-semibold text-foreground">
-                  {children}
-                </strong>
-              ),
-            }}
-          >
-            {post.content}
-          </Markdown>
-        </div>
-        {post.faq.length > 0 && (
-          <section className="mb-10 mt-12" aria-labelledby="faq-title">
-            <h2
-              id="faq-title"
-              className="mb-6 text-xl font-bold text-foreground"
-            >
-              {t("faqTitle")}
-            </h2>
-            <div className="space-y-4">
-              {post.faq.map((faq) => (
-                <div key={faq.question} className="glass-card rounded-xl p-5">
-                  <h3 className="mb-2 text-sm font-semibold text-primary sm:text-base">
-                    {t("question", { text: faq.question })}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    {t("answer", { text: faq.answer })}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-        <section className="glass-card my-12 rounded-2xl border-primary/40 bg-primary/5 p-8 text-center">
-          <h2 className="mb-2 text-xl font-bold text-primary">
-            {t("ctaTitle")}
-          </h2>
-          <p className="mb-6 text-sm text-muted-foreground">
-            {t("ctaDescription")}
+          <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+            {post.description}
           </p>
+        </header>
+        <div className="glass-card mb-10 rounded-2xl p-6 sm:p-8">
+          <BlogMarkdown content={post.content} />
+        </div>
+        <BlogFaq items={post.faq} title={t("faqTitle")} />
+        <section className="glass-card my-12 rounded-2xl border-primary/40 bg-primary/5 p-8 text-center">
+          <h2 className="mb-2 text-xl font-bold text-primary">{t("ctaTitle")}</h2>
+          <p className="mb-6 text-sm text-muted-foreground">{t("ctaDescription")}</p>
           <div className="flex flex-wrap justify-center gap-3">
             <a
               href={ctaHref}
