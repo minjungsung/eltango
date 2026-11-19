@@ -34,7 +34,7 @@ const STEPS = [
   },
 ];
 
-const CLASSES = [
+const CLASSES: { name: string; time: string; time2?: string; for: string }[] = [
   {
     name: "평일직장인반",
     time: "수 19:00 – 20:30",
@@ -47,7 +47,8 @@ const CLASSES = [
   },
   {
     name: "낮반",
-    time: "월 10:30 – 12:00",
+    time: "월 10:30 – 11:30",
+    time2: "수 11:30 – 12:30",
     for: "낮 시간이 편하신 분, 은퇴 후 시작하시는 분.",
   },
 ];
@@ -174,7 +175,15 @@ export function WarmWhiteHome() {
               {CLASSES.map((c) => (
                 <div key={c.name} className="tr">
                   <div className="name">{c.name}</div>
-                  <div className="time">{c.time}</div>
+                  <div className="time">
+                    {c.time}
+                    {c.time2 ? (
+                      <>
+                        <br />
+                        {c.time2}
+                      </>
+                    ) : null}
+                  </div>
                   <div className="for">{c.for}</div>
                 </div>
               ))}
