@@ -6,6 +6,17 @@ Note: historical commit messages were mostly Korean shorthand (`temp`, `폰`, `�
 
 ---
 
+## 2026-11-19 — Intro page refreshed to the Netlify v7; home 낮반 timetable corrected
+
+**Shipped:** `public/intro.html` replaced with the Netlify drop v7 (`netlify_drop_v7/index.html`, 16:40 KST — the same bytes `https://eltango.netlify.app/` serves). New in v7: the 웰니스 낮반 timetable (월 10:30–11:30, 수 11:30–12:30 60+), a five-question FAQ section with matching `FAQPage` schema, canonical / OG / twitter metadata, the RSS alternate and the 칼럼 footer link. The 11-18 copy also still carried `chrome_annotation` artifacts from the Drive edit; those are gone.
+**Host fixes:** this site has no `/oneday` (404) and `/columns/` only 308-redirects to a page that does not exist, so the two links that work as relative paths on Netlify are absolute to `https://eltango.netlify.app` — the FAQ note's 원데이 link and the footer 칼럼 link. No other relative `href`/`src` is left in the file; all seven 원데이 CTAs point at `https://eltango.netlify.app/oneday`.
+**Home:** `components/warmwhite-home.tsx` still showed `월 10:30 – 12:00` on the 낮반 row. It now reads `월 10:30 – 11:30` / `수 11:30 – 12:30`, matching `lib/school-info.ts` and the intro page. `CLASSES` took an optional `time2` field rendered as a second line, so the right-aligned `white-space: nowrap` column stays inside the card on mobile.
+**Validation:** `npx tsc --noEmit` clean, `npm run build` clean, local `npm start` 200 on `/` and `/intro.html` with no `10:30 – 12:00`.
+**Publication:** PR #89 squash-merged as `6c9a266`; `ci`, dependency gate, secret scanning and the Vercel preview all green. Production: `/` 200 and the 낮반 card carries both times; `/intro.html` 200 `text/html`, byte-identical to the repo file (SHA-256 `33af510f0c318b8bcc804ac339455abeca9c1e34bf1bb151987226f50431bdf0`), 0 personal numbers, 10 `0507-1404-9899`, the FAQ visible and the sticky CTA on the netlify `/oneday`.
+**Follow-ups:** None. The page's canonical and `og:url` still name `https://eltango.netlify.app/`, so this copy is deliberately not the indexed one — say so before changing it. Branch `feat/update-intro-and-schedule` is still on the remote (the delete was refused by the credential policy).
+
+---
+
 ## 2026-11-19 — AEO v5: llms.txt, RSS, per-column OG cards, breadcrumbs and FAQ accordion
 
 **Shipped:** Applied the director's AEO v5 patch on top of `9d7a5b1`. New static routes `/llms.txt`, `/llms-full.txt` and `/rss.xml`; `lib/school-info.ts` as the single source for address, phone, timetable and prices; global entity widened to `DanceSchool` + `LocalBusiness` with `OfferCatalog` (numeric KRW prices), `openingHoursSpecification`, `geo` and `sameAs`; per-column `BreadcrumbList` (3 steps, on screen and in schema), `Blog` schema on the index, `publisher.logo` on `BlogPosting`; `components/blog-markdown.tsx` renders GFM tables, blockquotes, figure captions and rules via `remark-gfm`; the column FAQ became a `<details>` accordion whose visible text is word-for-word the `FAQPage` text; nine 1200×630 cards under `public/og/` with `twitter:card`. Nine files added, four replaced. The next-intl structure and the `StructuredData` export the column pages import were kept, so no message bundle or `layout.tsx` import changed.
