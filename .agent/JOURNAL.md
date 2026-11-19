@@ -6,6 +6,15 @@ Note: historical commit messages were mostly Korean shorthand (`temp`, `폰`, `�
 
 ---
 
+## 2026-11-19 — AEO v5: llms.txt, RSS, per-column OG cards, breadcrumbs and FAQ accordion
+
+**Shipped:** Applied the director's AEO v5 patch on top of `9d7a5b1`. New static routes `/llms.txt`, `/llms-full.txt` and `/rss.xml`; `lib/school-info.ts` as the single source for address, phone, timetable and prices; global entity widened to `DanceSchool` + `LocalBusiness` with `OfferCatalog` (numeric KRW prices), `openingHoursSpecification`, `geo` and `sameAs`; per-column `BreadcrumbList` (3 steps, on screen and in schema), `Blog` schema on the index, `publisher.logo` on `BlogPosting`; `components/blog-markdown.tsx` renders GFM tables, blockquotes, figure captions and rules via `remark-gfm`; the column FAQ became a `<details>` accordion whose visible text is word-for-word the `FAQPage` text; nine 1200×630 cards under `public/og/` with `twitter:card`. Nine files added, four replaced. The next-intl structure and the `StructuredData` export the column pages import were kept, so no message bundle or `layout.tsx` import changed.
+**Why the lock file moved:** the patch's `package.json` adds `remark-gfm@^4.0.1` but shipped no matching `package-lock.json`, so `npm ci` (and therefore the `ci` workflow) failed on an out-of-sync lock. Regenerated `package-lock.json` with `npm install` — 20 new packages, no dependency version changed — and committed it with the patch.
+**Validation:** `npx tsc --noEmit` clean, `npm run build` succeeded (`/llms.txt`, `/llms-full.txt`, `/rss.xml` generated as static routes), and a local `npm start` smoke test returned 200 for `/`, `/en`, `/blog`, `/en/blog`, both locales of a column and `/sns`. `/llms.txt` → `text/plain` starting `# 엘땅고 강남본점`; `/rss.xml` → `application/rss+xml` with nine items; a column page carries `BlogPosting`, `BreadcrumbList` (3 `ListItem`s), `FAQPage`, `OfferCatalog` (3 offers) and four `OpeningHoursSpecification` entries; the FAQ accordion text matched the schema text; `/og/*.png` 200. No personal mobile number in any route, and the patch keeps `0507-1404-9899` only.
+**Follow-ups:** Confirm the production deployment and the `/llms.txt`, `/rss.xml`, `/intro.html` responses after the push. `npm run lint` still reports two pre-existing errors in `components/warmwhite-nav.tsx` (`<a>` instead of `next/link` for `/`), untouched by this patch.
+
+---
+
 ## 2026-11-19 — Standalone intro page pushed; production deployment rate limited
 
 **Delivered to source:** Retrieved the director's `intro.html` from the Drive file linked in her November 18 email and copied it verbatim to `public/intro.html`. Source SHA-256: `6bf06c08136baac87f002b50862f3b5653afdcdfc178146f66a852e3a53d37dc`. The self-contained HTML needs no build or configuration changes. Commit `b2f3454` was pushed to `main`.
