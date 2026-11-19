@@ -1,6 +1,6 @@
 # Current focus
 
-**Status:** The AEO v5 patch is live. Squash-merged as `62126ee` (PR #87) and deployed to production on 2026-11-19; `/llms.txt`, `/llms-full.txt`, `/rss.xml` and the per-column OG cards answer 200 on `https://eltango.vercel.app`. The `public/intro.html` push stranded by Vercel's rate limit went out with the same deployment, so `/intro.html` is live too.
+**Status:** The AEO v5 patch is live (`62126ee`, PR #87), and so is the refreshed intro page and the home timetable fix (`6c9a266`, PR #89, 2026-11-19). `https://eltango.vercel.app/intro.html` now serves the Netlify v7 page and `/` shows the corrected 낮반 times. The `public/intro.html` push stranded by Vercel's rate limit went out with the v5 deployment.
 **Working on:** Nothing in flight — next is the manual Search Console step (rich results test + re-index request).
 
 ## AEO v5 patch (2026-11-19, live)
@@ -15,14 +15,16 @@
 
 ## Intro page delivery
 
-- Copied the director's Drive `intro.html` verbatim to `public/intro.html`. SHA-256: `6bf06c08136baac87f002b50862f3b5653afdcdfc178146f66a852e3a53d37dc`.
-- The file is self-contained. Its non-embedded references are external booking, place, café, Instagram, and YouTube links. No application configuration changed.
-- Commit `b2f3454` is on GitHub `main`; automated `ci` and secret scanning passed. Production missed the file for a day because Vercel rate-limited that deployment; it went live with the v5 deployment on 2026-11-19 and the served bytes hash to the source SHA-256 above.
-- Note: `public/intro.html` is the 2026-11-18 15:58 copy, so it predates the 수 11:30 웰니스 낮반 and the `/oneday` link that the Netlify v6/v7 pages carry. Replace it with the current source when the director asks.
+- `public/intro.html` is now the Netlify drop v7 page (2026-11-19 16:40 KST), byte-identical to what `https://eltango.netlify.app/` serves. SHA-256: `33af510f0c318b8bcc804ac339455abeca9c1e34bf1bb151987226f50431bdf0`.
+- v7 carries the 웰니스 낮반 timetable (월 10:30–11:30, 수 11:30–12:30 60+), the five-question FAQ with matching `FAQPage` schema, canonical / OG / twitter metadata, the RSS alternate and the 칼럼 footer link; the `chrome_annotation` artifacts of the 11-18 Drive edit are gone.
+- Two links that work as relative paths on Netlify are absolute to `https://eltango.netlify.app` because this host has no such routes (`/oneday` 404, `/columns/` 308 to a missing page): the FAQ note's 원데이 link and the footer 칼럼 link. All seven 원데이 CTAs point at `https://eltango.netlify.app/oneday`.
+- The file is self-contained. Its non-embedded references are external booking, place, café, Instagram, YouTube and 칼럼 links. No application configuration changed.
+- The page's canonical and `og:url` name `https://eltango.netlify.app/`, so this copy is deliberately not the indexed one — decide with the director before changing that.
+- Production `/intro.html` answers 200 `text/html` and its served bytes hash to the SHA-256 above; no personal mobile number in it.
 
 ## Delivered
 
-- Korean home `/` is the warm-white editorial page: `app/warmwhite.css`, `components/warmwhite-home.tsx`, `warmwhite-nav.tsx`, `warmwhite-cta.tsx` (fixed mobile call/one-day bar), `app/[locale]/warmwhite-page.tsx`, and ten photos in `public/images/warmwhite/` including a Korean `og-cover.jpg`. Its timetable card still shows `월 10:30 – 12:00`; the class actually runs 10:30–11:30, so that label lags `lib/school-info.ts`.
+- Korean home `/` is the warm-white editorial page: `app/warmwhite.css`, `components/warmwhite-home.tsx`, `warmwhite-nav.tsx`, `warmwhite-cta.tsx` (fixed mobile call/one-day bar), `app/[locale]/warmwhite-page.tsx`, and ten photos in `public/images/warmwhite/` including a Korean `og-cover.jpg`. Its 낮반 timetable row reads `월 10:30 – 11:30` on one line and `수 11:30 – 12:30` on the next (optional `time2` in `CLASSES`), matching `lib/school-info.ts`.
 - `/en` keeps the existing screen and its `Navbar` / `MobileCTA`; only its footer contact phone changed.
 - `proxy.ts`: cookie-less requests are rendered in Korean instead of being redirected to `/en` by country; `/en` is still English and `/ko` still redirects to `/`. Paths containing a dot (`/llms.txt`, `/rss.xml`) bypass the locale middleware, so no matcher change was needed.
 - `app/robots.ts`: thirteen AI/search crawlers explicitly allowed.
