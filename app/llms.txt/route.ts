@@ -43,6 +43,7 @@ export async function GET() {
     "## 글",
     "",
     ...posts.map((post) => `- [${post.title}](${SITE_URL}/blog/${post.slug}): ${post.description}`),
+    `- [강남 탱고 배우기, 첫 달에 실제로 얼마가 들까?](${SITE_URL}/columns/gangnam-tango-first-month-cost.html): 원데이 30,000원과 정규 4주 100,000원, 첫 달 총액이 100,000원이 되는 이유와 탱고화·의상 없이 시작하는 방법`,
     "",
   ];
 
