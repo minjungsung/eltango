@@ -1,7 +1,13 @@
 # Current focus
 
 **Status:** The AEO v5 patch is live (`62126ee`, PR #87), and so is the refreshed intro page and the home timetable fix (`6c9a266`, PR #89, 2026-11-19). `https://eltango.vercel.app/intro.html` now serves the Netlify v7 page and `/` shows the corrected 낮반 times. The `public/intro.html` push stranded by Vercel's rate limit went out with the v5 deployment.
-**Working on:** Nothing in flight — next is the manual Search Console step (rich results test + re-index request).
+**Working on:** 릴스 편집기(`/editor.html`) PR 올림(2026-11-25). 다음은 원장님이 실제 생영상으로 써 보고 피드백 반영 + Search Console 수동 단계.
+
+## 릴스 편집기 (2026-11-25)
+
+- `public/editor.html` — 의존성 없는 단일 파일 릴스 편집기. 정적 파일이라 `app/`·메시지 번들·`proxy.ts` matcher 는 건드리지 않았다(파일명에 점이 있어 미들웨어를 타지 않음).
+- 무음 자동 감지(WebAudio RMS) → 컷, 타임라인 분할/삭제/트림, 0.8~2.0x 배속, 9:16·1:1·16:9, 훅 배너·자막(SRT/직접/음성인식), 버건디·딥그린 템플릿, Canvas+MediaRecorder 내보내기.
+- 영상은 업로드되지 않는다. 아웃트로는 안심번호·원데이 30,000원·`@gangnamtango`만 표기.
 
 ## AEO v5 patch (2026-11-19, live)
 
