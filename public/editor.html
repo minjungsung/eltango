@@ -100,11 +100,11 @@
     min-height:320px;
   }
   canvas#stage{
-    display:block;height:min(62vh,660px);width:auto;max-width:100%;
+    display:block;width:auto;height:auto;max-width:100%;max-height:min(70vh,720px);
     background:#000;border-radius:10px;
     box-shadow:0 14px 40px rgba(0,0,0,.5);
   }
-  @media (max-width:980px){ canvas#stage{height:min(52vh,520px)} }
+  @media (max-width:980px){ canvas#stage{max-height:min(60vh,560px)} }
 
   .drop{
     position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -133,6 +133,10 @@
     padding:7px 11px;font-size:12.5px;font-weight:600;cursor:pointer;
   }
   .seg button.on{background:rgba(201,154,76,.22);color:var(--gold-light)}
+  /* 크림색 패널 안의 세그먼트는 진한 잉크색으로 */
+  .panel .seg{border-color:var(--line)}
+  .panel .seg button{color:var(--muted)}
+  .panel .seg button.on{background:rgba(15,61,49,.10);color:var(--green)}
   .chip-label{font-size:12px;color:rgba(251,249,245,.55);margin-right:2px}
 
   /* ---------- timeline ---------- */
@@ -623,6 +627,7 @@ function loadFile(file){
     hookMediaAudio();
     seekOut(0);
     renderTimeline(); renderSubs(); updateClipStat(); drawFrame();
+    if(!rafId) rafId = requestAnimationFrame(tick);  // 미리보기 캔버스를 계속 갱신
     toast('영상 준비 완료 — 무음 컷부터 해볼까요?');
   };
   video.onerror = () => {
@@ -762,6 +767,7 @@ function drawFrame(){
   ctx.fillRect(0,0,W,H);
 
   // ---- 영상 ----
+  if(!S.dur){ return; }
   if(video.readyState >= 2 && video.videoWidth){
     const vw = video.videoWidth, vh = video.videoHeight;
     const scale = Math.max(W/vw, H/vh) * S.zoom;
@@ -1261,7 +1267,7 @@ $('subList').addEventListener('click', (e)=>{
 
 function addSubAtPlayhead(){
   const start = Math.max(0, S.outTime);
-  const cue = { start, end: Math.min(outDuration(), start + Math.max(1.2, 22/S.speed)), text: '' };
+  const cue = { start, end: Math.min(outDuration(), start + 3.0), text: '' };
   S.subs.push(cue);
   S.subs.sort((a,b)=>a.start-b.start);
   renderSubs(); drawFrame();
@@ -1384,6 +1390,7 @@ async function exportVideo(){
   if(monitorGain) monitorGain.gain.value = 0.0001;
 
   rec.start(200);
+  const actualMime = rec.mimeType || mime;
 
   try{
     await playSequenceForExport();
@@ -1400,8 +1407,8 @@ async function exportVideo(){
   $('progOverlay').classList.remove('show');
 
   if(exportCancelled){ toast('내보내기를 취소했어요'); return; }
-  const ext = mime.indexOf('mp4') >= 0 ? 'mp4' : 'webm';
-  const blob = new Blob(chunks, {type: mime.split(';')[0]});
+  const ext = actualMime.indexOf('mp4') >= 0 ? 'mp4' : 'webm';
+  const blob = new Blob(chunks, {type: actualMime.split(';')[0]});
   if(!blob.size){ toast('녹화된 데이터가 없어요 — 다시 시도해 주세요'); return; }
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
@@ -1410,7 +1417,12 @@ async function exportVideo(){
   document.body.appendChild(a);
   a.click();
   setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 4000);
-  toast(`내보내기 완료 — ${ext.toUpperCase()} ${(blob.size/1024/1024).toFixed(1)}MB`, 4000);
+  const mb = (blob.size/1024/1024).toFixed(1);
+  if(ext === 'mp4'){
+    toast(`내보내기 완료 — MP4 ${mb}MB`, 4000);
+  }else{
+    toast(`내보내기 완료 — WebM ${mb}MB · 인스타·유튜브 업로드는 MP4만 되니, 피클 자동편집기로 MP4를 뽑거나 아이폰 사진 앱에서 변환해 주세요`, 6500);
+  }
 }
 
 function playSequenceForExport(){
@@ -1442,6 +1454,7 @@ function playSequenceForExport(){
           $('progBar').style.width = pct.toFixed(1)+'%';
           $('progPct').textContent = Math.round(pct)+'%';
           updatePlayhead();
+          drawFrame();          // 녹화되는 캔버스를 매 프레임 갱신
           requestAnimationFrame(watch);
         };
         requestAnimationFrame(watch);
