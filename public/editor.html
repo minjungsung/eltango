@@ -1227,35 +1227,65 @@ async function analyzeByPlayback(threshold, minLen, onProgress){
   if(!S.dur) throw new Error('영상 길이를 알 수 없어요');
   const analyser = hookScanAnalyser();
   if(!analyser) throw new Error('오디오 그래프를 만들지 못했어요');
+  const ac = ensureAudio();
+  if(!ac) throw new Error('WebAudio 미지원');
   pause();
   const monitorPrev = monitorGain ? monitorGain.gain.value : 1;
   if(monitorGain) monitorGain.gain.value = 0;   // 훑는 동안 소리는 끈다
   try{
     let rate = 0;
-    // 4x 면 분석 창(85ms)이 표본 간격보다 길어 소리를 놓치지 않습니다. 4x 에서 오디오가 안 흐르면 2x 로.
-    for(const r of [4, 2]){
+    // 분석 창(85ms)이 표본 간격보다 길도록 2x로 듣는다 — 4x에서는 프레임이 빠져 빠진 소리를 무음으로 오인했다.
+    for(const r of [2, 1]){
       if(await rateFlowsAudio(analyser, r)){ rate = r; break; }
     }
     if(!rate) throw new Error('배속 재생에서 오디오를 읽지 못했어요');
+
+    const buf = new Float32Array(analyser.fftSize);
+    const readRms = ()=>{
+      analyser.getFloatTimeDomainData(buf);
+      let sum = 0;
+      for(let i=0;i<buf.length;i++){ const v = buf[i]; sum += v*v; }
+      return Math.sqrt(sum/buf.length);
+    };
 
     await seekTo(0);
     video.playbackRate = rate;
     await video.play();
 
-    const buf = new Float32Array(analyser.fftSize);
+    // 실제로 소리가 흘러오기 시작할 때까지 기다린다 (기다리는 동안의 0은 무음이 아니다)
+    let heard = false;
+    const waitUntil = performance.now() + 2500;
+    while(performance.now() < waitUntil){
+      if(readRms() > 0.002) { heard = true; break; }
+      await nextFrame();
+    }
+
+    // 시간은 미디어 클럭(currentTime 은 뚝뚝 끊기고 순서도 튄다) 대신 AudioContext 시계로 매긴다
+    let baseSrc = video.currentTime;
+    let baseAc = ac.currentTime;
+    let lastSync = performance.now();
+    let lastT = 0;
     const samples = [];
-    const guard = performance.now() + Math.max(30000, (S.dur/rate)*1000*1.8 + 20000);
+    const guard = performance.now() + Math.max(60000, (S.dur/rate)*1000*1.9 + 20000);
     while(performance.now() < guard){
-      analyser.getFloatTimeDomainData(buf);
-      let sum = 0;
-      for(let i=0;i<buf.length;i++){ const v = buf[i]; sum += v*v; }
-      const t = video.currentTime;
-      samples.push({ t, rms: Math.sqrt(sum/buf.length) });
+      const rms = readRms();
+      let t = baseSrc + (ac.currentTime - baseAc) * rate;
+      if(performance.now() - lastSync > 800){
+        const vt = video.currentTime;
+        if(isFinite(vt) && Math.abs(vt - t) > 0.4){ baseSrc = vt; baseAc = ac.currentTime; t = vt; }
+        lastSync = performance.now();
+      }
+      t = clamp(Math.max(lastT, t), 0, S.dur);
+      lastT = t;
+      samples.push({ t, rms });
       if(onProgress) onProgress(clamp(t/S.dur, 0, 0.999));
-      if(video.ended || t >= S.dur - 0.08) break;
+      if(video.ended || t >= S.dur - 0.1) break;
       await nextFrame();
     }
     video.pause();
+
+    // 끝까지 소리가 한 번도 안 들렸으면 무음으로 처리하지 않고 실패로 돌린다
+    if(!heard) throw new Error('스캔 중 오디오를 듣지 못했어요');
     return samplesToSilences(samples, threshold, minLen);
   }finally{
     if(monitorGain) monitorGain.gain.value = monitorPrev || 1;
@@ -1279,9 +1309,17 @@ function samplesToSilences(samples, threshold, minLen){
     }
   }
   if(start !== null) runs.push({ start, end: S.dur });
-  return runs
-    .map(r=>({ start: clamp(r.start, 0, S.dur), end: clamp(r.end, 0, S.dur) }))
-    .filter(r=>r.end - r.start >= minLen);
+  // 시계가 살짝 튀면 구간이 겹칠 수 있으니 시작 순서로 정리하고 겹친 구간은 합친다
+  const cleaned = [];
+  runs.map(r=>({ start: clamp(r.start, 0, S.dur), end: clamp(r.end, 0, S.dur) }))
+    .filter(r=>r.end > r.start)
+    .sort((a,b)=>a.start-b.start)
+    .forEach(r=>{
+      const last = cleaned[cleaned.length-1];
+      if(last && r.start <= last.end + 0.05) last.end = Math.max(last.end, r.end);
+      else cleaned.push({ start:r.start, end:r.end });
+    });
+  return cleaned.filter(r=>r.end - r.start >= minLen);
 }
 
 function applyDetected(silences, method){
