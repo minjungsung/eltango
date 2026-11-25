@@ -1182,7 +1182,7 @@ function hookScanAnalyser(){
   if(!ac || !mediaSrcNode) return null;
   if(!scanAnalyser){
     scanAnalyser = ac.createAnalyser();
-    scanAnalyser.fftSize = 2048;
+    scanAnalyser.fftSize = 4096;          // 48kHz에서 약 85ms 창 — 4x 스캔 표본 간격(64ms)보다 길어 빈틈 없이 듣는다
     scanAnalyser.smoothingTimeConstant = 0;
     scanSink = ac.createGain();
     scanSink.gain.value = 0;   // 분석용 통로는 무음
@@ -1232,7 +1232,8 @@ async function analyzeByPlayback(threshold, minLen, onProgress){
   if(monitorGain) monitorGain.gain.value = 0;   // 훑는 동안 소리는 끈다
   try{
     let rate = 0;
-    for(const r of [8, 4, 2]){
+    // 4x 면 분석 창(85ms)이 표본 간격보다 길어 소리를 놓치지 않습니다. 4x 에서 오디오가 안 흐르면 2x 로.
+    for(const r of [4, 2]){
       if(await rateFlowsAudio(analyser, r)){ rate = r; break; }
     }
     if(!rate) throw new Error('배속 재생에서 오디오를 읽지 못했어요');
