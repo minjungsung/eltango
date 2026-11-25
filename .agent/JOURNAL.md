@@ -6,6 +6,14 @@ Note: historical commit messages were mostly Korean shorthand (`temp`, `폰`, `�
 
 ---
 
+## 2026-11-25 — 릴스 편집기 후속 수정 (PR #95–#97)
+
+**Shipped:** `/editor.html` 초기 배포(#93, `fdc3615`) 뒤 세 번 다듬었다. #95(`8e99188`) 내보내기 중 캔버스를 매 프레임 다시 그려 녹화 fps를 0.35 → 정자·웹캠 수준으로 올렸고(미리보기 rAF 상시 구동, MediaRecorder mimeType 대신 실제 컨테이너로 확장자 결정), #96(`e3b25fe`) 훅 배너·자막 줄바꿈을 DP 균형 배분으로 바꿔 외톨이 단어를 없애고 스크림/아웃트로 그라데이션을 캐시, #97(`bbce822`)는 내보낸 파일 헤더에서 `avc1` 유무를 확인해 Chromium처럼 H.264 없이 VP9로 녹화된 MP4에는 “SNS 업로드 거부 가능” 안내를 띄운다.
+**Validation:** 프로덕션 `/editor.html` 200, `window.ELTANGO_EDITOR` 노출, 15초 생영상으로 무음 감지(3곳·1.7초) → 컷(4구간) → 자막 → 딥그린 → 내보내기까지 실제 수행, `window.__errors` 빈 배열.
+**Known:** 이 원격 브라우저(CPU 전용, H.264 없음)에서 1080p 녹화가 9fps 수준 — 기기 GPU에 따라 달라지며, 최종 H.264 MP4가 필요하면 `scripts/eltango_auto_editor.py`가 정답.
+
+---
+
 ## 2026-11-25 — 릴스 편집기 추가 (`/editor.html`)
 
 **Shipped:** `public/editor.html` — 엘땅고 전용 브라우저 릴스 편집기(단일 파일, 의존성 0). 라우트는 `/editor.html`(파일명에 점이 있어 `proxy.ts`의 로케일 미들웨어를 타지 않음). `noindex, nofollow`.
