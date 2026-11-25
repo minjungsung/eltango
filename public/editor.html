@@ -676,8 +676,7 @@ function tick(ts){
   lastTs = ts;
 
   if(S.playing){
-    const hit = clipAt(S.outTime);
-    if(hit){
+    const hit = clipAt(S.outTime);    if(hit){
       const srcLocal = video.currentTime - hit.clip.start;
       if(video.currentTime >= hit.clip.end - 0.03 || srcLocal < -0.15){
         // 다음 클립으로
@@ -698,7 +697,7 @@ function tick(ts){
       updatePlayhead();
     }
   }
-  drawFrame();
+  if(!S.exporting) drawFrame();   // 내보내기 중에는 녹화 루프가 캔버스를 갱신
 }
 
 function updatePlayhead(){
@@ -737,6 +736,39 @@ function wrapLines(text, maxWidth, maxLines){
   }
   if(cur) lines.push(cur);
   return lines.slice(0, maxLines);
+}
+
+// 줄마다 길이를 비슷하게 나누는 줄바꿔 (외톨이 단어 방지)
+function wrapBalanced(text, maxWidth, maxLines){
+  const words = String(text||'').replace(/\s+/g,' ').trim().split(' ').filter(Boolean);
+  if(words.length <= 1) return words;
+  const greedy = wrapLines(text, maxWidth, 99);
+  const n = Math.min(greedy.length, maxLines);
+  if(n <= 1) return greedy;
+
+  const spaceW = ctx.measureText(' ').width;
+  const W = words.map(w=>ctx.measureText(w).width);
+  const S = [0]; for(let i=0;i<W.length;i++) S.push(S[i]+W[i]);
+  const lineW = (i,j)=> S[j]-S[i] + spaceW*Math.max(0, j-i-1);
+  const target = lineW(0, words.length)/n;
+  const INF = Infinity;
+  const dp = Array.from({length:n+1},()=>new Array(words.length+1).fill(INF));
+  const prev = Array.from({length:n+1},()=>new Array(words.length+1).fill(-1));
+  dp[0][0] = 0;
+  for(let l=1;l<=n;l++){
+    for(let j=l;j<=words.length;j++){
+      for(let i=l-1;i<j;i++){
+        const w = lineW(i,j);
+        if(w > maxWidth*1.02 || dp[l-1][i] === INF) continue;
+        const cost = dp[l-1][i] + Math.pow(w - target, 2);
+        if(cost < dp[l][j]){ dp[l][j] = cost; prev[l][j] = i; }
+      }
+    }
+  }
+  if(dp[n][words.length] === INF) return greedy.slice(0, maxLines);
+  const out = []; let j = words.length;
+  for(let l=n;l>0;l--){ const i = prev[l][j]; out.unshift(words.slice(i,j).join(' ')); j = i; }
+  return out;
 }
 
 function fitFontSize(text, {maxWidth, base, min, maxLines, weight}){
@@ -798,7 +830,7 @@ function drawFrame(){
     const maxTextW = W - 260;
     const fs = fitFontSize(hook, {maxWidth:maxTextW, base:92, min:52, maxLines:2, weight:800});
     ctx.font = `800 ${fs}px ${FONT_STACK}`;
-    const lines = wrapLines(hook, maxTextW, 2);
+    const lines = wrapBalanced(hook, maxTextW, 2);
     const lineH = fs*1.22;
     const labelSize = 34;
     ctx.font = `700 ${labelSize}px ${FONT_STACK}`;
@@ -845,7 +877,7 @@ function drawFrame(){
     let fs = 64;
     ctx.font = `800 ${fs}px ${FONT_STACK}`;
     while(fs > 40 && ctx.measureText(active.text).width > maxW*2){ fs -= 2; ctx.font = `800 ${fs}px ${FONT_STACK}`; }
-    const lines = wrapLines(active.text, maxW, 3);
+    const lines = wrapBalanced(active.text, maxW, 3);
     const lineH = fs*1.28;
     const blockH = lineH*lines.length;
     const bottomY = H - 470;
@@ -1356,6 +1388,17 @@ function pickMime(){
 
 let exportCancelled = false;
 
+// MediaRecorder가 알려준 mimeType과 실제 파일 형식이 다를 때가 있어 헤더로 확인
+async function sniffExt(blob, fallbackMime){
+  try{
+    const head = new Uint8Array(await blob.slice(0, 16).arrayBuffer());
+    if(head[0] === 0x1A && head[1] === 0x45 && head[2] === 0xDF && head[3] === 0xA3) return 'webm';
+    const sig = String.fromCharCode(head[4], head[5], head[6], head[7]);
+    if(sig === 'ftyp') return 'mp4';
+  }catch(e){}
+  return (fallbackMime || '').indexOf('mp4') >= 0 ? 'mp4' : 'webm';
+}
+
 async function exportVideo(){
   if(!S.clips.length){ toast('먼저 영상을 불러와 주세요'); return; }
   if(S.exporting) return;
@@ -1407,9 +1450,9 @@ async function exportVideo(){
   $('progOverlay').classList.remove('show');
 
   if(exportCancelled){ toast('내보내기를 취소했어요'); return; }
-  const ext = actualMime.indexOf('mp4') >= 0 ? 'mp4' : 'webm';
   const blob = new Blob(chunks, {type: actualMime.split(';')[0]});
   if(!blob.size){ toast('녹화된 데이터가 없어요 — 다시 시도해 주세요'); return; }
+  const ext = await sniffExt(blob, actualMime);
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   const stamp = new Date().toISOString().slice(0,16).replace(/[:T]/g,'');
