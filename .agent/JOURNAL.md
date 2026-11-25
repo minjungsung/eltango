@@ -6,6 +6,17 @@ Note: historical commit messages were mostly Korean shorthand (`temp`, `폰`, `�
 
 ---
 
+## 2026-11-25 — 릴스 편집기 추가 (`/editor.html`)
+
+**Shipped:** `public/editor.html` — 엘땅고 전용 브라우저 릴스 편집기(단일 파일, 의존성 0). 라우트는 `/editor.html`(파일명에 점이 있어 `proxy.ts`의 로케일 미들웨어를 타지 않음). `noindex, nofollow`.
+**기능:** 드래그앤드롭 영상 로드(MP4/MOV/WebM) → WebAudio RMS 분석으로 무음 구간 자동 감지·컷(기준 dB·최소 무음·앞뒤 여유 조절) → 타임라인 분할/삭제/드래그 핸들 트림 → 배속 0.8~2.0x → 9:16·1:1·16:9 + 확대/위치 → 훅 배너·자막(직접 입력/SRT/Web Speech) → 로얄 버건디·딥그린 템플릿(워터마크·진행바·아웃트로) → Canvas + MediaRecorder로 워터마크 없는 MP4/WebM 다운로드.
+**Privacy:** 파일은 서버로 전송되지 않고 브라우저 메모리에서만 처리된다. 외부 요청은 Pretendard CDN 하나뿐.
+**Facts:** 아웃트로·푸터는 안심번호 `0507-1404-9899`·원데이 30,000원·신논현역 1번 출구 4분·`@gangnamtango`만 사용. 개인 휴대폰 번호 없음.
+**Validation:** esprima 파싱 통과, 로컬 정적 서버에서 DOM/이벤트 배선 확인. 프로덕션 검증은 배포 후 `/editor.html` 200·`window.ELTANGO_EDITOR` 존재·콘솔 오류 0으로 확인.
+**Follow-ups:** iOS Safari는 MediaRecorder MP4 내보내기가 제한적 — 데스크톱/안드로이드 Chrome 권장 문구를 페이지에 넣어 둠.
+
+---
+
 ## 2026-11-19 — Intro page refreshed to the Netlify v7; home 낮반 timetable corrected
 
 **Shipped:** `public/intro.html` replaced with the Netlify drop v7 (`netlify_drop_v7/index.html`, 16:40 KST — the same bytes `https://eltango.netlify.app/` serves). New in v7: the 웰니스 낮반 timetable (월 10:30–11:30, 수 11:30–12:30 60+), a five-question FAQ section with matching `FAQPage` schema, canonical / OG / twitter metadata, the RSS alternate and the 칼럼 footer link. The 11-18 copy also still carried `chrome_annotation` artifacts from the Drive edit; those are gone.
