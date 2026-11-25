@@ -1279,7 +1279,7 @@ async function analyzeByPlayback(threshold, minLen, onProgress){
       lastT = t;
       // 정확한 0(peak 0)은 방의 정적이 아니라 '오디오가 아직/잠시 안 흘러온 것'이다 — 무음으로 세지 않는다.
       if(lv.peak > 0){
-        samples.push({ t, rms: lv.rms });
+        samples.push({ t, rms: lv.rms, peak: lv.peak });
         if(onProgress) onProgress(clamp(t/S.dur, 0, 0.999));
       }
       if(video.ended || t >= S.dur - 0.1) break;
@@ -1301,13 +1301,15 @@ function samplesToSilences(samples, threshold, minLen){
   if(samples.length < 4) return [];
   const span = Math.abs(samples[samples.length-1].t - samples[0].t);
   const step = Math.max(0.04, span / Math.max(1, samples.length - 1));  // 표본 간격(원본 초)
+  // 스캔 표본은 peak 로 판단한다 — 배속 재생 중에는 오디오 프레임이 빠져 RMS 가 실제보다 낮게 나온다.
+  const level = (s)=> (s.peak !== undefined && s.peak > 0) ? s.peak : s.rms;
   const runs = [];
   let start = null;
   let prevT = null;
   for(const s of samples){
     const gap = prevT !== null && (s.t - prevT) > step * 4;   // 소리가 끊긴 틈은 구간을 잇지 않는다
     if(gap && start !== null){ runs.push({ start, end: prevT }); start = null; }
-    if(s.rms < threshold){
+    if(level(s) < threshold){
       if(start === null) start = Math.max(0, s.t - step);
     }else if(start !== null){
       runs.push({ start, end: s.t });
@@ -1326,7 +1328,8 @@ function samplesToSilences(samples, threshold, minLen){
       if(last && r.start <= last.end + 0.05) last.end = Math.max(last.end, r.end);
       else cleaned.push({ start:r.start, end:r.end });
     });
-  return cleaned.filter(r=>r.end - r.start >= minLen);
+  // 재생을 시작하고 끝내는 자리는 레벨이 흔들려 믿을 수 없다 — 앞·뒤 끝자락 구간은 버린다(앞뒤 3초 자르기로 처리).
+  return cleaned.filter(r=>r.end - r.start >= minLen && r.start > 0.4 && r.end < S.dur - 0.4);
 }
 
 function applyDetected(silences, method){
@@ -1335,10 +1338,13 @@ function applyDetected(silences, method){
   $('detectStat').innerHTML = (silences.length
     ? `<span class="pill">${silences.length}곳</span><span class="pill warn">총 ${totalSil.toFixed(1)}초</span>`
     : `<span class="pill">감지된 무음 없음</span>`)
-    + (method ? `<span class="pill">${method}</span>` : '');
+    + (method ? `<span class="pill">${method}</span>` : '')
+    + (method === '실시간 스캔' ? `<span class="pill warn">어림값 · 타임라인 확인 후 컷</span>` : '');
   $('btnApplySilence').disabled = !silences.length;
   renderTimeline();
-  toast(silences.length ? `무음 ${silences.length}곳(${totalSil.toFixed(1)}초)을 찾았어요${method==='실시간 스캔'?' · 배속 스캔으로 찾았어요':''}` : '무음을 찾지 못했어요');
+  toast(silences.length
+    ? `무음 ${silences.length}곳(${totalSil.toFixed(1)}초)을 찾았어요${method==='실시간 스캔'?' · 배속 스캔 어림값이라 타임라인에서 확인하고 잘라내세요':''}`
+    : '무음을 찾지 못했어요', method==='실시간 스캔' ? 4000 : 2400);
 }
 
 async function detectSilences(){
