@@ -1241,11 +1241,11 @@ async function analyzeByPlayback(threshold, minLen, onProgress){
     if(!rate) throw new Error('배속 재생에서 오디오를 읽지 못했어요');
 
     const buf = new Float32Array(analyser.fftSize);
-    const readRms = ()=>{
+    const readLevel = ()=>{
       analyser.getFloatTimeDomainData(buf);
-      let sum = 0;
-      for(let i=0;i<buf.length;i++){ const v = buf[i]; sum += v*v; }
-      return Math.sqrt(sum/buf.length);
+      let sum = 0, peak = 0;
+      for(let i=0;i<buf.length;i++){ const v = buf[i]; sum += v*v; const a = v<0?-v:v; if(a>peak) peak = a; }
+      return { rms: Math.sqrt(sum/buf.length), peak };
     };
 
     await seekTo(0);
@@ -1256,7 +1256,7 @@ async function analyzeByPlayback(threshold, minLen, onProgress){
     let heard = false;
     const waitUntil = performance.now() + 2500;
     while(performance.now() < waitUntil){
-      if(readRms() > 0.002) { heard = true; break; }
+      if(readLevel().peak > 0.002) { heard = true; break; }
       await nextFrame();
     }
 
@@ -1268,7 +1268,7 @@ async function analyzeByPlayback(threshold, minLen, onProgress){
     const samples = [];
     const guard = performance.now() + Math.max(60000, (S.dur/rate)*1000*1.9 + 20000);
     while(performance.now() < guard){
-      const rms = readRms();
+      const lv = readLevel();
       let t = baseSrc + (ac.currentTime - baseAc) * rate;
       if(performance.now() - lastSync > 800){
         const vt = video.currentTime;
@@ -1277,8 +1277,11 @@ async function analyzeByPlayback(threshold, minLen, onProgress){
       }
       t = clamp(Math.max(lastT, t), 0, S.dur);
       lastT = t;
-      samples.push({ t, rms });
-      if(onProgress) onProgress(clamp(t/S.dur, 0, 0.999));
+      // 정확한 0(peak 0)은 방의 정적이 아니라 '오디오가 아직/잠시 안 흘러온 것'이다 — 무음으로 세지 않는다.
+      if(lv.peak > 0){
+        samples.push({ t, rms: lv.rms });
+        if(onProgress) onProgress(clamp(t/S.dur, 0, 0.999));
+      }
       if(video.ended || t >= S.dur - 0.1) break;
       await nextFrame();
     }
@@ -1300,15 +1303,19 @@ function samplesToSilences(samples, threshold, minLen){
   const step = Math.max(0.04, span / Math.max(1, samples.length - 1));  // 표본 간격(원본 초)
   const runs = [];
   let start = null;
+  let prevT = null;
   for(const s of samples){
+    const gap = prevT !== null && (s.t - prevT) > step * 4;   // 소리가 끊긴 틈은 구간을 잇지 않는다
+    if(gap && start !== null){ runs.push({ start, end: prevT }); start = null; }
     if(s.rms < threshold){
       if(start === null) start = Math.max(0, s.t - step);
     }else if(start !== null){
       runs.push({ start, end: s.t });
       start = null;
     }
+    prevT = s.t;
   }
-  if(start !== null) runs.push({ start, end: S.dur });
+  if(start !== null) runs.push({ start, end: prevT !== null ? prevT : S.dur });
   // 시계가 살짝 튀면 구간이 겹칠 수 있으니 시작 순서로 정리하고 겹친 구간은 합친다
   const cleaned = [];
   runs.map(r=>({ start: clamp(r.start, 0, S.dur), end: clamp(r.end, 0, S.dur) }))
