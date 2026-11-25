@@ -1,7 +1,7 @@
 # Current focus
 
 **Status:** The AEO v5 patch is live (`62126ee`, PR #87), and so is the refreshed intro page and the home timetable fix (`6c9a266`, PR #89, 2026-11-19). `https://eltango.vercel.app/intro.html` now serves the Netlify v7 page and `/` shows the corrected 낮반 times. The `public/intro.html` push stranded by Vercel's rate limit went out with the v5 deployment.
-**Working on:** 릴스 편집기(`/editor.html`) 배포 완료(2026-11-25, #93·#95–#97). 다음은 원장님이 실제 생영상으로 써 보고 피드백 반영 + Search Console 수동 단계.
+**Working on:** 릴스 편집기(`/editor.html`)에 구간 순서 재배치(`⭐ 맨 앞으로`)와 아이폰 MOV 무음 분석 폴백을 넣었다(2026-11-25, PR #99). 다음은 원장님이 실제 생영상으로 써 보고 피드백 반영 + Search Console 수동 단계.
 
 ## 릴스 편집기 (2026-11-25)
 

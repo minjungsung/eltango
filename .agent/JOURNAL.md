@@ -6,6 +6,18 @@ Note: historical commit messages were mostly Korean shorthand (`temp`, `폰`, `�
 
 ---
 
+## 2026-11-25 — 릴스 편집기: 구간 순서 재배치 + 아이폰 무음 분석 폴백 (PR #99)
+
+**Shipped:** `/editor.html` 컷 탭에 **⭐ 맨 앞으로 · ◀ 앞으로 · ▶ 뒤로 · 복제** 버튼을 넣어, 뒤에 나온 하이라이트·결론 장면을 0초로 끌어올릴 수 있게 했다. `S.clips` 배열 순서가 그대로 재생·내보내기 순서이고 타임라인 블록에 순번 배지가 붙는다. 미리보기(`clipAt`)는 원래도 배열 순서를 따랐지만, 내보내기(`playSequenceForExport`)는 `srcTimeToOut`으로 원본 시간만 보고 출력 시간을 계산해 순서를 바꾸면 진행바·자막 타이밍이 어긋났으므로 클립별 누적 출력 오프셋(`accOut`)으로 바꿨다. 블록 손잡이 트림 범위도 이웃 블록 대신 원본 전체(0~dur)로 풀어 순서를 바꾼 뒤에도 트림이 튀지 않는다. 무음 후보 표시는 `srcRangeToOut`으로 새 순서의 여러 토막에 매핑했다.
+
+**Silence fallback:** 아이폰 5분 54초 영상에서 `decodeAudioData()`가 실패해 무음 분석이 통째로 죽던 문제를 고쳤다. 120MB 이하는 기존 파일 디코딩(빠름) → 실패하거나 그보다 크면 **배속 재생 + `AnalyserNode` 스캔**(8x→4x→2x, 배속에서 Safari가 오디오를 건너뛰면 자동 하향, 스캔 중 모니터 음소거)으로 폴백한다. 둘 다 실패하면 “타임라인에서 직접 자르거나 피클에 보내기”를 안내한다.
+
+**Validation:** 추출 JS `node --check` 통과. DOM 스텁 하네스(`work/eltango-seg-test/logic_test.js`)로 재배치·배속 매핑·스캔 표본→무음 23개 항목 통과(맨 앞으로 이동 후 0초가 새 첫 구간의 원본 시각을 가리킴, 1.5x에서 출력↔원본 오차 0, 블록 경계를 넘는 무음이 두 토막으로 갈라짐). 이 워크스페이스의 Chromium은 시스템 라이브러리(libnspr4 등)가 없어 띄울 수 없고 Vercel 프리뷰는 Deployment Protection에 막혀, 배포 후 프로덕션 `/editor.html`에서 직접 확인했다.
+
+**Companion:** 같은 날 `scripts/eltango_auto_editor.py`에 `--segments`(`--clips`/`--reorder` 별칭, `@구간.json` 지원)·`--segments-trim-silence`·`--transcribe-only`를 추가했다. 웹 편집기와 같은 “뒤 하이라이트를 맨 앞으로” 작업을 5분 영상에서도 할 수 있다.
+
+---
+
 ## 2026-11-25 — 릴스 편집기 후속 수정 (PR #95–#97)
 
 **Shipped:** `/editor.html` 초기 배포(#93, `fdc3615`) 뒤 세 번 다듬었다. #95(`8e99188`) 내보내기 중 캔버스를 매 프레임 다시 그려 녹화 fps를 0.35 → 정자·웹캠 수준으로 올렸고(미리보기 rAF 상시 구동, MediaRecorder mimeType 대신 실제 컨테이너로 확장자 결정), #96(`e3b25fe`) 훅 배너·자막 줄바꿈을 DP 균형 배분으로 바꿔 외톨이 단어를 없애고 스크림/아웃트로 그라데이션을 캐시, #97(`bbce822`)는 내보낸 파일 헤더에서 `avc1` 유무를 확인해 Chromium처럼 H.264 없이 VP9로 녹화된 MP4에는 “SNS 업로드 거부 가능” 안내를 띄운다.
