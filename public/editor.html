@@ -789,6 +789,22 @@ function fitFontSize(text, {maxWidth, base, min, maxLines, weight}){
   return min;
 }
 
+let gradCache = { key:'', top:null, bot:null, outro:null };
+function scrimGrads(W, H, themeKey){
+  const key = W + 'x' + H + ':' + themeKey;
+  if(gradCache.key !== key){
+    const top = ctx.createLinearGradient(0,0,0,H*0.34);
+    top.addColorStop(0,'rgba(3,10,8,.78)'); top.addColorStop(1,'rgba(3,10,8,0)');
+    const bot = ctx.createLinearGradient(0,H*0.62,0,H);
+    bot.addColorStop(0,'rgba(3,10,8,0)'); bot.addColorStop(1,'rgba(3,10,8,.80)');
+    const T = THEMES[themeKey] || THEMES.burgundy;
+    const outro = ctx.createLinearGradient(0,0,0,H);
+    outro.addColorStop(0, T.bg); outro.addColorStop(1, T.bg2);
+    gradCache = { key, top, bot, outro };
+  }
+  return gradCache;
+}
+
 function drawFrame(){
   const {w:W, h:H} = canvasSize();
   if(canvas.width !== W || canvas.height !== H){ canvas.width = W; canvas.height = H; }
@@ -813,15 +829,12 @@ function drawFrame(){
   const live = total > 0 ? S.outTime : 0;
 
   // ---- 스크림 ----
+  const grads = scrimGrads(W, H, S.theme);
   if(S.show.hook || S.subs.length){
-    const gTop = ctx.createLinearGradient(0,0,0,H*0.34);
-    gTop.addColorStop(0,'rgba(3,10,8,.78)'); gTop.addColorStop(1,'rgba(3,10,8,0)');
-    ctx.fillStyle = gTop; ctx.fillRect(0,0,W,H*0.34);
+    ctx.fillStyle = grads.top; ctx.fillRect(0,0,W,H*0.34);
   }
   if(S.subs.length || S.show.watermark){
-    const gBot = ctx.createLinearGradient(0,H*0.62,0,H);
-    gBot.addColorStop(0,'rgba(3,10,8,0)'); gBot.addColorStop(1,'rgba(3,10,8,.80)');
-    ctx.fillStyle = gBot; ctx.fillRect(0,H*0.62,W,H*0.38);
+    ctx.fillStyle = grads.bot; ctx.fillRect(0,H*0.62,W,H*0.38);
   }
 
   // ---- 상단 훅 배너 ----
@@ -936,17 +949,16 @@ function drawFrame(){
     const t0 = Math.max(0, total - OUTRO_SEC);
     if(live >= t0){
       const alpha = clamp((live - t0)/0.45, 0, 1);
-      drawOutro(alpha, T, W, H);
+      drawOutro(alpha, T, W, H, grads.outro);
     }
   }
 }
 
-function drawOutro(alpha, T, W, H){
+function drawOutro(alpha, T, W, H, grad){
   ctx.save();
   ctx.globalAlpha = alpha;
 
-  const g = ctx.createLinearGradient(0,0,0,H);
-  g.addColorStop(0, T.bg); g.addColorStop(1, T.bg2);
+  const g = grad || (()=>{ const x = ctx.createLinearGradient(0,0,0,H); x.addColorStop(0,T.bg); x.addColorStop(1,T.bg2); return x; })();
   ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
 
   ctx.strokeStyle = hexA(T.accent, .70); ctx.lineWidth = 3;
@@ -1388,15 +1400,27 @@ function pickMime(){
 
 let exportCancelled = false;
 
-// MediaRecorder가 알려준 mimeType과 실제 파일 형식이 다를 때가 있어 헤더로 확인
+// MediaRecorder가 알려준 mimeType과 실제 파일 형식·코덱이 다를 때가 있어 헤더로 확인
 async function sniffExt(blob, fallbackMime){
+  const out = { ext:'webm', h264:false };
   try{
-    const head = new Uint8Array(await blob.slice(0, 16).arrayBuffer());
-    if(head[0] === 0x1A && head[1] === 0x45 && head[2] === 0xDF && head[3] === 0xA3) return 'webm';
-    const sig = String.fromCharCode(head[4], head[5], head[6], head[7]);
-    if(sig === 'ftyp') return 'mp4';
-  }catch(e){}
-  return (fallbackMime || '').indexOf('mp4') >= 0 ? 'mp4' : 'webm';
+    const head = new Uint8Array(await blob.slice(0, 131072).arrayBuffer());
+    if(head[0] === 0x1A && head[1] === 0x45 && head[2] === 0xDF && head[3] === 0xA3){
+      out.ext = 'webm';
+    }else{
+      const sig = String.fromCharCode(head[4], head[5], head[6], head[7]);
+      out.ext = sig === 'ftyp' ? 'mp4' : ((fallbackMime||'').indexOf('mp4')>=0 ? 'mp4' : 'webm');
+    }
+    let ascii = '';
+    const step = 8192;
+    for(let i=0;i<head.length;i+=step){
+      ascii += String.fromCharCode.apply(null, head.subarray(i, Math.min(i+step, head.length)));
+    }
+    out.h264 = /avc1|avc3|hvc1|hev1/.test(ascii);
+  }catch(e){
+    out.ext = (fallbackMime || '').indexOf('mp4') >= 0 ? 'mp4' : 'webm';
+  }
+  return out;
 }
 
 async function exportVideo(){
@@ -1452,7 +1476,7 @@ async function exportVideo(){
   if(exportCancelled){ toast('내보내기를 취소했어요'); return; }
   const blob = new Blob(chunks, {type: actualMime.split(';')[0]});
   if(!blob.size){ toast('녹화된 데이터가 없어요 — 다시 시도해 주세요'); return; }
-  const ext = await sniffExt(blob, actualMime);
+  const {ext, h264} = await sniffExt(blob, actualMime);
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   const stamp = new Date().toISOString().slice(0,16).replace(/[:T]/g,'');
@@ -1461,10 +1485,12 @@ async function exportVideo(){
   a.click();
   setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 4000);
   const mb = (blob.size/1024/1024).toFixed(1);
-  if(ext === 'mp4'){
+  if(ext === 'mp4' && h264){
     toast(`내보내기 완료 — MP4 ${mb}MB`, 4000);
+  }else if(ext === 'mp4'){
+    toast(`내보내기 완료 — MP4 ${mb}MB · 이 브라우저는 H.264 없이 녹화해서 SNS 업로드가 거부될 수 있어요. 그럴 땐 피클 자동편집기로 MP4를 뽑아 주세요`, 7000);
   }else{
-    toast(`내보내기 완료 — WebM ${mb}MB · 인스타·유튜브 업로드는 MP4만 되니, 피클 자동편집기로 MP4를 뽑거나 아이폰 사진 앱에서 변환해 주세요`, 6500);
+    toast(`내보내기 완료 — ${ext.toUpperCase()} ${mb}MB · 인스타·유튜브 업로드는 MP4만 되니, 피클 자동편집기로 MP4를 뽑거나 아이폰 사진 앱에서 변환해 주세요`, 6500);
   }
 }
 
