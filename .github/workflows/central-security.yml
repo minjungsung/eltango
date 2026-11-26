@@ -14,4 +14,4 @@ jobs:
   scan:
     uses: minjungsung/.github/.github/workflows/secret-scanning.yml@786b005e3ad3a3aeaea3c06d79d7bf79446064af
     with:
-      policy-ref: 48ea7dbbf740a846200241dd1bee2cd9c60cd078
+      policy-ref: 786b005e3ad3a3aeaea3c06d79d7bf79446064af
