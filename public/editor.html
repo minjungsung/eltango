@@ -1782,7 +1782,7 @@ function previewOnStage(){
   const step = function(){
     const t = (performance.now() - t0)/1000;
     if(t > dur + 0.35){
-      S.previewT = dur;          // 마지막 프레임을 남겨 정지 화면으로 확인할 수 있게
+      S.previewT = Math.max(0, dur - 0.32);   // 퇴장 페이드 직전 프레임을 남겨 정지 화면으로 확인
       drawFrame();
       return;
     }
