@@ -8,6 +8,8 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700&display=swap">
 <style>
   :root{
     --green:#0F3D31;
@@ -215,6 +217,29 @@
   .theme-card .nm{font-size:12px;font-weight:700;color:var(--ink)}
   .theme-card .en{font-size:10.5px;color:var(--muted)}
 
+  /* ---------- 제목 모션 탭 ---------- */
+  .m-prev{position:relative;border-radius:12px;overflow:hidden;background:#0E1A16;margin-bottom:10px;border:1px solid var(--line)}
+  .m-prev canvas{display:block;width:100%;height:auto}
+  .m-prev-tag{position:absolute;left:8px;bottom:8px;font-size:10px;font-weight:700;letter-spacing:.05em;color:rgba(251,249,245,.82);background:rgba(0,0,0,.4);padding:3px 8px;border-radius:999px}
+  .m-now{font-size:11.5px;font-weight:800;color:var(--green);background:rgba(201,154,76,.15);border:1px solid rgba(201,154,76,.42);border-radius:8px;padding:7px 9px;margin-bottom:10px;text-align:center;line-height:1.4}
+  .m-styles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .m-style{border:2px solid transparent;border-radius:11px;background:#fff;padding:8px;text-align:left;cursor:pointer;box-shadow:0 2px 8px rgba(15,61,49,.06);transition:.15s}
+  .m-style:hover{box-shadow:0 4px 14px rgba(15,61,49,.12)}
+  .m-style.on{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,154,76,.18)}
+  .m-style .sw{height:40px;border-radius:7px;margin-bottom:6px;display:flex;align-items:center;justify-content:center;gap:6px;overflow:hidden}
+  .m-style .sw span{font-size:10.5px;font-weight:800;width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;flex:none}
+  .m-style .sw b{font-size:10.5px;letter-spacing:.06em;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:112px}
+  .m-style .nm{font-size:11.5px;font-weight:800;color:var(--ink);line-height:1.25;display:flex;gap:4px;align-items:baseline}
+  .m-style .nm i{font-style:normal;color:var(--gold);font-size:11px;font-weight:900;flex:none}
+  .m-style .use{font-size:10px;color:var(--muted);line-height:1.35;margin-top:2px}
+  .m-motions{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  .m-motion{display:flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:9px;padding:7px 8px;cursor:pointer;text-align:left;transition:.15s;color:var(--ink)}
+  .m-motion:hover{background:var(--cream-dim)}
+  .m-motion.on{border-color:var(--gold);background:#FFFBF2;box-shadow:0 0 0 2px rgba(201,154,76,.16)}
+  .m-motion .n{width:19px;height:19px;border-radius:50%;background:rgba(15,61,49,.08);color:var(--green);font-size:10.5px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none}
+  .m-motion.on .n{background:var(--gold);color:#33240B}
+  .m-motion .t{font-size:11.5px;font-weight:700;line-height:1.2}
+
   .switch{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px dashed var(--line);font-size:13px}
   .switch:last-child{border-bottom:none}
   .switch input{width:38px;height:22px;appearance:none;background:#D8D4CB;border-radius:999px;position:relative;cursor:pointer;transition:.2s;flex:none}
@@ -317,6 +342,7 @@
       <button data-tab="clip" class="on">클립</button>
       <button data-tab="cut">컷</button>
       <button data-tab="sub">자막</button>
+      <button data-tab="motion">모션</button>
       <button data-tab="look">템플릿</button>
     </div>
     <div class="tab-body">
@@ -431,6 +457,41 @@
         <div class="sub-list" id="subList"></div>
       </div>
 
+      <!-- 모션 -->
+      <div class="tab-pane" id="pane-motion">
+        <div class="sect-title">제목 모션 · 스타일 6종 · 모션 14종</div>
+        <div class="m-prev">
+          <canvas id="mPrev" width="720" height="300"></canvas>
+          <span class="m-prev-tag" id="mPrevTag">미리보기 · 반복 재생</span>
+        </div>
+        <div class="m-now" id="mStyleNow">1번 · 모던 딥그린·골드 / 4번 · 핑퐁 바운스</div>
+        <div class="switch"><span>제목을 모션 타이틀로</span><input type="checkbox" id="mOn" checked></div>
+        <div class="field" style="margin-top:12px">
+          <label>제목 문구</label>
+          <input type="text" id="mTitle" placeholder="예) 탱고, 발보다 먼저 오는 것">
+          <div class="hint">‘자막’ 탭의 상단 훅 타이틀과 같은 문구입니다.</div>
+        </div>
+        <div class="field">
+          <label>라벨 (비우면 스타일 기본값)</label>
+          <input type="text" id="mLabel">
+        </div>
+        <div class="row tight">
+          <div class="field">
+            <label>노출 시간 (초)</label>
+            <input type="number" id="mDur" value="3" min="0" step="0.5">
+          </div>
+          <div class="field" style="display:flex;align-items:flex-end">
+            <button class="btn dark wide" id="mPlay">캔버스에서 재생</button>
+          </div>
+        </div>
+        <div class="hint" style="margin:-6px 0 12px">0으로 두면 영상 끝까지 제목이 남습니다.</div>
+        <div class="sect-title">스타일 6종</div>
+        <div class="m-styles" id="mStyles"></div>
+        <div class="sect-title" style="margin-top:16px">모션 14종</div>
+        <div class="m-motions" id="mMotions"></div>
+        <div class="hint" style="margin-top:8px">번호로 말해도 됩니다 — 예) “3번 스타일에 1번 타자기”. 숫자가 들어간 문구에 2번 카운트업을 쓰면 숫자가 0부터 차오릅니다.</div>
+      </div>
+
       <!-- 템플릿 -->
       <div class="tab-pane" id="pane-look">
         <div class="sect-title">엘땅고 템플릿</div>
@@ -522,6 +583,8 @@ const S = {
   zoom:1, ox:0.5, oy:0.5,
   theme:'burgundy',
   subStyle:'outline',
+  motion:{on:true, style:1, num:4, dur:3.0, label:null, autoMotion:true},
+  previewT:null,
   hook:'', label:'엘땅고 강남본점 · 24년차 피쉬쌤',
   subs:[],
   silences:[],
@@ -628,6 +691,7 @@ function loadFile(file){
     return;
   }
   if(S.url) URL.revokeObjectURL(S.url);
+  S.previewT = null;
   S.file = file;
   S.url = URL.createObjectURL(file);
   video.src = S.url;
@@ -668,6 +732,7 @@ let rafId = null, lastTs = 0;
 
 function seekOut(t){
   if(!S.clips.length) return;
+  S.previewT = null;
   t = clamp(t, 0, outDuration());
   const hit = clipAt(t);
   if(!hit) return;
@@ -678,6 +743,7 @@ function seekOut(t){
 }
 
 function play(){
+  S.previewT = null;
   if(!S.clips.length) return;
   ensureAudio();
   if(S.outTime >= outDuration() - 0.05) seekOut(0);
@@ -730,6 +796,1042 @@ function updatePlayhead(){
   const pct = total > 0 ? clamp(S.outTime/total,0,1)*100 : 0;
   $('playhead').style.left = pct + '%';
   $('tCur').textContent = fmt(S.outTime);
+}
+
+/* ============================ 제목 모션 엔진 ============================ */
+/* scripts/eltango_motion.py 의 번호표를 브라우저 캔버스로 그대로 옮겼습니다.
+   스타일  1 모던 딥그린·골드 / 2 검정바 핑퐁 / 3 타자기 에세이 / 4 여행 브이로그 / 5 후킹 굵은 자막 / 6 5분 홈트 카운트
+   모션    1 타자기  2 숫자 카운트업  3 물결 웨이브  4 핑퐁 바운스  5 사방 산개  6 슬라이드 업  7 좌우 분할 등장
+          8 줌 펀치  9 블러 페이드인  10 형광펜 하이라이트  11 한 글자씩 드롭  12 네온·골드 글로우
+          13 플래시 임팩트  14 스플릿 줌                                              */
+
+const M_SANS = '"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif';
+const M_SERIF = '"Noto Serif KR","Nanum Myeongjo","Apple SD Gothic Neo",serif';
+const M_GOLD = '#F2CC88';
+
+const MOTION_STYLES = {
+  1:{num:1, name:'모던 딥그린·골드', use:'학원 공지·브랜드 톤 기본',
+     size:92, fill:'#FFFFFF', titleWeight:800,
+     panel:'#0F3D31', panelA:0.886, panelLine:'#D8C6A3', panelLineA:0.627, radius:30,
+     padX:48, padY:36, accentBar:'#D8C6A3',
+     labelSize:34, labelWeight:700, labelFill:M_GOLD, label:'엘땅고 강남본점 · 24년차 피쉬쌤',
+     align:'left', pos:'top', posY:52, sidePad:48, maxChars:12, maxLines:2,
+     sw:'linear-gradient(135deg,#0F3D31,#14503F)', swColor:M_GOLD, swText:'EL TANGO',
+     defaultMotion:4},
+  2:{num:2, name:'검정바 핑퐁', use:'자막형 정보·날짜 안내',
+     size:96, fill:'#FFFFFF', titleWeight:800,
+     panel:'#000000', panelA:0.839, radius:24, padX:52, padY:32, accentRule:M_GOLD,
+     labelSize:30, labelWeight:700, labelFill:M_GOLD, label:'EL TANGO · SEOUL',
+     align:'center', pos:'top', posY:64, sidePad:48, maxChars:12, maxLines:2,
+     sw:'linear-gradient(135deg,#0A0A0A,#2A2A2A)', swColor:'#FFFFFF', swText:'EL TANGO · SEOUL',
+     defaultMotion:4},
+  3:{num:3, name:'타자기 에세이', use:'에세이·브런치 감성 (틀려도 괜찮아)',
+     size:78, fill:'#FBF9F5', serif:true, titleWeight:500,
+     padX:40, padY:28, accentRule:'#D8C6A3',
+     labelSize:30, labelWeight:500, labelFill:'#D8C6A3', label:'피쉬쌤 · 엘땅고',
+     align:'left', pos:'center', posY:560, sidePad:92, maxChars:13, maxLines:3,
+     letterSpacing:2, scrim:0.60,
+     sw:'linear-gradient(135deg,#2A2320,#4A3B31)', swColor:'#FBF9F5', swText:'틀려도 괜찮아',
+     defaultMotion:1},
+  4:{num:4, name:'여행 브이로그', use:'tangotraveler · 남미 여행기',
+     size:84, fill:'#FFFFFF', titleWeight:800,
+     padX:0, padY:0, accentRule:'#FFFFFF',
+     labelSize:28, labelWeight:700, labelFill:'#FFFFFF', label:'TANGOTRAVELER · BUENOS AIRES',
+     align:'left', pos:'bottom', posY:0, sidePad:72, maxChars:12, maxLines:2,
+     shadow:true, scrim:0.46,
+     sw:'linear-gradient(160deg,#123A4A,#3F6E7A)', swColor:'#FFFFFF', swText:'BUENOS AIRES',
+     defaultMotion:6},
+  5:{num:5, name:'후킹 굵은 자막', use:'쇼츠·릴스 3초 훅',
+     size:104, fill:'#FFFFFF', titleWeight:800, strokeW:9, stroke:'rgba(0,0,0,.92)',
+     padX:0, padY:0,
+     labelSize:30, labelWeight:700, labelFill:M_GOLD, label:'',
+     align:'center', pos:'top', posY:120, sidePad:56, maxChars:10, maxLines:2,
+     emphasisLastLine:true, scrim:0.32,
+     sw:'linear-gradient(135deg,#141414,#3A2A14)', swColor:'#FFFFFF', swText:'몸치 탈출',
+     defaultMotion:8},
+  6:{num:6, name:'5분 홈트 카운트', use:'5분 연습·카운트다운 홈트',
+     size:112, fill:'#FFFFFF', titleWeight:800,
+     panel:'#082A22', panelA:0.910, panelLine:'#D8C6A3', panelLineA:0.588, radius:44,
+     padX:90, padY:46,
+     labelSize:38, labelWeight:700, labelFill:M_GOLD, label:'TANGO HOME TRAINING',
+     align:'center', pos:'center', posY:760, sidePad:48, maxChars:9, maxLines:2,
+     countLayout:true,
+     sw:'linear-gradient(135deg,#082A22,#0F3D31)', swColor:M_GOLD, swText:'5분',
+     defaultMotion:2}
+};
+
+const MOTION_LIST = {
+  1:{num:1, key:'typewriter', name:'타자기', inT:0.05, desc:'한 글자씩 찍히고 깜빡이는 커서'},
+  2:{num:2, key:'countup',    name:'숫자 카운트업', inT:0.90, desc:'숫자가 0에서 목표까지 차오름'},
+  3:{num:3, key:'wave',       name:'물결 웨이브', inT:0.30, desc:'글자가 물결처럼 출렁이며 안착'},
+  4:{num:4, key:'pingpong',   name:'핑퐁 바운스', inT:0.46, desc:'0.6→1.13→0.95→1.0 탄성 바운스'},
+  5:{num:5, key:'scatter',    name:'사방 산개', inT:0.42, desc:'글자가 사방에서 모여들어 안착'},
+  6:{num:6, key:'slideup',    name:'슬라이드 업', inT:0.45, desc:'아래에서 미끄러져 올라옴'},
+  7:{num:7, key:'splitlr',    name:'좌우 분할 등장', inT:0.40, desc:'짝수 글자 왼쪽·홀수 글자 오른쪽에서'},
+  8:{num:8, key:'zoompunch',  name:'줌 펀치', inT:0.26, desc:'1.34배에서 탁 내려앉는 임팩트'},
+  9:{num:9, key:'blurfade',   name:'블러 페이드인', inT:0.50, desc:'흐림에서 선명하게 떠오름'},
+  10:{num:10, key:'highlight',name:'형광펜 하이라이트', inT:0.16, desc:'골드 형광펜이 글자를 쓸고 지나감'},
+  11:{num:11, key:'chardrop', name:'한 글자씩 드롭', inT:0.55, desc:'위에서 통통 튀며 한 글자씩 낙하'},
+  12:{num:12, key:'neon',     name:'네온·골드 글로우', inT:0.35, desc:'골드 빛이 숨쉬듯 번짐'},
+  13:{num:13, key:'flash',    name:'플래시 임팩트', inT:0.20, desc:'흰 섬광 + 진동 + 스케일 펀치'},
+  14:{num:14, key:'splitzoom',name:'스플릿 줌', inT:0.34, desc:'상·하 절반이 갈라져 줌인으로 합쳐짐'}
+};
+
+const mMeasure = document.createElement('canvas').getContext('2d');
+const M_FILTER_OK = (function(){
+  try{ const c = document.createElement('canvas').getContext('2d'); c.filter = 'blur(2px)'; return c.filter === 'blur(2px)'; }
+  catch(e){ return false; }
+})();
+
+function mClamp(v, lo, hi){ lo = (lo==null?0:lo); hi = (hi==null?1:hi); return v < lo ? lo : (v > hi ? hi : v); }
+function mSmooth(t){ t = mClamp(t); return t*t*(3-2*t); }
+function mEaseCubic(t){ t = mClamp(t); return 1 - Math.pow(1-t,3); }
+function mEaseQuart(t){ t = mClamp(t); return 1 - Math.pow(1-t,4); }
+function mEaseBack(t, s){ t = mClamp(t) - 1; s = (s==null?1.7:s); return 1 + t*t*((s+1)*t + s); }
+function mEaseBounce(t){
+  t = mClamp(t); const n1 = 7.5625, d1 = 2.75;
+  if(t < 1/d1) return n1*t*t;
+  if(t < 2/d1){ t -= 1.5/d1; return n1*t*t + 0.75; }
+  if(t < 2.5/d1){ t -= 2.25/d1; return n1*t*t + 0.9375; }
+  t -= 2.625/d1; return n1*t*t + 0.984375;
+}
+function mSpring(u){
+  u = mClamp(u);
+  const keys = [[0,0.60],[0.22,1.13],[0.44,0.955],[0.66,1.028],[1,1.0]];
+  for(let i=0;i<keys.length-1;i++){
+    const u0 = keys[i][0], v0 = keys[i][1], u1 = keys[i+1][0], v1 = keys[i+1][1];
+    if(u <= u1){ const t = (u1===u0) ? 0 : (u-u0)/(u1-u0); return v0 + (v1-v0)*mSmooth(t); }
+  }
+  return 1;
+}
+function mMulberry(seed){
+  let a = seed >>> 0;
+  return function(){
+    a = (a + 0x6D2B79F5) >>> 0;
+    let t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+function mFontOf(st, size, weight){
+  const w = weight || st.titleWeight || 800;
+  return w + ' ' + Math.max(8, Math.round(size)) + 'px ' + (st.serif ? M_SERIF : M_SANS);
+}
+function mAlphaColor(hex, a){
+  if(hex.charAt(0) !== '#') return hex;
+  const h = hex.slice(1);
+  const n = parseInt(h.length === 3 ? h.split('').map(c=>c+c).join('') : h, 16);
+  return 'rgba(' + ((n>>16)&255) + ',' + ((n>>8)&255) + ',' + (n&255) + ',' + mClamp(a) + ')';
+}
+
+/* ---------- 줄바꿈 (어절 유지 + 줄 길이 균형) ---------- */
+function mWrapText(text, font, maxW, maxChars, maxLines){
+  const c2 = mMeasure;
+  c2.font = font;
+  const words = String(text || '').replace(/\s+/g,' ').trim().split(' ').filter(Boolean);
+  if(!words.length) return [];
+  const ok = (s)=> (c2.measureText(s).width <= maxW && s.length <= maxChars);
+  const greedy = [];
+  let cur = '';
+  for(const w of words){
+    const cand = cur ? cur + ' ' + w : w;
+    if(!cur || ok(cand)) cur = cand;
+    else { greedy.push(cur); cur = w; }
+  }
+  if(cur) greedy.push(cur);
+
+  let lines = greedy;
+  const n = Math.min(greedy.length, maxLines);
+  if(greedy.length > 1 && greedy.length <= 3 && words.length >= 3){
+    let best = null, bestScore = Infinity;
+    // 어절 경계 n줄 분할 전수 조사 (어절 수가 적어 경우의 수가 작다)
+    const groups = [];
+    const walk = (start, left, acc) => {
+      if(left === 1){ groups.push(acc.concat([[start, words.length]])); return; }
+      for(let i = start + 1; i <= words.length - left + 1; i++) walk(i, left-1, acc.concat([[start, i]]));
+    };
+    walk(0, n, []);
+    for(const g of groups){
+      const cands = g.map(([a,b])=>words.slice(a,b).join(' '));
+      if(!cands.every(ok)) continue;
+      const widths = cands.map(c=>c2.measureText(c).width);
+      const mx = Math.max.apply(null, widths), mn = Math.min.apply(null, widths);
+      const score = mx + 0.35*(mx-mn);
+      if(score < bestScore){ best = cands; bestScore = score; }
+    }
+    if(best) lines = best;
+  }
+  // 한 줄이 너무 길면 글자 단위로 쪼갠다
+  const out = [];
+  for(const ln of lines){
+    if(c2.measureText(ln).width <= maxW && ln.length <= maxChars){ out.push(ln); continue; }
+    let buf = '';
+    for(const ch of ln){
+      if(c2.measureText(buf + ch).width > maxW || (buf.length + 1) > maxChars){
+        if(buf) out.push(buf);
+        buf = ch;
+      }else buf += ch;
+    }
+    if(buf) out.push(buf);
+  }
+  if(out.length > maxLines){
+    const head = out.slice(0, maxLines - 1);
+    head.push(out.slice(maxLines - 1).join(' '));
+    return head;
+  }
+  return out;
+}
+
+/* ---------- 블록 만들기 (좌표는 캔버스 절대 좌표) ---------- */
+function mBuildBlock(text, styleNum, label, W, H){
+  const st = MOTION_STYLES[styleNum] || MOTION_STYLES[1];
+  const k = Math.min(W, H) / 1080;      // 짧은 변 기준 — 1:1·16:9에서도 제목이 화면을 넘지 않게
+  const lab = (label == null || label === undefined ? st.label : label) || '';
+  const src = String(text || '').trim();
+  const blk = { style:st, k:k, W:W, H:H, glyphs:[], lines:[], num:null, meta:{},
+                panel:null, accentBar:null, accentRule:null, label:null,
+                content:{x0:0, y0:0, x1:W, y1:0}, rnd:[] };
+  if(!src) return null;
+
+  if(st.countLayout){
+    const mm = src.match(/\d[\d,]*(?:\.\d+)?/);
+    if(mm){ mBuildCount(blk, src, mm, st, k, W, H, lab); return blk; }
+  }
+  mBuildText(blk, src, st, k, W, H, lab);
+  return blk;
+}
+
+function mBuildText(blk, text, st, k, W, H, lab){
+  const c2 = mMeasure;
+  const maxW = W - st.sidePad*k*2 - st.padX*k*2;
+  let size = st.size * k;
+  let font = mFontOf(st, size);
+  let lines = mWrapText(text, font, maxW, st.maxChars, st.maxLines);
+  let guard = 0;
+  while(size > 44*k && guard++ < 40){
+    c2.font = font;
+    const wmax = lines.reduce((m,l)=>Math.max(m, c2.measureText(l).width), 0);
+    if(wmax <= maxW) break;
+    size -= 4*k;
+    font = mFontOf(st, size);
+    lines = mWrapText(text, font, maxW, st.maxChars, st.maxLines);
+  }
+  if(!lines.length) lines = [text];
+  c2.font = font;
+  let met = c2.measureText('가');
+  const asc = met.fontBoundingBoxAscent || met.actualBoundingBoxAscent || size*0.86;
+  const desc = met.fontBoundingBoxDescent || met.actualBoundingBoxDescent || size*0.22;
+  const lineH = size * 1.24;
+  const widths = lines.map(l => c2.measureText(l).width);
+  const textW = Math.max.apply(null, widths);
+
+  const hasPanel = !!st.panel;
+  const padX = hasPanel ? st.padX*k : 0;
+  const padY = hasPanel ? st.padY*k : 0;
+  const accOff = (st.accentBar && hasPanel) ? 30*k : 0;
+  const contentW = textW + accOff + padX*2;
+  let px0;
+  if(hasPanel || st.align !== 'left') px0 = Math.max(st.sidePad*k, (W - contentW)/2);
+  else px0 = st.sidePad*k;
+  const px1 = px0 + contentW;
+  const xText = (st.align === 'left') ? (px0 + padX + accOff) : (px0 + px1)/2;
+
+  const ls = (st.letterSpacing || 0) * k;
+  let idx = 0;
+  lines.forEach(function(ln, li){
+    const base = li*lineH + asc;
+    let x = (st.align === 'left') ? xText : xText - widths[li]/2;
+    for(const ch of ln){
+      const adv = c2.measureText(ch).width;
+      let fill = st.fill;
+      if(st.emphasisLastLine && lines.length > 1 && li === lines.length-1) fill = M_GOLD;
+      blk.glyphs.push({ch:ch, x:x, base:base, adv:adv, idx:idx++, line:li, size:size,
+                       fill:fill, strokeW:(st.strokeW||0)*k, stroke:st.stroke||null});
+      x += adv + ls;
+    }
+  });
+  blk.lines = lines;
+
+  const contentBottom = (lines.length-1)*lineH + asc + desc;
+  const labH = lab ? (st.labelSize*k + 22*k) : 0;
+  const py0 = -padY;
+  const py1 = contentBottom + padY + labH;
+  if(hasPanel) blk.panel = {x0:px0, y0:py0, x1:px1, y1:py1};
+  if(st.accentBar && hasPanel){
+    blk.accentBar = {x:px0 + 20*k, y:py0 + padY*0.55, w:9*k, h:(py1-py0) - padY*1.1};
+  }
+  let ruleY = null;
+  if(st.accentRule && !hasPanel){
+    const ruleW = Math.min(textW, 220*k);
+    const rx0 = (st.align === 'left') ? px0 : (W - ruleW)/2;
+    ruleY = contentBottom + 22*k;
+    blk.accentRule = {x:rx0, y:ruleY, w:ruleW, h:3*k, color:st.accentRule};
+  }
+  if(lab){
+    let ly, lx, anchor;
+    if(hasPanel){
+      ly = contentBottom + 20*k + st.labelSize*k;
+      lx = (st.align === 'left') ? xText : (px0+px1)/2;
+      anchor = (st.align === 'left') ? 'left' : 'center';
+    }else{
+      ly = ruleY != null ? (ruleY + 22*k + st.labelSize*k) : (contentBottom + 26*k + st.labelSize*k);
+      lx = (st.align === 'left') ? px0 : W/2;
+      anchor = (st.align === 'left') ? 'left' : 'center';
+    }
+    blk.label = {text:lab, x:lx, base:ly, size:st.labelSize*k, fill:st.labelFill, anchor:anchor};
+  }
+
+  // 숫자 카운트업 구간
+  const nm = text.match(/\d[\d,]*(?:\.\d+)?/);
+  if(nm){
+    const flat = lines.join('');
+    const pos = flat.indexOf(nm[0]);
+    if(pos >= 0){
+      const gs = blk.glyphs.filter(g => g.idx >= pos && g.idx < pos + nm[0].length);
+      if(gs.length){
+        blk.num = {text:nm[0], value:parseFloat(nm[0].replace(/,/g,'')), x1:gs[gs.length-1].x + gs[gs.length-1].adv,
+                   base:gs[0].base, size:size, fill:gs[0].fill,
+                   strokeW:(st.strokeW||0)*k, stroke:st.stroke||null,
+                   decimals: nm[0].indexOf('.') >= 0 ? nm[0].split('.')[1].length : 0,
+                   glyphIdx: gs.map(g=>g.idx)};
+      }
+    }
+  }
+
+  // 내용 영역 bbox (상대 좌표)
+  let xsMin = px0, xsMax = px1;
+  blk.glyphs.forEach(function(g){ xsMin = Math.min(xsMin, g.x); xsMax = Math.max(xsMax, g.x + g.adv); });
+  let y0 = hasPanel ? py0 : 0;
+  let y1 = hasPanel ? py1 : (blk.label ? (blk.label.base + 6*k) : contentBottom);
+  if(blk.accentRule) y1 = Math.max(y1, blk.accentRule.y + 6*k);
+  const contentH = y1 - y0;
+  let topAbs;
+  if(st.pos === 'top') topAbs = st.posY*k;
+  else if(st.pos === 'bottom') topAbs = H - (st.num === 4 ? 330 : 260)*k - contentH;
+  else topAbs = (st.num === 6) ? (H - contentH)/2 - 40*k : st.posY*k;
+  if(topAbs < 40*k) topAbs = 40*k;
+
+  const dy = topAbs - y0;
+  mShiftBlock(blk, dy);
+  blk.content = {x0:xsMin, y0:y0 + dy, x1:xsMax, y1:y1 + dy};
+
+  // 모션별 결정적 난수 (사방 산개)
+  const rnd = mMulberry(7);
+  blk.rnd = blk.glyphs.map(function(){ return [rnd()*0.5-0.25, rnd()*100-40, rnd()*28-14]; });
+}
+
+function mBuildCount(blk, text, mm, st, k, W, H, lab){
+  const c2 = mMeasure;
+  const numTxt = mm[0];
+  let tail = text.slice(mm.index + numTxt.length);
+  let unit = '';
+  const um = tail.match(/^\s*([가-힣A-Za-z]{1,2})/);
+  if(um){ unit = um[1]; tail = tail.slice(um[0].length); }
+  const rest = tail.trim();
+  const size = st.size * k;
+  const font = mFontOf(st, size);
+  c2.font = font;
+  let met = c2.measureText('가');
+  const asc = met.fontBoundingBoxAscent || met.actualBoundingBoxAscent || size*0.86;
+  const desc = met.fontBoundingBoxDescent || met.actualBoundingBoxDescent || size*0.22;
+  const numW = c2.measureText(numTxt).width;
+  const unitSize = size*0.50;
+  const unitFont = mFontOf(st, unitSize, 700);
+  c2.font = unitFont;
+  const unitW = unit ? c2.measureText(unit).width : 0;
+  const groupW = numW + (unit ? unitW + 10*k : 0);
+  const restSize = size*0.40;
+  const restFont = mFontOf(st, restSize, 700);
+  c2.font = restFont;
+  const restW = rest ? c2.measureText(rest).width : 0;
+
+  const padX = Math.max(st.padX*k, 58*k);
+  const padY = st.padY*k;
+  const innerW = Math.max(groupW, restW);
+  const panelW = innerW + padX*2;
+  const panelX0 = (W - panelW)/2, panelX1 = (W + panelW)/2;
+  const base = asc;                       // 상대 좌표: 패널 위가 0
+  const gx = (W - groupW)/2;
+  let yBottom = base + desc;
+  const labelBase = -20*k;                 // 패널 위 라벨
+  let restBase = 0;
+  if(rest){ restBase = yBottom + 30*k + restSize*0.4; yBottom = restBase + restSize*0.28; }
+  const panelY0 = -padY, panelY1 = yBottom + padY;
+
+  blk.num = {text:numTxt, value:parseFloat(numTxt.replace(/,/g,'')), x0:gx, x1:gx + numW,
+             base:base, size:size, fill:st.fill, strokeW:(st.strokeW||0)*k, stroke:st.stroke||null,
+             decimals: numTxt.indexOf('.') >= 0 ? numTxt.split('.')[1].length : 0,
+             unit:unit, unitSize:unitSize, unitX:gx + numW + 10*k, unitBase:base,
+             rest:rest, restSize:restSize, restBase:restBase, glyphIdx:[]};
+  blk.meta.unit = unit; blk.meta.rest = rest;
+  blk.panel = {x0:panelX0, y0:panelY0, x1:panelX1, y1:panelY1};
+  blk.lines = [numTxt + unit + (rest ? ' ' + rest : '')];
+
+  let y0 = panelY0, y1 = panelY1;
+  let xsMin = panelX0, xsMax = panelX1;
+  if(lab){
+    c2.font = mFontOf(st, st.labelSize*k, st.labelWeight);
+    const lw = c2.measureText(lab).width;
+    blk.label = {text:lab, x:W/2, base:panelY0 - 20*k, size:st.labelSize*k, fill:st.labelFill, anchor:'center'};
+    xsMin = Math.min(xsMin, (W - lw)/2 - 10*k);
+    xsMax = Math.max(xsMax, (W + lw)/2 + 10*k);
+    y0 = panelY0 - 20*k - st.labelSize*k;
+  }
+  const contentH = y1 - y0;
+  const topAbs = (H - contentH)/2 - 40*k;
+  const dy = Math.max(40*k, topAbs) - y0;
+  mShiftBlock(blk, dy);
+  blk.content = {x0:xsMin, y0:y0 + dy, x1:xsMax, y1:y1 + dy};
+}
+
+function mShiftBlock(blk, dy){
+  blk.glyphs.forEach(function(g){ g.base += dy; });
+  if(blk.panel){ blk.panel.y0 += dy; blk.panel.y1 += dy; }
+  if(blk.accentBar) blk.accentBar.y += dy;
+  if(blk.accentRule) blk.accentRule.y += dy;
+  if(blk.label) blk.label.base += dy;
+  if(blk.num){ blk.num.base += dy; blk.num.unitBase += dy; blk.num.restBase += dy; }
+}
+
+/* ---------- 프레임 상태 (모션 14종) ---------- */
+function mState(motionNum, t, dur, blk){
+  const st = blk.style, k = blk.k, W = blk.W;
+  const g = blk.glyphs, n = g.length;
+  const fs = {alpha:1, scale:1, dx:0, dy:0, blur:0, glow:0, flash:0,
+              panelAlpha:1, panelScale:1,
+              charAlpha:null, charDx:null, charDy:null, charScale:null, charRot:null,
+              cursor:null, cursorAlpha:1, hlProgress:-1, numberText:null, split:null};
+  const mv = MOTION_LIST[motionNum] || MOTION_LIST[4];
+  const cx = (blk.content.x0 + blk.content.x1)/2;
+  const cy = (blk.content.y0 + blk.content.y1)/2;
+
+  switch(mv.key){
+    case 'typewriter': {
+      const cps = 0.052;
+      const typed = t / cps;
+      fs.charAlpha = g.map(function(gl){ return gl.idx < typed ? 1 : 0; });
+      const last = Math.min(n-1, Math.floor(typed) - 1);
+      if(last >= 0 && n){
+        const gl = g[last];
+        fs.cursor = {x: gl.x + gl.adv, base: gl.base, size: gl.size};
+        fs.cursorAlpha = (t*2.2) % 1 < 0.62 ? 1 : 0.10;
+      }else if(n){
+        fs.cursor = {x: g[0].x, base: g[0].base, size: g[0].size};
+        fs.cursorAlpha = 0.9;
+      }
+      if(dur - t < 0.05) fs.cursor = null;
+      break;
+    }
+    case 'countup': {
+      fs.alpha = mClamp(t/0.18);
+      const u = mEaseCubic(mClamp(t/0.95));
+      if(blk.num){
+        const val = blk.num.value * u;
+        const dec = blk.num.decimals || 0;
+        fs.numberText = dec
+          ? val.toLocaleString('en-US', {minimumFractionDigits:dec, maximumFractionDigits:dec})
+          : Math.round(val).toLocaleString('en-US');
+        if(t >= 0.95 && t <= 1.25){
+          const p = (t - 0.95)/0.30;
+          fs.scale = 1 + 0.05*Math.sin(Math.PI*p);
+        }
+      }
+      break;
+    }
+    case 'wave': {
+      const dec = Math.max(0.18, 1 - t/1.15);
+      const amp = 26*dec*k;
+      fs.charDy = g.map(function(gl){ return amp*Math.sin(2*Math.PI*(t*1.7) - gl.idx*0.55); });
+      fs.charRot = g.map(function(gl){ return 1.6*dec*Math.sin(2*Math.PI*t*1.7 - gl.idx*0.55); });
+      fs.charAlpha = g.map(function(gl){ return mClamp((t - gl.idx*0.018)/0.26); });
+      fs.panelAlpha = mClamp(t/0.25);
+      break;
+    }
+    case 'pingpong': {
+      const u = mClamp(t/0.60);
+      fs.scale = mSpring(u);
+      fs.alpha = mClamp(t/0.10);
+      const amp = 16*k*Math.max(0, 1 - t/0.75);
+      fs.charDy = g.map(function(gl){ return amp*Math.sin(2*Math.PI*(t*3.1) - gl.idx*0.9); });
+      fs.panelAlpha = mClamp(t/0.12);
+      fs.panelScale = 1 + 0.05*Math.max(0, 1 - t/0.55)*Math.sin(Math.PI*Math.min(1, t/0.55));
+      break;
+    }
+    case 'scatter': {
+      const reach = (st.panel ? 165 : 330) * k;
+      fs.charDx = []; fs.charDy = []; fs.charRot = []; fs.charAlpha = [];
+      g.forEach(function(gl, i){
+        const r = blk.rnd[i] || [0,0,0];
+        const delay = gl.idx*0.012;
+        const u = mEaseCubic(mClamp((t - delay)/0.44));
+        let ang = Math.atan2(gl.base - cy, gl.x + gl.adv/2 - cx) + r[0];
+        const dist = reach + r[1];
+        let ddx = Math.cos(ang)*dist*(1-u);
+        ddx = Math.max(ddx, -(gl.x - 10*k));
+        ddx = Math.min(ddx, W - 10*k - (gl.x + gl.adv));
+        fs.charDx.push(ddx);
+        fs.charDy.push(Math.sin(ang)*dist*0.66*(1-u));
+        fs.charRot.push(r[2]*(1-u));
+        fs.charAlpha.push(mClamp(u*1.6));
+      });
+      fs.panelAlpha = mClamp((t - 0.20)/0.20);
+      fs.panelScale = 0.94 + 0.06*mEaseCubic(mClamp((t - 0.20)/0.22));
+      break;
+    }
+    case 'slideup': {
+      const u = mEaseQuart(mClamp(t/0.50));
+      fs.alpha = mClamp(t/0.30);
+      fs.dy = (1-u)*120*k;
+      fs.blur = (1-u)*3.0;
+      fs.panelAlpha = mClamp(t/0.35);
+      break;
+    }
+    case 'splitlr': {
+      const reach = (st.panel ? 170 : 330) * k;
+      fs.charDx = []; fs.charRot = []; fs.charAlpha = [];
+      g.forEach(function(gl){
+        const delay = gl.idx*0.010;
+        const u = mEaseBack(mClamp((t - delay)/0.42), 1.2);
+        const side = (gl.idx % 2 === 0) ? -1 : 1;
+        let ddx = side*reach*(1-u);
+        ddx = Math.max(ddx, -(gl.x - 10*k));
+        ddx = Math.min(ddx, W - 10*k - (gl.x + gl.adv));
+        fs.charDx.push(ddx);
+        fs.charRot.push(side*6*(1-u));
+        fs.charAlpha.push(mClamp((t - delay)/0.16));
+      });
+      fs.panelAlpha = mClamp((t - 0.12)/0.20);
+      break;
+    }
+    case 'zoompunch': {
+      const u = mEaseQuart(mClamp(t/0.24));
+      fs.scale = 1.34 - 0.34*u;
+      fs.alpha = mClamp(t/0.06);
+      if(t < 0.30){
+        fs.dx = 9*k*Math.sin(62*t)*Math.exp(-9*t);
+        fs.dy = 5*k*Math.cos(51*t)*Math.exp(-9*t);
+      }
+      fs.flash = 0.22*Math.exp(-16*t);
+      fs.panelAlpha = mClamp(t/0.10);
+      break;
+    }
+    case 'blurfade': {
+      const u = mClamp(t/0.55);
+      fs.alpha = mEaseCubic(u);
+      fs.blur = 13*(1-u)*(1-u)*(1-u*0.3)*k;
+      fs.scale = 1.045 - 0.045*mEaseCubic(u);
+      fs.panelAlpha = mEaseCubic(mClamp(t/0.30));
+      break;
+    }
+    case 'highlight': {
+      fs.alpha = mClamp(t/0.14);
+      fs.hlProgress = mClamp((t - 0.18)/0.50);
+      if(fs.hlProgress >= 0) fs.scale = 1 + 0.012*Math.sin(Math.PI*fs.hlProgress);
+      fs.panelAlpha = mClamp(t/0.20);
+      break;
+    }
+    case 'chardrop': {
+      fs.charDy = []; fs.charScale = []; fs.charAlpha = [];
+      g.forEach(function(gl){
+        const delay = gl.idx*0.035;
+        const u = mClamp((t - delay)/0.55);
+        fs.charDy.push(-210*k*(1 - mEaseBounce(u)));
+        let sq = 1;
+        if(u > 0.55 && u < 0.95) sq = 1 + 0.12*Math.sin(Math.PI*(u - 0.55)/0.40);
+        fs.charScale.push(sq);
+        fs.charAlpha.push(mClamp(u*3));
+      });
+      fs.panelAlpha = mClamp(t/0.15);
+      break;
+    }
+    case 'neon': {
+      const u = mClamp(t/0.35);
+      fs.alpha = mEaseCubic(u);
+      fs.scale = 0.97 + 0.03*mEaseCubic(u);
+      fs.glow = (0.35 + 0.30*(0.5 + 0.5*Math.sin(2*Math.PI*(t - 0.2)*0.9)))*u;
+      fs.panelAlpha = mClamp(t/0.30);
+      break;
+    }
+    case 'flash': {
+      const u = mEaseQuart(mClamp(t/0.18));
+      fs.scale = 1.34 - 0.34*u;
+      fs.alpha = 1;
+      fs.flash = 0.80*Math.exp(-13*t);
+      if(t < 0.36){
+        fs.dx = 12*k*Math.sin(85*t)*Math.exp(-10*t);
+        fs.dy = 7*k*Math.cos(73*t)*Math.exp(-10*t);
+      }
+      fs.panelAlpha = mClamp(t/0.08);
+      break;
+    }
+    case 'splitzoom': {
+      const u = mEaseQuart(mClamp(t/0.38));
+      fs.split = {gap:(1-u)*74*k, scale:0.86 + 0.14*u,
+                  aTop:mClamp(t/0.18), aBottom:mClamp((t - 0.04)/0.18)};
+      fs.panelAlpha = mClamp(t/0.12);
+      break;
+    }
+  }
+  return fs;
+}
+
+/* ---------- 그리기 ---------- */
+let _mLayer = null;
+function mLayer(W, H){
+  if(!_mLayer || _mLayer.canvas.width !== W || _mLayer.canvas.height !== H){
+    const c = document.createElement('canvas');
+    c.width = W; c.height = H;
+    _mLayer = {canvas:c, ctx:c.getContext('2d')};
+  }
+  _mLayer.ctx.setTransform(1,0,0,1,0,0);
+  _mLayer.ctx.clearRect(0,0,W,H);
+  return _mLayer;
+}
+
+function mDrawScrim(c2, blk, fs){
+  const st = blk.style;
+  if(!st.scrim) return;
+  const a = mClamp(st.scrim * fs.panelAlpha);
+  if(a <= 0.02) return;
+  const b = blk.content;
+  const cx = (b.x0+b.x1)/2, cy = (b.y0+b.y1)/2;
+  const r = Math.max((b.x1-b.x0)*0.78, (b.y1-b.y0)*0.95) + 90*blk.k;
+  const grd = c2.createRadialGradient(cx, cy, r*0.18, cx, cy, r);
+  grd.addColorStop(0, 'rgba(6,9,8,' + a + ')');
+  grd.addColorStop(0.62, 'rgba(6,9,8,' + (a*0.72) + ')');
+  grd.addColorStop(1, 'rgba(6,9,8,0)');
+  c2.save(); c2.fillStyle = grd;
+  c2.fillRect(cx - r, cy - r, r*2, r*2);
+  c2.restore();
+}
+
+function mDrawPanel(c2, blk, fs){
+  const st = blk.style;
+  if(!blk.panel) {
+    if(blk.accentRule && fs.panelAlpha > 0.02){
+      const r = blk.accentRule;
+      c2.save(); c2.globalAlpha = fs.panelAlpha;
+      c2.fillStyle = mAlphaColor(r.color, 0.82);
+      c2.fillRect(r.x, r.y, r.w, Math.max(1, r.h));
+      c2.restore();
+    }
+    return;
+  }
+  const p = blk.panel;
+  const cx = (p.x0+p.x1)/2, cy = (p.y0+p.y1)/2;
+  const w = (p.x1-p.x0)*fs.panelScale, h = (p.y1-p.y0)*fs.panelScale;
+  c2.save();
+  c2.globalAlpha = fs.panelAlpha * st.panelA;
+  if(st.shadow){ c2.shadowColor = 'rgba(0,0,0,.45)'; c2.shadowBlur = 26*blk.k; c2.shadowOffsetY = 6*blk.k; }
+  roundRect(c2, cx - w/2, cy - h/2, w, h, st.radius*blk.k);
+  c2.fillStyle = st.panel;
+  c2.fill();
+  c2.shadowColor = 'transparent'; c2.shadowBlur = 0; c2.shadowOffsetY = 0;
+  if(st.panelLine){
+    c2.globalAlpha = fs.panelAlpha;
+    c2.lineWidth = 2*blk.k;
+    c2.strokeStyle = mAlphaColor(st.panelLine, st.panelLineA);
+    c2.stroke();
+  }
+  c2.restore();
+  if(blk.accentBar && fs.panelAlpha > 0.02){
+    const a = blk.accentBar;
+    c2.save(); c2.globalAlpha = fs.panelAlpha;
+    c2.fillStyle = st.accentBar;
+    roundRect(c2, a.x, cy - a.h*fs.panelScale/2, a.w, a.h*fs.panelScale, 5*blk.k);
+    c2.fill(); c2.restore();
+  }
+  if(blk.accentRule && fs.panelAlpha > 0.02){
+    const r = blk.accentRule;
+    c2.save(); c2.globalAlpha = fs.panelAlpha;
+    c2.fillStyle = mAlphaColor(r.color, 0.82);
+    c2.fillRect(r.x, r.y, r.w, Math.max(1, r.h));
+    c2.restore();
+  }
+}
+function mDrawHighlight(c2, blk, progress){
+  if(!blk.glyphs.length) return;
+  const byLine = {};
+  blk.glyphs.forEach(function(g){ (byLine[g.line] = byLine[g.line] || []).push(g); });
+  Object.keys(byLine).forEach(function(key){
+    const gs = byLine[key];
+    const lx0 = Math.min.apply(null, gs.map(g=>g.x));
+    const lx1 = Math.max.apply(null, gs.map(g=>g.x + g.adv));
+    const sweep = lx0 + (lx1 - lx0)*mClamp(progress*1.18);
+    const wDraw = sweep - lx0;
+    if(wDraw <= 0) return;
+    const g0 = gs[0], k = blk.k;
+    const hh = g0.size*0.62;
+    const y0 = g0.base - g0.size*0.44;
+    c2.save();
+    c2.fillStyle = 'rgba(242,204,136,.65)';
+    roundRect(c2, lx0 - 6*k, y0, wDraw, hh, hh*0.35);
+    c2.fill();
+    c2.fillStyle = 'rgba(242,204,136,.47)';
+    c2.beginPath();
+    c2.ellipse(lx0 + wDraw - 2*k, y0 + hh/2, 10*k, hh*0.55, 0, 0, Math.PI*2);
+    c2.fill();
+    c2.restore();
+  });
+}
+
+function mDrawGlyphs(c2, blk, fs){
+  const st = blk.style, k = blk.k;
+  const skip = {};
+  if(blk.num && fs.numberText != null) blk.num.glyphIdx.forEach(function(i){ skip[i] = 1; });
+  const glow = fs.glow > 0.02;
+  for(const g of blk.glyphs){
+    if(skip[g.idx]) continue;
+    const ca = fs.charAlpha ? fs.charAlpha[g.idx] : 1;
+    const a = fs.alpha * (ca == null ? 1 : ca);
+    if(a <= 0.01) continue;
+    const dx = fs.charDx ? fs.charDx[g.idx] : 0;
+    const dy = fs.charDy ? fs.charDy[g.idx] : 0;
+    const sc = fs.charScale ? fs.charScale[g.idx] : 1;
+    const rot = fs.charRot ? fs.charRot[g.idx] : 0;
+    c2.save();
+    c2.globalAlpha = a;
+    if(glow){
+      c2.shadowColor = 'rgba(242,204,136,' + mClamp(fs.glow*0.85) + ')';
+      c2.shadowBlur = 30*k*fs.glow;
+    }
+    const ccx = g.x + g.adv/2 + dx, ccy = g.base - g.size*0.36 + dy;
+    if(rot || sc !== 1){
+      c2.translate(ccx, ccy);
+      if(rot) c2.rotate(rot*Math.PI/180);
+      if(sc !== 1) c2.scale(sc, sc);
+      c2.translate(-ccx, -ccy);
+    }
+    c2.font = mFontOf(st, g.size);
+    c2.textAlign = 'left';
+    c2.textBaseline = 'alphabetic';
+    if(g.strokeW > 0 && g.stroke){
+      c2.lineJoin = 'round'; c2.lineWidth = g.strokeW; c2.strokeStyle = g.stroke;
+      c2.strokeText(g.ch, g.x + dx, g.base + dy);
+    }
+    c2.fillStyle = g.fill;
+    c2.fillText(g.ch, g.x + dx, g.base + dy);
+    c2.restore();
+  }
+}
+
+function mDrawNumber(c2, blk, fs){
+  const num = blk.num;
+  if(!num) return;
+  const st = blk.style, k = blk.k;
+  const txt = fs.numberText != null ? fs.numberText : num.text;
+  let a = fs.alpha;
+  if(fs.charAlpha && num.glyphIdx && num.glyphIdx.length){
+    const ca = fs.charAlpha[num.glyphIdx[0]];
+    if(ca != null) a *= ca;
+  }
+  if(a <= 0.01) return;
+  c2.save();
+  c2.globalAlpha = a;
+  if(fs.glow > 0.02){
+    c2.shadowColor = 'rgba(242,204,136,' + mClamp(fs.glow*0.85) + ')';
+    c2.shadowBlur = 30*k*fs.glow;
+  }
+  c2.font = mFontOf(st, num.size);
+  c2.textBaseline = 'alphabetic';
+  c2.textAlign = 'right';
+  if(num.strokeW > 0 && num.stroke){
+    c2.lineJoin = 'round'; c2.lineWidth = num.strokeW; c2.strokeStyle = num.stroke;
+    c2.strokeText(txt, num.x1, num.base);
+  }
+  c2.fillStyle = num.fill;
+  c2.fillText(txt, num.x1, num.base);
+  if(num.unit){
+    c2.textAlign = 'left';
+    c2.font = mFontOf(st, num.unitSize, 700);
+    c2.fillStyle = M_GOLD;
+    c2.fillText(num.unit, num.unitX, num.unitBase);
+  }
+  if(num.rest){
+    c2.textAlign = 'center';
+    c2.font = mFontOf(st, num.restSize, 700);
+    c2.fillStyle = M_GOLD;
+    c2.fillText(num.rest, blk.W/2, num.restBase);
+  }
+  c2.restore();
+}
+
+function mDrawLabel(c2, blk, fs){
+  if(!blk.label) return;
+  const st = blk.style;
+  const L = blk.label;
+  const a = fs.alpha * (0.6 + 0.4*fs.alpha);
+  if(a <= 0.02) return;
+  c2.save();
+  c2.globalAlpha = a;
+  c2.font = mFontOf(st, L.size, st.labelWeight || 700);
+  c2.textBaseline = 'alphabetic';
+  c2.textAlign = L.anchor === 'left' ? 'left' : 'center';
+  c2.fillStyle = L.fill;
+  c2.fillText(L.text, L.x, L.base);
+  c2.restore();
+}
+
+function mDrawCursor(c2, blk, fs){
+  if(!fs.cursor) return;
+  const c = fs.cursor, k = blk.k;
+  const cw = Math.max(8*k, c.size*0.11);
+  const ch = c.size*0.86;
+  c2.save();
+  c2.globalAlpha = mClamp(fs.cursorAlpha) * fs.alpha;
+  c2.fillStyle = M_GOLD;
+  c2.fillRect(c.x + 6*k, c.base - ch, cw, ch);
+  c2.restore();
+}
+
+function mRenderTitle(c2, blk, fs){
+  mDrawScrim(c2, blk, fs);
+  mDrawPanel(c2, blk, fs);
+  if(fs.hlProgress >= 0) mDrawHighlight(c2, blk, fs.hlProgress);
+  mDrawGlyphs(c2, blk, fs);
+  mDrawNumber(c2, blk, fs);
+  mDrawLabel(c2, blk, fs);
+  mDrawCursor(c2, blk, fs);
+}
+
+function mDrawTitleOn(c2, blk, fs){
+  const W = blk.W, H = blk.H, k = blk.k;
+  const b = blk.content;
+  const cx = (b.x0 + b.x1)/2, cy = (b.y0 + b.y1)/2;
+  const needLayer = !!fs.split || (M_FILTER_OK && fs.blur > 0.25);
+  let layer = null;
+  if(needLayer){
+    layer = mLayer(W, H);
+    mRenderTitle(layer.ctx, blk, fs);
+  }
+  c2.save();
+  c2.translate(cx + fs.dx, cy + fs.dy);
+  if(fs.scale !== 1) c2.scale(fs.scale, fs.scale);
+  c2.translate(-cx, -cy);
+  if(layer){
+    if(fs.split){
+      const gap = fs.split.gap, sa = fs.split.scale;
+      const mid = Math.max(2, Math.min(H - 2, cy));
+      const drawHalf = function(srcY, srcH, alpha, dy){
+        if(alpha <= 0.01) return;
+        c2.save();
+        c2.globalAlpha = alpha;
+        c2.drawImage(layer.canvas, 0, srcY, W, srcH,
+                     (W - W*sa)/2, dy, W*sa, srcH*sa);
+        c2.restore();
+      };
+      drawHalf(0, mid, fs.split.aTop, mid - gap - mid*sa);
+      drawHalf(mid, H - mid, fs.split.aBottom, mid + gap);
+    }else{
+      if(M_FILTER_OK && fs.blur > 0.25) c2.filter = 'blur(' + (fs.blur).toFixed(2) + 'px)';
+      c2.drawImage(layer.canvas, 0, 0);
+      c2.filter = 'none';
+    }
+  }else{
+    mRenderTitle(c2, blk, fs);
+  }
+  c2.restore();
+
+  if(fs.flash > 0.01){
+    const r = Math.max(b.x1 - b.x0, (b.y1 - b.y0)*1.5)*0.8 + 70*k;
+    const grd = c2.createRadialGradient(cx, cy, 0, cx, cy, r);
+    grd.addColorStop(0, 'rgba(255,255,255,' + mClamp(fs.flash*0.92) + ')');
+    grd.addColorStop(0.55, 'rgba(255,255,255,' + mClamp(fs.flash*0.42) + ')');
+    grd.addColorStop(1, 'rgba(255,255,255,0)');
+    c2.save();
+    c2.globalCompositeOperation = 'lighter';
+    c2.fillStyle = grd;
+    c2.fillRect(cx - r, cy - r, r*2, r*2);
+    c2.restore();
+  }
+}
+
+/* ---------- 편집기 연결 ---------- */
+let _mCache = {key:'', blk:null};
+function mLabelNow(){
+  if(S.motion.label != null) return S.motion.label;
+  const stl = MOTION_STYLES[S.motion.style];
+  return stl ? stl.label : '';
+}
+function mBlock(W, H){
+  const key = [S.hook, S.motion.style, mLabelNow(), W, H].join('\u0001');
+  if(_mCache.key !== key){
+    let blk = null;
+    try{ blk = mBuildBlock(S.hook, S.motion.style, mLabelNow(), W, H); }catch(e){ blk = null; }
+    _mCache = {key:key, blk:blk};
+  }
+  return _mCache.blk;
+}
+function mInvalidate(){ _mCache = {key:'', blk:null}; }
+
+function mMotionWindow(total){
+  let d = S.motion.dur > 0 ? S.motion.dur : (total || 4);
+  if(total > 0 && d > total) d = total;
+  return Math.max(0.4, d);
+}
+
+function drawMotionTitle(live, W, H){
+  const blk = mBlock(W, H);
+  if(!blk) return;
+  const total = outDuration();
+  const dur = mMotionWindow(total);
+  if(live > dur + 0.001) return;
+  const t = Math.max(0, live);
+  const fs = mState(S.motion.num, t, dur, blk);
+  if(dur < total - 0.01){
+    const OUT = 0.30;
+    if(dur - t < OUT){
+      const q = mSmooth(mClamp((dur - t)/OUT));
+      fs.alpha *= q;
+      fs.scale *= 0.985 + 0.015*q;
+    }
+  }
+  mDrawTitleOn(ctx, blk, fs);
+}
+
+function mMockBg(c2, W, H){
+  const g = c2.createLinearGradient(0, 0, W*0.4, H);
+  g.addColorStop(0, '#16211D');
+  g.addColorStop(0.55, '#0E1A16');
+  g.addColorStop(1, '#1B2A24');
+  c2.fillStyle = g;
+  c2.fillRect(0, 0, W, H);
+  const v = c2.createRadialGradient(W*0.5, H*0.42, 0, W*0.5, H*0.42, W*0.8);
+  v.addColorStop(0, 'rgba(201,154,76,.10)');
+  v.addColorStop(1, 'rgba(0,0,0,.42)');
+  c2.fillStyle = v;
+  c2.fillRect(0, 0, W, H);
+}
+
+/* ---------- 모션 탭 미리보기 ---------- */
+let mPrevRaf = 0, mPrevT0 = 0;
+function mPrevAspect(){
+  return ASPECTS[S.aspect] || ASPECTS['9:16'];
+}
+function drawMotionPreview(t, dur, blk){
+  const cv = $('mPrev');
+  if(!cv) return;
+  const pc = cv.getContext('2d');
+  const W = blk.W, H = blk.H, k = blk.k;
+  const b = blk.content;
+  const padY = 150*k;
+  let y0 = Math.max(0, b.y0 - padY);
+  let y1 = Math.min(H, b.y1 + padY);
+  if(y1 - y0 < 380*k){
+    const mid = (y0 + y1)/2;
+    y0 = Math.max(0, mid - 190*k);
+    y1 = Math.min(H, mid + 190*k);
+  }
+  const cropH = Math.max(120, y1 - y0);
+  const outW = 720;
+  const s = outW / W;
+  const outH = Math.max(100, Math.round(cropH * s));
+  if(cv.width !== outW || cv.height !== outH){ cv.width = outW; cv.height = outH; }
+  pc.setTransform(1,0,0,1,0,0);
+  pc.clearRect(0, 0, outW, outH);
+  const bg = pc.createLinearGradient(0, 0, outW, outH);
+  bg.addColorStop(0, '#16211D'); bg.addColorStop(0.55, '#0E1A16'); bg.addColorStop(1, '#1B2A24');
+  pc.fillStyle = bg; pc.fillRect(0, 0, outW, outH);
+  const vg = pc.createRadialGradient(outW*0.5, outH*0.45, 0, outW*0.5, outH*0.45, outW*0.7);
+  vg.addColorStop(0, 'rgba(201,154,76,.10)'); vg.addColorStop(1, 'rgba(0,0,0,.35)');
+  pc.fillStyle = vg; pc.fillRect(0, 0, outW, outH);
+  const fs = mState(S.motion.num, t, dur, blk);
+  pc.setTransform(s, 0, 0, s, 0, -y0*s);
+  mDrawTitleOn(pc, blk, fs);
+  pc.setTransform(1,0,0,1,0,0);
+}
+function startPreviewLoop(){
+  stopPreviewLoop();
+  mPrevT0 = performance.now();
+  const W = mPrevAspect()[0], H = mPrevAspect()[1];
+  const step = function(){
+    const mv = MOTION_LIST[S.motion.num] || MOTION_LIST[4];
+    const dur = Math.max(1.5, mv.inT + 1.15);
+    const blk = mBlock(W, H);
+    if(blk){
+      const el = (performance.now() - mPrevT0)/1000;
+      const t = Math.min(dur, el % (dur + 0.55));
+      drawMotionPreview(t, dur, blk);
+      $('mPrevTag').textContent = (S.motion.style) + '번 스타일 · ' + S.motion.num + '번 ' + mv.name;
+    }else{
+      const cv = $('mPrev');
+      const pc = cv.getContext('2d');
+      pc.setTransform(1,0,0,1,0,0);
+      pc.clearRect(0, 0, cv.width, cv.height);
+      pc.fillStyle = '#0E1A16'; pc.fillRect(0, 0, cv.width, cv.height);
+      pc.fillStyle = 'rgba(251,249,245,.55)';
+      pc.font = '500 22px ' + M_SANS;
+      pc.textAlign = 'center'; pc.textBaseline = 'middle';
+      pc.fillText('제목을 입력하면 여기에 움직여 보여요', cv.width/2, cv.height/2);
+    }
+    mPrevRaf = requestAnimationFrame(step);
+  };
+  mPrevRaf = requestAnimationFrame(step);
+}
+function stopPreviewLoop(){
+  if(mPrevRaf) cancelAnimationFrame(mPrevRaf);
+  mPrevRaf = 0;
+}
+
+function previewOnStage(){
+  const total = outDuration();
+  const dur = mMotionWindow(total);
+  pause();
+  const t0 = performance.now();
+  const step = function(){
+    const t = (performance.now() - t0)/1000;
+    if(t > dur + 0.35){
+      S.previewT = dur;          // 마지막 프레임을 남겨 정지 화면으로 확인할 수 있게
+      drawFrame();
+      return;
+    }
+    S.previewT = Math.min(t, dur);
+    drawFrame();
+    requestAnimationFrame(step);
+  };
+  S.previewT = 0;
+  drawFrame();
+  requestAnimationFrame(step);
+}
+
+/* ---------- 모션 탭 UI ---------- */
+function mStyleCards(){
+  const box = $('mStyles');
+  if(!box) return;
+  box.innerHTML = Object.keys(MOTION_STYLES).map(function(key){
+    const s = MOTION_STYLES[key];
+    return '<button class="m-style" data-style="' + s.num + '">' +
+      '<div class="sw" style="background:' + s.sw + ';color:' + s.swColor + '">' +
+        '<span>' + s.num + '</span><b>' + s.swText + '</b></div>' +
+      '<div class="nm"><i>' + s.num + '</i>' + s.name + '</div>' +
+      '<div class="use">' + s.use + '</div></button>';
+  }).join('');
+}
+function mMotionCards(){
+  const box = $('mMotions');
+  if(!box) return;
+  box.innerHTML = Object.keys(MOTION_LIST).map(function(key){
+    const m = MOTION_LIST[key];
+    return '<button class="m-motion" data-motion="' + m.num + '" title="' + m.desc + '">' +
+      '<span class="n">' + m.num + '</span><span class="t">' + m.name + '</span></button>';
+  }).join('');
+}
+function mPaintUI(){
+  const s = MOTION_STYLES[S.motion.style];
+  document.querySelectorAll('#mStyles .m-style').forEach(function(el){
+    el.classList.toggle('on', +el.dataset.style === S.motion.style);
+  });
+  document.querySelectorAll('#mMotions .m-motion').forEach(function(el){
+    el.classList.toggle('on', +el.dataset.motion === S.motion.num);
+  });
+  const nm = $('mStyleNow');
+  if(nm) nm.textContent = s.num + '번 · ' + s.name + ' / ' + S.motion.num + '번 · ' + MOTION_LIST[S.motion.num].name;
+  const lab = $('mLabel');
+  if(lab) lab.value = mLabelNow();
+  const ti = $('mTitle');
+  if(ti && document.activeElement !== ti) ti.value = S.hook;
+  if($('mDur')) $('mDur').value = S.motion.dur > 0 ? S.motion.dur : 0;
 }
 
 /* ============================ 캔버스 렌더 ============================ */
@@ -840,7 +1942,7 @@ function drawFrame(){
   ctx.fillRect(0,0,W,H);
 
   // ---- 영상 ----
-  if(!S.dur){ return; }
+  if(!S.dur && S.previewT == null){ return; }
   if(video.readyState >= 2 && video.videoWidth){
     const vw = video.videoWidth, vh = video.videoHeight;
     const scale = Math.max(W/vw, H/vh) * S.zoom;
@@ -848,10 +1950,12 @@ function drawFrame(){
     const dx = (W - dw) * S.ox;
     const dy = (H - dh) * S.oy;
     try{ ctx.drawImage(video, dx, dy, dw, dh); }catch(e){}
+  }else if(S.previewT != null){
+    mMockBg(ctx, W, H);
   }
 
   const total = outDuration();
-  const live = total > 0 ? S.outTime : 0;
+  const live = (S.previewT != null) ? S.previewT : (total > 0 ? S.outTime : 0);
 
   // ---- 스크림 ----
   const grads = scrimGrads(W, H, S.theme);
@@ -862,8 +1966,11 @@ function drawFrame(){
     ctx.fillStyle = grads.bot; ctx.fillRect(0,H*0.62,W,H*0.38);
   }
 
-  // ---- 상단 훅 배너 ----
+  // ---- 상단 훅 배너 (모션 타이틀 / 고정 배너) ----
   if(S.show.hook && (S.hook||'').trim()){
+    if(S.motion.on){
+      drawMotionTitle(live, W, H);
+    }else{
     const hook = S.hook.trim();
     const maxTextW = W - 260;
     const fs = fitFontSize(hook, {maxWidth:maxTextW, base:92, min:52, maxLines:2, weight:800});
@@ -905,6 +2012,7 @@ function drawFrame(){
       ctx.font = `700 ${labelSize}px ${FONT_STACK}`;
       ctx.fillStyle = T.accentLight;
       ctx.fillText(S.label, px+24+accentW+22, ty + 8);
+    }
     }
   }
 
@@ -1701,6 +2809,7 @@ async function exportVideo(){
 
   ensureAudio();
   pause();
+  S.previewT = null;
   S.exporting = true;
   exportCancelled = false;
   $('progOverlay').classList.add('show');
@@ -1878,7 +2987,7 @@ $('btnClipRight').addEventListener('click', moveSelectedClipRight);
 $('btnClipDup').addEventListener('click', duplicateSelectedClip);
 
 // 자막
-$('hookText').addEventListener('input', (e)=>{ S.hook = e.target.value; drawFrame(); });
+$('hookText').addEventListener('input', (e)=>{ S.hook = e.target.value; $('mTitle').value = S.hook; mInvalidate(); drawFrame(); });
 $('labelText').addEventListener('input', (e)=>{ S.label = e.target.value; drawFrame(); });
 $('btnAddSub').addEventListener('click', addSubAtPlayhead);
 $('btnImportSrt').addEventListener('click', ()=>$('srtInput').click());
@@ -1920,11 +3029,52 @@ $('subStyleSeg').addEventListener('click', (e)=>{
   drawFrame();
 });
 
+/* ===== 제목 모션 (스타일 6종 · 모션 14종) ===== */
+mStyleCards(); mMotionCards(); mPaintUI();
+$('mOn').addEventListener('change', (e)=>{ S.motion.on = e.target.checked; drawFrame(); });
+$('mTitle').addEventListener('input', (e)=>{
+  S.hook = e.target.value;
+  $('hookText').value = S.hook;
+  mInvalidate();
+  drawFrame();
+});
+$('mLabel').addEventListener('input', (e)=>{
+  S.motion.label = e.target.value;
+  mInvalidate();
+  drawFrame();
+});
+$('mDur').addEventListener('input', (e)=>{
+  const v = parseFloat(e.target.value);
+  S.motion.dur = isNaN(v) ? 0 : Math.max(0, v);
+  drawFrame();
+});
+$('mPlay').addEventListener('click', previewOnStage);
+$('mStyles').addEventListener('click', (e)=>{
+  const b = e.target.closest('.m-style'); if(!b) return;
+  const num = +b.dataset.style;
+  const prevDefault = MOTION_STYLES[S.motion.style] ? MOTION_STYLES[S.motion.style].label : null;
+  if(S.motion.label != null && S.motion.label === prevDefault) S.motion.label = null;
+  if(S.motion.autoMotion) S.motion.num = (MOTION_STYLES[num] || MOTION_STYLES[1]).defaultMotion;
+  S.motion.style = num;
+  mInvalidate(); mPaintUI(); drawFrame();
+});
+$('mMotions').addEventListener('click', (e)=>{
+  const b = e.target.closest('.m-motion'); if(!b) return;
+  S.motion.num = +b.dataset.motion;
+  S.motion.autoMotion = false;
+  mPaintUI(); drawFrame();
+});
+if(document.fonts && document.fonts.ready){
+  document.fonts.ready.then(()=>{ mInvalidate(); drawFrame(); });
+}
+
 // 탭
 document.querySelector('.tabs').addEventListener('click', (e)=>{
   const b = e.target.closest('button'); if(!b) return;
   document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on', x===b));
   document.querySelectorAll('.tab-pane').forEach(p=>p.classList.toggle('on', p.id === 'pane-'+b.dataset.tab));
+  if(b.dataset.tab === 'motion'){ mPaintUI(); startPreviewLoop(); }
+  else { stopPreviewLoop(); }
 });
 
 // 내보내기
@@ -1940,8 +3090,9 @@ $('btnHelp').addEventListener('click', ()=>{
     '   타임라인을 눌러 위치를 옮기고, 블록 양끝을 끌어 미세 조정\n' +
     '   뒤에 나온 하이라이트를 맨 앞으로 : 블록 선택 → "⭐ 맨 앞으로"\n' +
     '3) [자막] 탭 → 훅 타이틀 입력, 자막은 현재 위치에서 추가 / SRT 불러오기\n' +
-    '4) [템플릿] 탭 → 버건디·딥그린 선택, 훅 배너·워터마크·진행바·아웃트로 켜고 끄기\n' +
-    '5) 상단 "MP4 내보내기" → 재생 속도대로 한 번 훑고 파일이 저장됩니다\n\n' +
+    '4) [모션] 탭 → 제목 스타일 6종·모션 14종을 번호로 고르고, 미리보기로 움직임 확인 (\"캔버스에서 재생\"으로 실제 화면 확인)\n' +
+    '5) [템플릿] 탭 → 버건디·딥그린 선택, 훅 배너·워터마크·진행바·아웃트로 켜고 끄기\n' +
+    '6) 상단 "MP4 내보내기" → 재생 속도대로 한 번 훑고 파일이 저장됩니다\n\n' +
     '단축키: Space 재생/정지, ←/→ 1초 이동\n' +
     '모든 처리는 이 브라우저 안에서만 이루어지고, 영상은 어디에도 업로드되지 않습니다.'
   );
@@ -1977,7 +3128,10 @@ window.ELTANGO_EDITOR = {
   drawFrame, outDuration, parseSrt, toSrt, pickMime, addSubAtPlayhead, seekOut,
   moveSelectedClip, sendSelectedClipToFront, moveSelectedClipLeft, moveSelectedClipRight,
   duplicateSelectedClip, analyzeByPlayback, analyzeByDecode, srcToOut, srcRangeToOut,
-  clipAt, samplesToSilences
+  clipAt, samplesToSilences,
+  motion:{ styles: MOTION_STYLES, motions: MOTION_LIST, build: mBuildBlock, state: mState,
+           draw: mDrawTitleOn, block: mBlock, invalidate: mInvalidate,
+           previewLoop: startPreviewLoop, previewStop: stopPreviewLoop, onStage: previewOnStage }
 };
 })();
 </script>
